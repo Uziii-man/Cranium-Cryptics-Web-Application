@@ -1,0 +1,24 @@
+*{
+    font-family: Arial, sans-serif;
+    box-sizing: border-box;
+    --fontRoboto: 'Roboto';
+    --fontPoppins: 'Poppins';
+    --fontOzwald: 'Oswald';
+    --primaryColor:#789798;
+    --secondaryColor:#F2F2F0;
+    --thirdColor:#395B64;
+    --fourthColor: #2C3333;
+}
+
+.disease-status{
+    height: 45vh;
+    margin-bottom: 10vh;
+}
+
+.tumor-details{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-top: 5vh;
+    font-size: 19px;
+}
