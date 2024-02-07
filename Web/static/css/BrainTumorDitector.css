@@ -1,0 +1,231 @@
+*{
+    font-family: Arial, sans-serif;
+    box-sizing: border-box;
+    --fontRoboto: 'Roboto';
+    --fontPoppins: 'Poppins';
+    --fontOzwald: 'Oswald';
+    --primaryColor:#789798;
+    --secondaryColor:#F2F2F0;
+    --thirdColor:#395B64;
+    --fourthColor: #2C3333;
+}
+
+.dashboard-main-section {
+    display: flex;
+    flex-direction: row;
+
+}
+
+.display-section {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    background-color: var(--secondaryColor);
+}
+
+.upload-section {
+    width: 100%;
+    background-color: var(--primaryColor);
+}
+
+
+.image-upload-heading{
+    font-size: 24px;
+    margin-bottom: 2vh;
+    color: var(--fourthColor);
+    font-family: var(--fontPoppins);
+}
+
+.image-holding-section {
+    height: 53vh;
+    width: 28vw;
+    background-color: var(--secondaryColor);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 16px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+    cursor: pointer;
+    transition: box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+.image-holding-section span {
+    color: var(--fourthColor);
+    font-size: 18px;
+    font-weight: normal;
+    cursor: pointer;
+
+}
+
+.upload-button, .scan-button {
+    margin-top: 20px;
+    padding: 20px 35px;
+    font-size: 18px;
+    color: var(--secondaryColor);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.upload-button {
+    background-color: var(--thirdColor);
+    display: flex;
+    align-self: center;
+    width: 60%;
+    height: 10%;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 6vh;
+    cursor: pointer;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+}
+
+.scan-button {
+    background-color: var(--primaryColor);
+    width: 40%;
+    height: 10%;
+    box-shadow: 0 10px 16px rgba(0, 0, 0, 0.3);
+}
+
+.upload-button:hover, .scan-button:hover {
+    background-color: var(--thirdColor);
+    cursor: pointer;
+}
+
+.result-section {
+    width: 50%;
+    background-color: var(--secondaryColor);
+}
+
+.result-section img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+#dropArea {
+    border: 2px dashed var(--secondaryColor);
+    padding: 20px;
+    text-align: center;
+    transition: border-color 0.3s ease-in-out;
+    box-shadow: 0 16px 16px rgba(0, 0, 0, 0.3);
+}
+
+#dropArea.active {
+    border-color: var(--fourthColor);
+}
+
+.image-holding-section img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease-in-out;
+}
+
+.image-holding-section:hover {
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    transform: scale(1.05);
+}
+
+.image-holding-section:hover img {
+    transform: scale(1.08);
+}
+
+.result-section{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.magnifying-glass{
+    height: 10vh;
+    width: 10vh;
+    background-color: var(--primaryColor);
+    border-radius: 50%;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+    z-index: 10000;
+}
+
+.disease-status {
+    height: 40%;
+    width: 75%;
+    border-radius: 10px;
+    background-color: var(--secondaryColor);
+    margin-bottom: 2vh;
+    box-shadow: 0 8px 10px rgba(0, 0, 0, 0.8);
+    transition: box-shadow 0.3s ease-in-out;
+}
+
+.detected-disease {
+    height: 40%;
+    width: 75%;
+    border-radius: 10px;
+    background-color:var(--secondaryColor);
+    margin-bottom: 2vh;
+    box-shadow: 0 8px 10px rgba(0, 0, 0, 0.8);
+    transition: box-shadow 0.3s ease-in-out;
+}
+
+.tumour-status-heading,
+.tumor-type-heading {
+    width: 100%;
+    height: 27%;
+    background: linear-gradient(to right, var(--fourthColor), var(--thirdColor));
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    color: var(--secondaryColor);
+}
+
+.tumor-details{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    margin-top: 2vh;
+    width:80%;
+    height: 20vh;
+    font-size: 18px;
+    margin-left: 2vw;
+    font-family: var(--fontPoppins);
+}
+
+.menu-list a {
+    text-decoration: none;
+    color: #000;
+    margin: 0;
+}
+
+.image-upload-heading{
+    font-family: var(--fontPoppins);
+    font-size: 25px;
+}
+
+.tumor-details{
+    font-family: var(--fontPoppins);
+}
+
+.dashboard-panes{
+    display: flex;
+    flex-direction: column;
+    height: 110%;
+}
+
+.display-section{
+    box-shadow: 0 8px 10px rgba(0, 0, 0, 0.8);
+}
+
+@media screen and(max-width: 1300px){
+
+}
+

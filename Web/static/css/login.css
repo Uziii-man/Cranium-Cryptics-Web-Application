@@ -1,0 +1,28 @@
+*{
+    font-family: Arial, sans-serif;
+    box-sizing: border-box;
+    --fontRoboto: 'Roboto';
+    --fontPoppins: 'Poppins';
+    --fontOzwald: 'Oswald';
+    --primaryColor:#789798;
+    --secondaryColor:#F2F2F0;
+    --thirdColor:#395B64;
+    --fourthColor: #2C3333;
+}
+
+.login-page{
+    background-color: var(--primaryColor);
+    opacity: 0.6;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-main{
+    background-color: var(--secondaryColor);
+    height: 82%;
+    width: 65%;
+    box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.3);
+}
