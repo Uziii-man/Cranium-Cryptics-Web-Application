@@ -57,29 +57,36 @@
             </div>
             <div class="dashboard-panes">
                 <section class="dashboard-main-section">
-                    <div class="main-left-section">
-
+                    <div class="dashboard-text">
+                          <h1 class="dashboard-heading1">Decoding Brain Health: MRI Image Analysis for Precise Diagnosis</h1>
+                          <p class="dashboard-subheading">Streamline your diagnosis process with our rapid MRI image analysis,
+                              delivering precise results at the touch of a button</p>
+                          <button class="report-generating-button"><a href="report_generation.html" class="btn">Generate Report</a></button>
                     </div>
-                    <div class="scanner-container">
-                        <div class="scanner"></div>
+
+                    <div class="dashboard-image">
+                        <img src="../static/images/background__1_-removebg-preview.png" alt="Brain Image" class="img-db">
                     </div>
                 </section>
 
                 <section class="dashboard-sub-section">
                     <div class="image-detection-cards card-1"> 
                         <image class="card-image" src="../static/images/braintumour.jpg"></image>
+                        <h1 class="card-header">Tumour Detector</h1>
                         <p class="card-name">Detects brain tumors using advanced imaging analysis</p>
-                        <button onclick="redirectTumour()">Try Brain Tumour Detector</button>
+                        <a href="/BrainTumourDetector" class="card-link"><button onclick="redirectTumour()">Try it</button></a>
                     </div>
                     <div class="image-detection-cards card-2"> 
                         <image class="card-image" src="../static/images/ischemicstroke.jpg"></image>
+                        <h1 class="card-header">Stroke Detector</h1>
                         <p class="card-name">Identifies ischemic strokes by analyzing medical images</p>
-                        <button onclick="redirectStroke()">Try Ischemic Stroke Detector</button>
+                        <a href="/BrainStrokeDetector" class="card-link"><button onclick="redirectStroke()">Try it</button></a>
                     </div>
                     <div class="image-detection-cards card-3"> 
                         <image class="card-image" src="../static/images/alzhimer-removebg-preview.png"></image>
+                        <h1 class="card-header">Alzheimer Detector</h1>
                         <p class="card-name">Identifies early Alzheimer's signs through image analysis</p>
-                        <button onclick="redirectAlzhimer()">Try Alzhimer Detector</button>
+                        <a href="/AlzheimerDiseaseDetector" class="card-link"><button onclick="redirectAlzhimer()">Try it</button></a>
                     </div>
                 </section>
 
