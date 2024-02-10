@@ -156,7 +156,7 @@ body, html {
     padding: 20px;
     text-align: center;
     color: var(--secondaryColor);
-    box-shadow: 4px 8px 8px rgba(0, 0, 0, 0.8);
+    box-shadow: 2px 4px 4px rgba(128, 126, 126, 0.9);
     border-radius: 2px;
     transition: transform 0.3s ease;
 }
@@ -166,7 +166,7 @@ body, html {
     font-family: var(--fontPoppins);
     background-color: #000000;
     height:10vh;
-    font-size: 1.25rem;
+    font-size: 1.10rem;
     text-align: center;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     cursor: pointer;
@@ -186,13 +186,12 @@ body, html {
 }
 
 .image-detection-cards button:hover{
-    background-color: #8CB9BD;;
-    color: #000000;
-
+    background-color: #3b5160;
+    color: #ffffff;
 }
 
 .image-detection-cards button:active{
-    background-color: #3b5160;
+    opacity: 0.9;
     color: #ffffff;
 }
 
@@ -200,9 +199,9 @@ body, html {
 
 .dashboard-copyright{
     height: 20vh;
-    border-bottom-left-radius: 5px;
-    border-bottom-right-radius: 5px;
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.8);
+    border-bottom-left-radius: 2px;
+    border-bottom-right-radius: 2px;
+    box-shadow: 0 5px 10px rgba(108, 105, 105, 0.8);
 }
 
 .card-image{
@@ -437,7 +436,7 @@ body, html {
 }
 
 .profile-list1:hover{
-    background-color:  rgb(236, 237, 238);
+    background-color: var(--secondaryColor);
     border-radius: 10px;
 }
 
@@ -452,7 +451,7 @@ body, html {
 }
 
 .profile-list2:hover{
-    background-color: rgb(236, 237, 238);
+    background-color: var(--secondaryColor);
     border-radius: 10px;
 }
 
@@ -498,7 +497,7 @@ body, html {
     justify-content: center;
     text-align: center;
     padding: 4px;
-    font-size: 18px;
+    font-size: 16px;
 }
 
 .dashboard-heading{
@@ -514,35 +513,14 @@ body, html {
 }
 
 .dashboard-heading img{
-    height: 45px;
-    width: 45px;
+    height: 55px;
+    width: 55px;
     border-radius: 20vh;
     margin-right: 1vw;
 }
 
 .result-section{
     box-shadow: 5px 0 10px rgba(0, 0, 0, 0.3);
-}
-
-::-webkit-scrollbar {
-    width: 15px; 
-}
-
-::-webkit-scrollbar-track {
-    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.6);
-}
-
-::-webkit-scrollbar-thumb {
-    background: var(--primaryColor);
-
-}
-
-::-webkit-scrollbar-thumb:hover {
-    background: var(--thirdColor);
-}
-
-::-webkit-scrollbar-button {
-    display: none; 
 }
 
 #brain{
@@ -628,6 +606,19 @@ body, html {
     background-color: black;
     opacity: 0.9;
     color: var(--secondaryColor);
+}
+
+.heading-span{
+    font-family: var(--fontPoppins);
+    color: #3e4041;
+}
+
+.hello{
+    box-shadow: 0 0 10px rgba(100, 100, 100, 0.40);
+}
+
+.current_page{
+    box-shadow: 0 0 15px rgba(100, 100, 100, 0.60);
 }
 
 

@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="../static/css/MainPage.css">
     <link rel="stylesheet" href="../static/css/BrainTumorDitector.css">
     <link rel="stylesheet" href="../static/css/Alzheimer.css">
-    <link rel="icon" type="image/x-icon" href="../static/images/brainImage.svg">
+    <link rel="icon" type="image/x-icon" href="../static/images/logo1.png">
     <title>Cranium Cryptics</title>
 </head>
 <body>
@@ -19,15 +19,15 @@
             <div class="menu-container">
                 <div class="Menu-main-list">
                     <ul class="menu-list">
-                        <li  class="menu-detail-list">
+                        <li  class="menu-detail-list" onmouseout="nav_back_highliter()" onmouseover="nav_highliter();">
                         <a href="/Dashboard"><image src="../static/images/dashboard.png" class="menu-img">Dashboard</image></a></li>
-                        <li  class="menu-detail-list">
+                        <li  class="menu-detail-list" onmouseout="nav_back_highliter()" onmouseover="nav_highliter();">
                         <a href="/BrainTumourDetector"><image src="../static/images/dashboard.png" class="menu-img">Tumor Detection</image></a></li>
-                        <li  class="menu-detail-list">
+                        <li  class="menu-detail-list" onmouseout="nav_back_highliter()" onmouseover="nav_highliter();">
                         <a href="/BrainStrokeDetector"><image src="../static/images/dashboard.png" class="menu-img">Stroke Detection</image></a></li>
-                        <li  class="menu-detail-list">
+                        <li  class="menu-detail-list current_page hello">
                         <a href="/AlzheimerDiseaseDetector"><image src="../static/images/dashboard.png" class="menu-img">Alzheimer Detection</image></a></li>
-                        <li  class="menu-detail-list">
+                        <li  class="menu-detail-list" onmouseout="nav_back_highliter()" onmouseover="nav_highliter();">
                         <a href="/ReportGenerator"><image src="../static/images/dashboard.png" class="menu-img">Report Generator</image></a></li>
                     </ul>
                     <section class="logout-section">
@@ -49,8 +49,8 @@
         <div class="right-pane">
             <div class="dashboard-header">
                 <section class="dashboard-heading">
-                    <h2>Cranium Cryptics</h2>
-                    <img src="../static/images/logo.jpg" height="20px" width="20px">
+                    <h2><span class="heading-span">Cranium</span> Cryptics</h2>
+                    <img src="../static/images/logo1.png" height="20px" width="20px">
                 </section>
                 <section class="profile-header" onmouseover="ProfilePopView()" onmouseout="removeProfileView()">
                     <image src="../static/images/profile.jpeg" class="profile-image"></image>

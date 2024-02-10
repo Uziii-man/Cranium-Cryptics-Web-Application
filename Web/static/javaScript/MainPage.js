@@ -84,3 +84,17 @@ function redirectStroke() {
 function redirectAlzhimer() {
     window.location.href = "AlzheimerDiseaseDetector.html";
 }
+
+function nav_highliter() {
+    let current_button = document.querySelector(".current_page");
+    if (current_button !== null) {
+        current_button.style.transition = "box-shadow 0.5s ease"; // Smooth transition
+        current_button.style.boxShadow = "none"; // Remove box shadow
+    }
+}
+
+
+function nav_back_highliter() {
+    let current_button = document.querySelector(".current_page");
+    current_button.style.boxShadow = "0 0 15px rgba(100, 100, 100, 0.60)"
+}
