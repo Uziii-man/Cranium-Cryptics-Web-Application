@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../static/css/MainPage.css">
-    <link rel="icon" type="image/x-icon" href="../static/images/brainImage.svg">
+    <link rel="icon" type="image/x-icon" href="../static/images/logo1.png" sizes="64x64 32x32">
     <title>Cranium Cryptics</title>
 </head>
 <body>
@@ -17,15 +17,15 @@
             <div class="menu-container">
                 <div class="Menu-main-list">
                     <ul class="menu-list">
-                        <li  class="menu-detail-list">
+                        <li  class="menu-detail-list current_page hello">
                         <a href="/Dashboard"><image src="../static/images/dashboard.png" class="menu-img">Dashboard</image></a></li>
-                        <li  class="menu-detail-list">
+                        <li  class="menu-detail-list" onmouseout="nav_back_highliter()" onmouseover="nav_highliter();">
                         <a href="/BrainTumourDetector"><image src="../static/images/dashboard.png" class="menu-img">Tumor Detection</image></a></li>
-                        <li  class="menu-detail-list">
+                        <li  class="menu-detail-list" onmouseout="nav_back_highliter()" onmouseover="nav_highliter();">
                         <a href="/BrainStrokeDetector"><image src="../static/images/dashboard.png" class="menu-img" >Stroke Detection</image></a></li>
-                        <li  class="menu-detail-list">
+                        <li  class="menu-detail-list" onmouseout="nav_back_highliter()" onmouseover="nav_highliter();">
                         <a href="/AlzheimerDiseaseDetector"><image src="../static/images/dashboard.png" class="menu-img">Alzheimer Detection</image></a></li>
-                        <li  class="menu-detail-list">
+                        <li  class="menu-detail-list" onmouseout="nav_back_highliter()" onmouseover="nav_highliter();">
                         <a href="/ReportGenerator"><image src="../static/images/dashboard.png" class="menu-img">Report Generator</image></a></li>
                     </ul>
                     <section class="logout-section">
@@ -47,8 +47,8 @@
         <div class="right-pane">
             <div class="dashboard-header">
                 <section class="dashboard-heading">
-                    <h2>Cranium Cryptics</h2>
-                    <img src="../static/images/logo.jpg" height="20px" width="20px">
+                    <h2><span class="heading-span">Cranium</span> Cryptics</h2>
+                    <img src="../static/images/logo1.png" height="20px" width="20px">
                 </section>
                 <section class="profile-header" onmouseover="ProfilePopView()" onmouseout="removeProfileView()">
                     <image src="../static/images/profile.jpeg" class="profile-image"></image>
@@ -57,29 +57,36 @@
             </div>
             <div class="dashboard-panes">
                 <section class="dashboard-main-section">
-                    <div class="main-left-section">
-
+                    <div class="dashboard-text">
+                          <h1 class="dashboard-heading1">Decoding Brain Health: MRI Image Analysis for Precise Diagnosis</h1>
+                          <p class="dashboard-subheading">Streamline your diagnosis process with our rapid MRI image analysis,
+                              delivering precise results at the touch of a button</p>
+                          <button class="report-generating-button"><a href="report_generation.html" class="btn">Generate Report</a></button>
                     </div>
-                    <div class="scanner-container">
-                        <div class="scanner"></div>
+
+                    <div class="dashboard-image">
+                        <img src="../static/images/background__1_-removebg-preview.png" alt="Brain Image" class="img-db">
                     </div>
                 </section>
 
                 <section class="dashboard-sub-section">
                     <div class="image-detection-cards card-1"> 
                         <image class="card-image" src="../static/images/braintumour.jpg"></image>
+                        <h1 class="card-header">Tumour Detector</h1>
                         <p class="card-name">Detects brain tumors using advanced imaging analysis</p>
-                        <button onclick="redirectTumour()">Try Brain Tumour Detector</button>
+                        <a href="/BrainTumourDetector" class="card-link"><button onclick="redirectTumour()">Try it</button></a>
                     </div>
                     <div class="image-detection-cards card-2"> 
                         <image class="card-image" src="../static/images/ischemicstroke.jpg"></image>
+                        <h1 class="card-header">Stroke Detector</h1>
                         <p class="card-name">Identifies ischemic strokes by analyzing medical images</p>
-                        <button onclick="redirectStroke()">Try Ischemic Stroke Detector</button>
+                        <a href="/BrainStrokeDetector" class="card-link"><button onclick="redirectStroke()">Try it</button></a>
                     </div>
                     <div class="image-detection-cards card-3"> 
                         <image class="card-image" src="../static/images/alzhimer-removebg-preview.png"></image>
+                        <h1 class="card-header">Alzheimer Detector</h1>
                         <p class="card-name">Identifies early Alzheimer's signs through image analysis</p>
-                        <button onclick="redirectAlzhimer()">Try Alzhimer Detector</button>
+                        <a href="/AlzheimerDiseaseDetector" class="card-link"><button onclick="redirectAlzhimer()">Try it</button></a>
                     </div>
                 </section>
 
