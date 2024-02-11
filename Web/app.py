@@ -33,5 +33,15 @@ def ReportGenerator():
     return render_template('ReportGenerator.html')
 
 
+@app.route('/Register')
+def Register():
+    return render_template('Register.html')
+
+
+@app.route('/login')
+def login():
+    return render_template('login.html')
+
+
 if __name__ == '__main__':
     app.run(debug=True)

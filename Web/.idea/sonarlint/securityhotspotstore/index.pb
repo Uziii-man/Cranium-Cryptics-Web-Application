@@ -27,3 +27,13 @@ H
 static/css/Alzheimer.css,c\e\ce99e23b4974dc19b31720346230cd4a2df0a79d
 E
 static/css/Stroke.css,d\8\d8d35ecc02be78272cece80fae6b41db62193935
+E
+static/css/signin.css,a\1\a1af49023c3a7c4d007fa094da4fbf8a2bf19794
+G
+templates/Register.html,d\f\df0f6a31e0f389f75f0d394038a740ec44e92b90
+G
+static/css/register.css,4\7\47e92512cd4acf4a741874af800d92b4798d69ca
+F
+templates/profile.html,7\f\7f1863afc75308f4b2ba18256c163b6f3c56c5d1
+N
+static/css/reportgenerator.css,d\b\db7a7f244d25fe348b321152ee19742c4643cf8f
