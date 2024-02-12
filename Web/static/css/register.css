@@ -105,12 +105,12 @@ body {
 
 .signin-link{
   text-decoration: none;
-  color:#1e2c34;
+  color: blue;
   font-weight: bold;
 }
 
 .signin-link:hover{
-  color: rgb(83, 83, 92);
+  color:#1e2c34;
 }
 
 .registration-bottom{

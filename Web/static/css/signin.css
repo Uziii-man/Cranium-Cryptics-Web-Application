@@ -101,21 +101,16 @@ body {
 .forgot{
   font-size: 15px;
   text-decoration: none;
-  color:#1e2c34;
-}
-
-.forgot:hover{
-  color: rgb(83, 83, 92);
 }
 
 .register-link{
   text-decoration: none;
-  color:#1e2c34;
+  color: blue;
   font-weight: bold;
 }
 
 .register-link:hover{
-  color: rgb(83, 83, 92);
+  color: #1e2c34;
 }
 
 .signin-registration{
