@@ -9,6 +9,7 @@
     <link rel="icon" type="image/x-icon" href="../static/images/brainImage.svg">
     <title>Cranium Cryptics</title>
 </head>
+<<<<<<< Updated upstream
 <body>
     <div class="login-page">
        <div class="login-main">
@@ -16,3 +17,48 @@
        </div>
     </div>
 </body>
+=======
+<body class="align">
+  <div class="form-space">
+      <section class="signin-image">
+          <img src="../static/images/logo1.png" height="80px" width="80px">
+          <h1>Sign in to <span class="heading-span">Cranium</span> Cryptics</h1>
+      </section>
+
+      <div class="login-container">
+
+        <form action="https://httpbin.org/post" method="POST" class="form login">
+
+            <div class="form__field">
+              <label for="login__username" class="content-login">Username:</label>
+              <input id="login__username" type="text" name="username" class="form__input"
+                     placeholder="Username" required>
+            </div>
+
+            <div class="form__field">
+                <div class="password-content">
+                    <label for="login__password" class="content-login">Password:</label>
+                    <a href="forgot.html" class="forgot">Forgot Password?</a>
+                </div>
+                <input id="login__password" type="password" name="password" class="form__input" placeholder="Password" required>
+            </div>
+
+            <div class="form__field">
+                <input type="submit" value="Sign In">
+            </div>
+
+        </form>
+
+        <div class="signin-registration">
+             <p class="error-message"></p>
+             <p class="text--center">Not Registered? <a href="Register.html" class="register-link">Register here</a></p>
+        </div>
+
+  </div>
+
+  </div>
+
+
+</body>
+</html>
+>>>>>>> Stashed changes

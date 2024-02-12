@@ -1,0 +1,128 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+}
+
+.form-space{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+}
+
+.signin-image{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  width: 30%;
+  height: 60%;
+  background-color: #f0f0f0;
+  border-radius: 10px;
+  padding: 20px;
+  margin-top: -10vh;
+}
+
+.login {
+  margin: 0;
+  width: 90%;
+}
+
+.form__field {
+  margin-bottom: 15px;
+}
+
+.form__field label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.form__field input[type='text'],
+.form__field input[type='password'],
+.form__field input[type='submit'] {
+  height: 120%;
+  width: 100%;
+  padding: 15px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  font-size: 15px;
+  font-family: var(--fontPoppins);
+}
+
+.form__field input[type='submit']:focus {
+  border-color: #3b5160;
+}
+
+.form__field input[type='submit'] {
+  background-color: #3b5160;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.form__field input[type='submit']:hover {
+  background-color: black;
+}
+
+.text--center {
+  text-align: center;
+  text-decoration: none;
+}
+
+.content-login{
+  font-family: var(--fontPoppins);
+  font-size: 18px;
+}
+
+.password-content{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.forgot{
+  font-size: 15px;
+  text-decoration: none;
+  color:#1e2c34;
+}
+
+.forgot:hover{
+  color: rgb(83, 83, 92);
+}
+
+.register-link{
+  text-decoration: none;
+  color:#1e2c34;
+  font-weight: bold;
+}
+
+.register-link:hover{
+  color: rgb(83, 83, 92);
+}
+
+.signin-registration{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 8vh;
+}
