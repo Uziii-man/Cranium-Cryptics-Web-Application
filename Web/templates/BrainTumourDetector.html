@@ -30,15 +30,15 @@
                         <a href="/ReportGenerator"><image src="../static/images/dashboard.png" class="menu-img">Report Generator</image></a></li>
                     </ul>
                     <section class="logout-section">
-                        <div class="logout-account">
+                        <a href="#" class="logout-account">
                             <image src="../static/images/account.png" class="menu-img logout-img" id="account-dt"></image>
                             <p>Account</p>
-                        </div>
-                        
-                        <div class="logout-account-section">
-                           <image src="../static/images/logout.png" class="menu-img logout-img"></image>
-                           <p>Logout</p>
-                        </div>
+                        </a>
+
+                        <a href="/login" class="logout-account-section">
+                            <image src="../static/images/logout.png" class="menu-img logout-img"></image>
+                            <p>Logout</p>
+                        </a>
                     </section>
 
                 </div>
@@ -59,7 +59,8 @@
             <div class="dashboard-panes">
                 <section class="dashboard-main-section">
 
-                    <form id="imageForm" class="display-section" id="dropArea">
+                    <form id="imageForm" class="display-section" id="dropArea" method="post" action="/tumor"
+                          enctype="multipart/form-data">
                         <h2 class="image-upload-heading">Upload the MRI image here</h2>
                         <label for="fileInput">
                         <div class="image-holding-section" id="imagePreview">
@@ -67,7 +68,8 @@
                             <span>Select an image</span>
                         </div>
                         </label>
-                        <input type="file" id="fileInput" class="upload-button" accept="image/*" onchange="previewImage()" required>
+                        <input type="file" id="fileInput" class="upload-button" accept="image/*" onchange="previewImage()" required
+                        name="imagefile">
                         <button class="scan-button">Scan Image</button>
                     </form>
 
@@ -96,12 +98,18 @@
                 <section class="profile-popup" onmouseover="ProfilePopView()" onmouseout="removeProfileView()">
                     <div>
                         <ul class="profile-viewer-list">
-                            <li  class="profile-viewer-list-element profile-list1">
-                                <image src="../static/images/profile2.png" class="menu-img profile-img">View Profile</image></li>
-                            <li  class="profile-viewer-list-element" id="line-profile"></li>
-                            <li  class="profile-viewer-list-element profile-list2">
-                                <image src="../static/images/signout-removebg-preview.png" class="menu-img profile-img2">Sign Out</image></li>
-                        </ul>
+                            <li class="profile-viewer-list-element profile-list1">
+                                <a href="#" class="pop-link">
+                                    <img src="../static/images/profile2.png" class="menu-img profile-img" alt="View Profile">View Profile
+                                </a>
+                            </li>
+                            <li class="profile-viewer-list-element" id="line-profile"></li>
+                            <li class="profile-viewer-list-element profile-list2">
+                                <a href="/login" class="pop-link">
+                                    <img src="../static/images/signout-removebg-preview.png" class="menu-img profile-img2" alt="Sign Out">Sign Out
+                                </a>
+                            </li>
+                       </ul>
                     </div>
                      
                 </section>

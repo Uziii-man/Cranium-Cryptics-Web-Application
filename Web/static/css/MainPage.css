@@ -45,7 +45,7 @@ body, html {
     height: 100%;
     padding: 0;
     font-family: var(--fontRoboto);
-    box-shadow: 0 0px 20px rgba(0, 0, 0, 0.8); 
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.8);
 }
 
 
@@ -57,7 +57,7 @@ body, html {
     height: 100%;
     width: 100%;
     padding-top: 0px;
-    box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.8); 
+    box-shadow: 0 0 8px rgba(100, 100, 100, 0.60);
 }
 
 .menu-container {
@@ -131,7 +131,7 @@ body, html {
     background-color: var(--secondaryColor);
     display: flex;
     flex-direction: row;
-    box-shadow: 0 8px 10px rgba(0, 0, 0, 0.8);
+    box-shadow: 0 4px 15px rgba(100, 100, 100, 0.60);
 }
 
 .dashboard-sub-section{
@@ -141,7 +141,7 @@ body, html {
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
-    box-shadow: 0 8px 10px rgba(0, 0, 0, 0.8);
+    box-shadow: 0 4px 15px rgba(100, 100, 100, 0.60);
 }
 
 
@@ -156,7 +156,7 @@ body, html {
     padding: 20px;
     text-align: center;
     color: var(--secondaryColor);
-    box-shadow: 2px 4px 4px rgba(128, 126, 126, 0.9);
+    box-shadow: 1px 1px 4px rgba(128, 126, 126, 0.9);
     border-radius: 2px;
     transition: transform 0.3s ease;
 }
@@ -245,10 +245,17 @@ body, html {
     height:11vh;
     display:flex;
     align-items: center;
+    padding-top: 1vh;
     padding-left: 10px;
     font-style: var(--fontPoppins);
     font-size: 18px;
     align-self: center;
+}
+
+.menu-detail-list a{
+    height: 100%;
+    width: 100%;
+
 }
 
 
@@ -278,7 +285,7 @@ body, html {
     justify-content: space-between;
     align-items: center;
     height: 11vh;
-    box-shadow: 0 8px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 2px 8px 10px rgba(0, 0, 0, 0.1);
 }
 
 .profile-header{
@@ -343,6 +350,8 @@ body, html {
     margin-right: 5%;
     height:45%;
     cursor: pointer;
+    text-decoration: none;
+    color: black;
 }
 
 .logout-account:hover{
@@ -359,6 +368,8 @@ body, html {
     height:45%;
     margin-right: 10px;
     cursor: pointer;
+    text-decoration: none;
+    color: black;
 }
 
 .logout-account-section:hover{
@@ -539,7 +550,7 @@ body, html {
 .dashboard-main-section{
     display: flex;
     flex-direction: row;
-    box-shadow: 0 8px 10px rgba(0, 0, 0, 0.8);
+    box-shadow: 0 4px 15px rgba(100, 100, 100, 0.60);
 }
 
 .dashboard-image{
@@ -590,6 +601,7 @@ body, html {
     cursor: pointer;
     transition: background-color 0.3s ease;
     margin-bottom: 4vh;
+    box-shadow: 0 0 15px rgba(100, 100, 100, 0.60);
 }
 
 .report-generating-button a{
@@ -620,6 +632,15 @@ body, html {
 .current_page{
     box-shadow: 0 0 15px rgba(100, 100, 100, 0.60);
 }
+
+.pop-link{
+    width: 100%;
+    text-decoration: none;
+    color:black;
+    display: flex;
+    align-items: center;
+}
+
 
 
 
