@@ -59,7 +59,8 @@
             <div class="dashboard-panes">
                 <section class="dashboard-main-section">
 
-                    <form id="imageForm" class="display-section" id="dropArea">
+                    <form id="imageForm" class="display-section" id="dropArea" method="post" action="/tumor"
+                          enctype="multipart/form-data">
                         <h2 class="image-upload-heading">Upload the MRI image here</h2>
                         <label for="fileInput">
                         <div class="image-holding-section" id="imagePreview">
@@ -67,7 +68,8 @@
                             <span>Select an image</span>
                         </div>
                         </label>
-                        <input type="file" id="fileInput" class="upload-button" accept="image/*" onchange="previewImage()" required>
+                        <input type="file" id="fileInput" class="upload-button" accept="image/*" onchange="previewImage()" required
+                        name="imagefile">
                         <button class="scan-button">Scan Image</button>
                     </form>
 
