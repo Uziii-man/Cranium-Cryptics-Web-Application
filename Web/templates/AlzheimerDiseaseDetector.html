@@ -78,9 +78,23 @@
                         <section class="disease-status">
                             <h2 class="tumour-status-heading">Alzheimer Detection Status</h2>
                             <div class="tumor-details">
-                                <h3 class="Alzheimer-status">Status: Not Detected</h3>
-                                <h3 class="Alzheimer-type">Detected Type: None</h3>
-                                <h3 class="alzheimer-probability">Probability : 0.00</h3>
+                                {% if predicted_class %}
+                                    <h3 class="Alzheimer-status">Status : {{ predicted_class[0] }}</h3>
+                                {% else %}
+                                    <h3 class="Alzheimer-status">Status : Not Detected</h3>
+                                {% endif %}
+
+                                {% if predicted_class %}
+                                    <h3 class="Alzheimer-type">Detected Type : {{ predicted_class[1] }}</h3>
+                                {% else %}
+                                    <h3 class="Alzheimer-type">Detected Type : None</h3>
+                                {% endif %}
+
+                                {% if score %}
+                                    <h3 class="alzheimer-probability">Probability : {{ score }}</h3>
+                                {% else %}
+                                    <h3 class="alzheimer-probability">Probability : 0.00</h3>
+                                {% endif %}
                             </div>
                         </section>
                     </div>
