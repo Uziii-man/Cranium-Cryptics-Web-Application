@@ -63,29 +63,36 @@
                           enctype="multipart/form-data">
                         <h2 class="image-upload-heading">Upload the MRI image here</h2>
                         <label for="fileInput">
-                        <div class="image-holding-section" id="imagePreview">
-                            <div class="magnifying-glass" id="magnifying-glass"></div>
-                            <span>Select an image</span>
-                        </div>
+                             <div class="image-holding-section" id="imagePreview">
+                                <div class="preview-container">
+                                        <img src="{{ image_path }}" alt="Preview" class="holder"/>
+                                        <div class="magnifying-glass-effect"></div>
+                                        <div  class="scan-bar"></div>
+                                </div>
+                                    {% if not image_path %}
+                                        <span class="span-image">Select an image</span>
+                                    {% endif %}
+                            </div>
+
                         </label>
                         <input type="file" id="fileInput" class="upload-button" accept="image/*" onchange="previewImage()" required
-                        name="imagefile">
-                        <button class="scan-button">Scan Image</button>
+                        name="imagefile" onclick="displayUpdateTumorStatus()">
+                        <button class="scan-button" id="scanButton">Scan Image</button>
                     </form>
 
                     <div class="result-section">
                         <section class="disease-status">
                             <h2 class="tumour-status-heading">Tumor Detection Status</h2>
                             <div class="tumor-details">
-                                <h3 id="status">Status: Not Detected</h3>
-                                <h3 id="probability">Probability: 0.00</h3>
+                                <h3 id="status" class="tumor-status">Status: Not Detected</h3>
+                                <h3 id="probability" class="probability-status">Probability: 0.00</h3>
                             </div>
                         </section>
                         <section class="detected-disease">
                             <h2  class="tumor-type-heading">Detected Tumour Type</h2>
                             <div class="tumor-details">
-                                <h3>Type : Not Detected</h3>
-                                <h3>Probability : 0.00</h3>
+                                <h3  class="type-status">Type: {{ predicted_class }}</h3>
+                                <h3  class="probability-status-type">Probability : 0.00</h3>
                             </div>
                         </section>
                     </div>
@@ -123,9 +130,15 @@
     </div>
 
     <script src="../static/javaScript/MainPage.js">
-        workSpaceGenerator();
+        const image_path = "{{ image_path }}";
+        displayUpdateTumorStatus();
+        window.addEventListener('DOMContentLoaded', function() {
+            clickScan(image_path);
+        });
     </script>
 
-    <script src="../static/javaScript/BrainTumorDitector.js"></script>
+    <script src="../static/javaScript/BrainTumorDitector.js">
+        imageAfterScan();
+    </script>
 </body>
 </html>

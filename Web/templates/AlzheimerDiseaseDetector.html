@@ -70,7 +70,7 @@
                             </div>
                         </label>
                         <input type="file" id="fileInput" class="upload-button" accept="image/*" onchange="previewImage()"
-                        name="imagefile">
+                        name="imagefile" onclick="displayUpdateAlzheimerStatus()">
                         <button class="scan-button" >Scan Image</button>
                     </form>
 
@@ -78,9 +78,9 @@
                         <section class="disease-status">
                             <h2 class="tumour-status-heading">Alzheimer Detection Status</h2>
                             <div class="tumor-details">
-                                <h3>Status: Not Detected</h3>
-                                <h3>Detected Type: None</h3>
-                                <h3>Probability : 0.00</h3>
+                                <h3 class="Alzheimer-status">Status: Not Detected</h3>
+                                <h3 class="Alzheimer-type">Detected Type: None</h3>
+                                <h3 class="alzheimer-probability">Probability : 0.00</h3>
                             </div>
                         </section>
                     </div>

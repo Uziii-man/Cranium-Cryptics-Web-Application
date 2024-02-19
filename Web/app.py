@@ -9,6 +9,22 @@ from sklearn.utils import resample
 from keras.models import load_model
 
 app = Flask(__name__)
+
+# Tumor Detection Models
+tumor_vgg_16 = load_model('C:/Users/laksh/OneDrive/Desktop/Web/models/brain_tumor_detector_vgg16.h5')
+tumor_vgg_19 = load_model('C:/Users/laksh/OneDrive/Desktop/Web/models/tumormodel_vgg19.h5')
+tumor_resnet_50 = load_model('C:/Users/laksh/OneDrive/Desktop/Web/models/BrainTumor_Rnetl.h5')
+
+# Tumour Classification Models
+classification_vgg_16 = load_model('C:/Users/laksh/OneDrive/Desktop/Web/models/brain_tumor_classification_vgg16.h5')
+classification_vgg_19 = load_model('C:/Users/laksh/OneDrive/Desktop/Web/models/brain_tumor_classification_vgg19.h5')
+classification_resnet_50 = load_model(
+    'C:/Users/laksh/OneDrive/Desktop/Web/models/brain_tumor_classification_resnet50.h5')
+
+# Side Detection Model
+side_detection_vgg_16 = load_model('C:/Users/laksh/OneDrive/Desktop/Web/models/brain_side_vgg16.h5')
+
+model_side_detection = load_model('C:/Users/laksh/OneDrive/Desktop/Web/models/brain_side_vgg16.h5')
 model_tumor_classification_vgg16 = load_model(
     'C:/Users/laksh/OneDrive/Desktop/Web/models/brain_tumor_classification_vgg19.h5')
 model_resnet50_stroke = load_model('C:/Users/laksh/OneDrive/Desktop/Web/models/ischemic_stroke_vgg16.h5')
@@ -57,7 +73,7 @@ def login():
     return render_template('login.html')
 
 
-@app.route('/tumor', methods=['POST'])
+@app.route('/tumor', methods=['POST', 'GET'])
 def predict_tumour_type():
     imagefile = request.files['imagefile']
     image_path = "./static/predictingBrainClassificationImages/" + imagefile.filename
@@ -65,16 +81,26 @@ def predict_tumour_type():
     image = load_img(image_path, target_size=(256, 256))
     plt.imshow(image)
     plt.show()
+
+
+
     image = apply_gamma_correction(image, 1.5)
     plt.imshow(image)
     plt.show()
+
+    label_mapping_side = {0: 'Axial', 1: 'Coronal', 3: 'Sagittal'}
 
     label_mapping = {0: 'Glioma', 1: 'Meningioma', 3: 'Pituitary', 2: 'NoTumor'}
 
     # Convert PIL image to array
     image_array = img_to_array(image)
+
     # Expand dimensions to match the input shape expected by the model
     image_array = np.expand_dims(image_array, axis=0)
+
+    probabilities_side = model_side_detection.predict(image_array)[0]
+
+    print(probabilities_side)
 
     # Predict class probabilities
     probabilities = model_tumor_classification_vgg16.predict(image_array)[0]
@@ -208,6 +234,7 @@ def predict_alzheimer():
 
     return render_template('AlzheimerDiseaseDetector.html', image_path=image_path, predicted_class=predicted_class,
                            score=score)
+
 
 if __name__ == '__main__':
     app.run(debug=True)

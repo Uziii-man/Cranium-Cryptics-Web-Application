@@ -155,8 +155,8 @@
 }
 
 .image-holding-section img {
-    width: 100%;
-    height: 100%;
+    max-width: 100%;
+    max-height: 100%;
     object-fit: cover;
     transition: transform 0.3s ease-in-out;
 }
@@ -164,10 +164,6 @@
 .image-holding-section:hover {
     box-shadow: 0 0 15px rgba(100, 100, 100, 0.60);
     transform: scale(1.015);
-}
-
-.image-holding-section:hover img {
-    transform: scale(1.08);
 }
 
 .result-section{
@@ -271,6 +267,45 @@
 .display-section{
     box-shadow: 0 0 15px rgba(100, 100, 100, 0.60);
 }
+
+
+.image-preview-container {
+    position: relative;
+    display: inline-block;
+}
+
+.holder {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    cursor: none;
+}
+
+.magnifying-glass-effect {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 2px solid black;
+    cursor: none;
+    background-repeat: no-repeat;
+    background-size: 450% 450%; /* Adjust this value according to your preference */
+    display: none;
+}
+
+.scan-bar {
+    position: absolute;
+    top: -100%;
+    width: 10vh;
+    height: 10px;
+    background-color: blue;
+    animation: scanAnimation 2s linear infinite alternate;
+    z-index: 10000;
+}
+
+
+
+
 
 @media screen and(max-width: 1300px){
 
