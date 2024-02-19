@@ -128,9 +128,9 @@ const probability_status = document.querySelector('.probability-status');
 const probabiliity_status_type = document.querySelector('.probability-status-type');
 
 function displayUpdateTumorStatus(){
-    tumor_status.innerHTML = "Status: Not Detected";
-    type_status.innerHTML = "Type: Not Detected";
-    probability_status.innerHTML = "Probability: 0.00";
+    tumor_status.innerHTML = "Status: Not Scanned";
+    type_status.innerHTML = "Type: Not Scanned";
+    probability_status.innerHTML = "Probability : 0.00";
     probabiliity_status_type.innerHTML = "Probability: 0.00";
 }
 
@@ -139,7 +139,7 @@ const alzheimer_probability_status = document.querySelector('.alzheimer-probabil
 const  alzheimer_probability_status_type = document.querySelector('.Alzheimer-type');
 
 function displayUpdateAlzheimerStatus(){
-    alzheimer_status.innerHTML = "Status: Not Detected";
+    alzheimer_status.innerHTML = "Status: Not Scanned";
     alzheimer_probability_status.innerHTML = "Probability : 0.00";
     alzheimer_probability_status_type.innerHTML = "Detected Type: None";
 }
@@ -148,7 +148,7 @@ const stroke_status = document.querySelector('.stroke-status');
 const stroke_probability_status = document.querySelector('.stroke-probability');
 
 function displayUpdateStrokeStatus(){
-     stroke_status.innerHTML = "Status: Not Detected";
+     stroke_status.innerHTML = "Status: Not Scanned";
      stroke_probability_status.innerHTML = "Probability: 0.00";
 }
 

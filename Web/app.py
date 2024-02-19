@@ -73,51 +73,102 @@ def login():
     return render_template('login.html')
 
 
-@app.route('/tumor', methods=['POST', 'GET'])
+@app.route('/tumor', methods=['POST'])
 def predict_tumour_type():
+    # Assigning the voting for tumor detection
+    voting_detector = {"tumor": 0, "normal": 0}
+
+    # Assigning the voting for tumor classification
+    voting_classifier = {"Glioma": 0, "Meningioma": 0, "Pituitary": 0, "NoTumor": 0}
+
+    # Label mapping for side detection
+    label_mapping_side = {0: 'Axial', 1: 'Coronal', 3: 'Sagittal'}
+
+    label_mapping_classification = {0: 'Glioma', 1: 'Meningioma', 3: 'Pituitary', 2: 'NoTumor'}
+
     imagefile = request.files['imagefile']
     image_path = "./static/predictingBrainClassificationImages/" + imagefile.filename
     imagefile.save(image_path)
-    image = load_img(image_path, target_size=(256, 256))
-    plt.imshow(image)
+
+    classification_image = load_img(image_path, target_size=(256, 256))
+    detector_image = load_img(image_path, target_size=(240, 240))
+
+    # Plotting the classification image
+    plt.imshow(classification_image)
+    plt.title("Classification Image")
     plt.show()
 
-
-
-    image = apply_gamma_correction(image, 1.5)
-    plt.imshow(image)
+    # Plotting the detector image
+    plt.imshow(detector_image)
+    plt.title("Detector Image")
     plt.show()
 
-    label_mapping_side = {0: 'Axial', 1: 'Coronal', 3: 'Sagittal'}
+    # Apply gamma correction to the classification image
+    classification_image = apply_gamma_correction(classification_image, 1.5)
+    plt.imshow(classification_image)
+    plt.title("Gamma Corrected Classification Image")
+    plt.show()
 
-    label_mapping = {0: 'Glioma', 1: 'Meningioma', 3: 'Pituitary', 2: 'NoTumor'}
+    # Apply gamma correction to the detector image
+    detector_image = apply_gamma_correction(detector_image, 1.5)
+    plt.imshow(detector_image)
+    plt.title("Gamma Corrected Detector Image")
+    plt.show()
 
-    # Convert PIL image to array
-    image_array = img_to_array(image)
+    # Convert PIL Classification image to array
+    classification_image_array = img_to_array(classification_image)
+
+    # Convert PIL Detector image to array
+    detector_image_array = img_to_array(detector_image)
 
     # Expand dimensions to match the input shape expected by the model
-    image_array = np.expand_dims(image_array, axis=0)
+    classification_image_array = np.expand_dims(classification_image_array, axis=0)
 
-    probabilities_side = model_side_detection.predict(image_array)[0]
+    # Expand dimensions to match the input shape expected by the model
+    detector_image_array = np.expand_dims(detector_image_array, axis=0)
+
+    prediction_array = [0, 0]
+    score_array = [0, 0]
+
+    pb = tumor_vgg_16.predict(detector_image_array)
+    if (pb[0][0] > 0.5):
+        index = round(pb[0][0])
+
+    print("Hello", pb[0])
+    print()
+
+    probabilities_side = model_side_detection.predict(classification_image_array)[0]
 
     print(probabilities_side)
 
     # Predict class probabilities
-    probabilities = model_tumor_classification_vgg16.predict(image_array)[0]
+    probability_vgg16 = classification_vgg_16.predict(classification_image_array)[0]
+    probability_vgg19 = classification_vgg_19.predict(classification_image_array)[0]
+    probability_resnet50 = classification_resnet_50.predict(classification_image_array)[0]
+
+    probabilities = ((probability_vgg16 + probability_vgg19 + probability_resnet50) / 3)
+
+    score_array[1] = np.argmax(probabilities)
+
+    print("Probability : ", probabilities)
 
     # Get the predicted class index
     predicted_class_index = np.argmax(probabilities)
 
     # Get the predicted class label
-    predicted_class = label_mapping[predicted_class_index]
+    predicted_class = label_mapping_classification[predicted_class_index]
+
+    prediction_array[1] = predicted_class
 
     # Get the score of the predicted class
-    score = probabilities[predicted_class_index]
+    score1 = probabilities[predicted_class_index]
 
-    print(f"Predicted Class: {predicted_class}, Score: {score}")
+    print(f"Predicted Class: {predicted_class}, Score: {score1}")
 
-    return render_template('BrainTumourDetector.html', image_path=image_path, predicted_class=predicted_class,
-                           score=score)
+    print("Predicted class array:", prediction_array)
+
+    return render_template('BrainTumourDetector.html', image_path=image_path, predicted_class=prediction_array,
+                           score=score_array)
 
 
 # Function to apply gamma correction

@@ -65,7 +65,11 @@
                         <label for="fileInput">
                              <div class="image-holding-section" id="imagePreview">
                                 <div class="preview-container">
+                                    {% if image_path %}
                                         <img src="{{ image_path }}" alt="Preview" class="holder"/>
+                                    {% else %}
+                                        <img src="" alt="Preview" class="holder" style="display: none"/>
+                                    {% endif %}
                                         <div class="magnifying-glass-effect"></div>
                                         <div  class="scan-bar"></div>
                                 </div>
@@ -84,15 +88,31 @@
                         <section class="disease-status">
                             <h2 class="tumour-status-heading">Tumor Detection Status</h2>
                             <div class="tumor-details">
-                                <h3 id="status" class="tumor-status">Status: Not Detected</h3>
-                                <h3 id="probability" class="probability-status">Probability: 0.00</h3>
+                                {% if predicted_class %}
+                                    <h3 id="status" class="tumor-status stat">Status : {{ predicted_class[0] }}</h3>
+                                {% else %}
+                                    <h3 id="status" class="tumor-status stat">Status : Not Scanned</h3>
+                                {% endif %}
+                                {% if predicted_class %}
+                                    <h3 id="probability" class="probability-status stat">Probability : {{ predicted_class[0] }}</h3>
+                                {% else %}
+                                    <h3 id="probability" class="probability-status stat">Probability : 0.00</h3>
+                                {% endif %}
                             </div>
                         </section>
                         <section class="detected-disease">
                             <h2  class="tumor-type-heading">Detected Tumour Type</h2>
                             <div class="tumor-details">
-                                <h3  class="type-status">Type: {{ predicted_class }}</h3>
-                                <h3  class="probability-status-type">Probability : 0.00</h3>
+                                {% if predicted_class %}
+                                    <h3 class="type-status stat">Type : {{ predicted_class[1] }}</h3>
+                                {% else %}
+                                      <h3 class="type-status stat">Type : Not Scanned</h3>
+                                {% endif %}
+                                {% if predicted_class %}
+                                    <h3  class="probability-status-type stat">Probability : {{ predicted_class[1] }}</h3>
+                                {% else %}
+                                    <h3  class="probability-status-type stat">Probability : 0.00</h3>
+                                {% endif %}
                             </div>
                         </section>
                     </div>
