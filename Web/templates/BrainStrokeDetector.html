@@ -71,7 +71,7 @@
                         </label>
                         <input type="file" id="fileInput" class="upload-button" accept="image/*" onchange="previewImage()"
                         required
-                        name="imagefile">
+                        name="imagefile" onclick="displayUpdateStrokeStatus()">
                         <button class="scan-button" >Scan Image</button>
                     </form>
 
@@ -79,8 +79,8 @@
                         <section class="disease-status">
                             <h2 class="tumour-status-heading">Stroke Detection Status</h2>
                             <div class="tumor-details">
-                                <h3>Status : Not Detected</h3>
-                                <h3>Probability : 0.00</h3>
+                                <h3 class="stroke-status">Status : Not Detected</h3>
+                                <h3 class="stroke-probability">Probability : 0.00</h3>
                             </div>
                         </section>
                     </div>
