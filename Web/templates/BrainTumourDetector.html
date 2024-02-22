@@ -71,7 +71,6 @@
                                         <img src="" alt="Preview" class="holder" style="display: none"/>
                                     {% endif %}
                                         <div class="magnifying-glass-effect"></div>
-                                        <div  class="scan-bar"></div>
                                 </div>
                                     {% if not image_path %}
                                         <span class="span-image">Select an image</span>
@@ -94,7 +93,7 @@
                                     <h3 id="status" class="tumor-status stat">Status : Not Scanned</h3>
                                 {% endif %}
                                 {% if predicted_class %}
-                                    <h3 id="probability" class="probability-status stat">Probability : {{ predicted_class[0] }}</h3>
+                                    <h3 id="probability" class="probability-status stat">Probability : {{ score[0] }}</h3>
                                 {% else %}
                                     <h3 id="probability" class="probability-status stat">Probability : 0.00</h3>
                                 {% endif %}
@@ -109,7 +108,7 @@
                                       <h3 class="type-status stat">Type : Not Scanned</h3>
                                 {% endif %}
                                 {% if predicted_class %}
-                                    <h3  class="probability-status-type stat">Probability : {{ predicted_class[1] }}</h3>
+                                    <h3  class="probability-status-type stat">Probability : {{ score[1] }}</h3>
                                 {% else %}
                                     <h3  class="probability-status-type stat">Probability : 0.00</h3>
                                 {% endif %}
@@ -145,8 +144,11 @@
         </div>
     </div>
 
-    <div>
-        
+    <div class="scan-box">
+        <div class="scanning-animation" id="scanningAnimation">
+               <img src="../static/images/logo1.png" class="logo-img" alt="img-logo">
+               <p>Scanning...</p>
+        </div>
     </div>
 
     <script src="../static/javaScript/MainPage.js">

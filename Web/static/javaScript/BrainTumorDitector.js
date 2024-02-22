@@ -128,10 +128,10 @@ const probability_status = document.querySelector('.probability-status');
 const probabiliity_status_type = document.querySelector('.probability-status-type');
 
 function displayUpdateTumorStatus(){
-    tumor_status.innerHTML = "Status: Not Scanned";
-    type_status.innerHTML = "Type: Not Scanned";
+    tumor_status.innerHTML = "Status : Not Scanned";
+    type_status.innerHTML = "Type : Not Scanned";
     probability_status.innerHTML = "Probability : 0.00";
-    probabiliity_status_type.innerHTML = "Probability: 0.00";
+    probabiliity_status_type.innerHTML = "Probability : 0.00";
 }
 
 const alzheimer_status = document.querySelector('.Alzheimer-status');
@@ -139,17 +139,17 @@ const alzheimer_probability_status = document.querySelector('.alzheimer-probabil
 const  alzheimer_probability_status_type = document.querySelector('.Alzheimer-type');
 
 function displayUpdateAlzheimerStatus(){
-    alzheimer_status.innerHTML = "Status: Not Scanned";
+    alzheimer_status.innerHTML = "Status : Not Scanned";
     alzheimer_probability_status.innerHTML = "Probability : 0.00";
-    alzheimer_probability_status_type.innerHTML = "Detected Type: None";
+    alzheimer_probability_status_type.innerHTML = "Detected Type : None";
 }
 
 const stroke_status = document.querySelector('.stroke-status');
 const stroke_probability_status = document.querySelector('.stroke-probability');
 
 function displayUpdateStrokeStatus(){
-     stroke_status.innerHTML = "Status: Not Scanned";
-     stroke_probability_status.innerHTML = "Probability: 0.00";
+     stroke_status.innerHTML = "Status : Not Scanned";
+     stroke_probability_status.innerHTML = "Probability : 0.00";
 }
 
 function clickScan(event, image_path) {
@@ -183,6 +183,40 @@ imageHolder.addEventListener('mouseleave', function() {
     magnifyingGlass.style.display = 'none';
     document.body.style.cursor = 'auto'; // Restore cursor
 });
+
+
+
+
+// Function to show or hide the scanning animation
+function toggleScanningAnimation(show) {
+    const scanningAnimation = document.querySelector(".scan-box");
+    scanningAnimation.style.display = show ? "flex" : "none";
+    if(scanningAnimation.style.display === "flex"){
+        scanningAnimation.style.justifyContent = "center";
+        scanningAnimation.style.alignItems = "center";
+    }
+
+}
+
+// Function to handle file input change event
+function handleFileInputChange() {
+    var fileInput = document.getElementById("fileInput");
+    var imagePreview = document.getElementById("imagePreview");
+
+    // Check if a file is selected
+    if (fileInput.files.length > 0) {
+        // Show scanning animation
+        toggleScanningAnimation(true);
+
+    } else {
+        // Hide scanning animation
+        toggleScanningAnimation(false);
+    }
+}
+
+// Attach event listener to file input change event
+document.querySelector(".scan-button").addEventListener("click", handleFileInputChange);
+
 
 
 
