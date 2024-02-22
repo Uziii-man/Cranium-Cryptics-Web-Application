@@ -11,7 +11,7 @@ from keras.models import load_model
 app = Flask(__name__)
 
 # Tumor Detection Models
-tumor_vgg_16 = load_model('C:/Users/laksh/OneDrive/Desktop/Web/models/brain_tumor_detector_vgg16.h5')
+tumor_vgg_16 = load_model('C:/Users/laksh/OneDrive/Desktop/Web/models/TumorDetectionModel_VGG-16.h5')
 tumor_vgg_19 = load_model('C:/Users/laksh/OneDrive/Desktop/Web/models/tumormodel_vgg19.h5')
 tumor_resnet_50 = load_model('C:/Users/laksh/OneDrive/Desktop/Web/models/BrainTumor_Rnetl.h5')
 
@@ -76,10 +76,7 @@ def login():
 @app.route('/tumor', methods=['POST'])
 def predict_tumour_type():
     # Assigning the voting for tumor detection
-    voting_detector = {"tumor": 0, "normal": 0}
-
-    # Assigning the voting for tumor classification
-    voting_classifier = {"Glioma": 0, "Meningioma": 0, "Pituitary": 0, "NoTumor": 0}
+    label_mapping_detector = {0: "Tumor", 1: "Normal"}
 
     # Label mapping for side detection
     label_mapping_side = {0: 'Axial', 1: 'Coronal', 3: 'Sagittal'}
@@ -91,7 +88,7 @@ def predict_tumour_type():
     imagefile.save(image_path)
 
     classification_image = load_img(image_path, target_size=(256, 256))
-    detector_image = load_img(image_path, target_size=(240, 240))
+    detector_image = load_img(image_path, target_size=(256, 256))
 
     # Plotting the classification image
     plt.imshow(classification_image)
@@ -130,11 +127,16 @@ def predict_tumour_type():
     prediction_array = [0, 0]
     score_array = [0, 0]
 
-    pb = tumor_vgg_16.predict(detector_image_array)
-    if (pb[0][0] > 0.5):
-        index = round(pb[0][0])
+    detector_vgg_16_probability = tumor_vgg_16.predict(detector_image_array)[0]
+    detector_score = detector_vgg_16_probability[np.argmax(detector_vgg_16_probability)]
+    detector_prediction = np.argmax(detector_vgg_16_probability)
 
-    print("Hello", pb[0])
+    detector_class = label_mapping_detector[detector_prediction]
+
+    prediction_array[0] = detector_class
+    score_array[0] = "{:.2f}".format(detector_score)
+
+    print("Hello", detector_vgg_16_probability[0])
     print()
 
     probabilities_side = model_side_detection.predict(classification_image_array)[0]
@@ -148,9 +150,11 @@ def predict_tumour_type():
 
     probabilities = ((probability_vgg16 + probability_vgg19 + probability_resnet50) / 3)
 
-    score_array[1] = np.argmax(probabilities)
+    score = probabilities[np.argmax(probabilities)]
 
-    print("Probability : ", probabilities)
+    score_array[1] = "{:.2f}".format(score)
+
+    print("Probability : ", score_array[1])
 
     # Get the predicted class index
     predicted_class_index = np.argmax(probabilities)
@@ -286,6 +290,5 @@ def predict_alzheimer():
     return render_template('AlzheimerDiseaseDetector.html', image_path=image_path, predicted_class=predicted_class,
                            score=score)
 
-
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, port=5000)

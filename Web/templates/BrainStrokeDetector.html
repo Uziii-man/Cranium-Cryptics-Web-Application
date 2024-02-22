@@ -71,7 +71,7 @@
                                     {% else %}
                                          <img src="" alt="Preview" class="holder" style="display: none">
                                     {% endif %}
-                                          <div class="magnifying-glass" id="magnifying-glass"></div>
+                                          <div class="magnifying-glass-effect" id="magnifying-glass"></div>
                                           <div class="scan-bar"></div>
                                 </div>
                                     {% if not image_path %}
@@ -100,7 +100,22 @@
                                 {% else %}
                                      <h3 class="stroke-probability stat">Probability : 0.00</h3>
                                 {% endif %}
+                            </div>
+                        </section>
 
+                        <section class="detected-disease">
+                            <h2  class="tumor-type-heading">Detected Image Edge</h2>
+                            <div class="tumor-details">
+                                {% if class_name %}
+                                    <h3 class="type-status stat">Type : {{ class_name }}</h3>
+                                {% else %}
+                                      <h3 class="type-status stat">Type : Not Scanned</h3>
+                                {% endif %}
+                                {% if prediction_score %}
+                                    <h3  class="probability-status-type stat">Probability : {{ prediction_score }}</h3>
+                                {% else %}
+                                    <h3  class="probability-status-type stat">Probability : 0.00</h3>
+                                {% endif %}
                             </div>
                         </section>
                     </div>
@@ -133,8 +148,11 @@
         </div>
     </div>
 
-    <div>
-        
+    <div class="scan-box">
+        <div class="scanning-animation" id="scanningAnimation">
+               <img src="../static/images/logo1.png" class="logo-img" alt="img-logo">
+               <p>Scanning...</p>
+        </div>
     </div>
 
     <script src="../static/javaScript/MainPage.js">
