@@ -216,6 +216,9 @@ def apply_sobel8_filter(image):
 
 @app.route('/stroke', methods=['POST'])
 def predict_stroke():
+    # Label mapping for side detection
+    label_mapping_side = {0: 'Axial', 1: 'Coronal', 3: 'Sagittal'}
+
     imagefile = request.files['imagefile']
     image_path = "./static/predictingStrokeImages/" + imagefile.filename
     imagefile.save(image_path)
@@ -231,6 +234,13 @@ def predict_stroke():
     predictions = model_resnet50_stroke.predict(image)
     class_name = np.argmax(predictions)
 
+    side_prediction = model_side_detection.predict(image)
+    side_prediction_score = side_prediction[0][np.argmax(side_prediction)]
+    side_class = np.argmax(side_prediction)
+    side_name = label_mapping_side[side_class]
+
+    print(f"Predicted Side: {side_name}, Score: {side_prediction_score}")
+
     # Get the prediction score
     prediction_score = predictions[0][class_name]
 
@@ -240,7 +250,10 @@ def predict_stroke():
 
     print(f"Predicted Class: {label_mapping[class_name]}, Score: {prediction_score}")
 
-    return render_template('BrainStrokeDetector.html', image_path=image_path, class_name=label_mapping[class_name],
+    class_name = [label_mapping[class_name], side_name]
+    prediction_score = [prediction_score, side_prediction_score]
+
+    return render_template('BrainStrokeDetector.html', image_path=image_path, class_name=class_name,
                            prediction_score=prediction_score)
 
 
@@ -289,6 +302,7 @@ def predict_alzheimer():
 
     return render_template('AlzheimerDiseaseDetector.html', image_path=image_path, predicted_class=predicted_class,
                            score=score)
+
 
 if __name__ == '__main__':
     app.run(debug=True, port=5000)

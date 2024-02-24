@@ -90,13 +90,13 @@
                             <h2 class="tumour-status-heading">Stroke Detection Status</h2>
                             <div class="tumor-details">
                                 {% if class_name %}
-                                     <h3 class="stroke-status stat">Status : {{ class_name }}</h3>
+                                     <h3 class="stroke-status stat">Status : {{ class_name[0] }}</h3>
                                 {% else %}
                                      <h3 class="stroke-status stat">Status : Not Scanned</h3>
                                 {% endif %}
 
                                 {% if prediction_score %}
-                                     <h3 class="stroke-probability stat">Probability : {{ prediction_score }}</h3>
+                                     <h3 class="stroke-probability stat">Probability : {{ prediction_score[0] }}</h3>
                                 {% else %}
                                      <h3 class="stroke-probability stat">Probability : 0.00</h3>
                                 {% endif %}
@@ -107,12 +107,12 @@
                             <h2  class="tumor-type-heading">Detected Image Edge</h2>
                             <div class="tumor-details">
                                 {% if class_name %}
-                                    <h3 class="type-status stat">Type : {{ class_name }}</h3>
+                                    <h3 class="type-status stat">Type : {{ class_name[1] }}</h3>
                                 {% else %}
                                       <h3 class="type-status stat">Type : Not Scanned</h3>
                                 {% endif %}
                                 {% if prediction_score %}
-                                    <h3  class="probability-status-type stat">Probability : {{ prediction_score }}</h3>
+                                    <h3  class="probability-status-type stat">Probability : {{ prediction_score[1] }}</h3>
                                 {% else %}
                                     <h3  class="probability-status-type stat">Probability : 0.00</h3>
                                 {% endif %}
