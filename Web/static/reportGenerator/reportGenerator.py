@@ -101,38 +101,8 @@ header_table_data = [
 header_table = Table(header_table_data, colWidths=[350, 200])
 content.append(header_table)
 
-# Add section line
-# # Add some paragraphs or other content to the 'content' list
-# paragraph_text = "This is a sample paragraph."
-# paragraph = Paragraph(paragraph_text, getSampleStyleSheet()['Normal'])
-# content.append(paragraph)
-#
-# # Add a spacer
-# content.append(Spacer(1, 12))
-#
-# # Function to add a horizontal line at the bottom of each page
-# def add_horizontal_line(canvas, doc):
-#     canvas.line(0, 10, A4[0], 10)
-#
-# # Attach the line-drawing function to the 'onPage' event of the canvas
-# document.onPage = add_horizontal_line
-#
-# class CustomDocTemplate(SimpleDocTemplate):
-#     def afterPage(self):
-#         self.canv.line(36, 36, A4[0] - 36, 36)  # Adjust the coordinates as needed
-#
-# # Create a list to store the content
-# # content = []
-#
-# # Add some paragraphs or other content to the 'content' list
-# paragraph_text = "This is a sample paragraph."
-# paragraph = Paragraph(paragraph_text, getSampleStyleSheet()['Normal'])
-# content.append(paragraph)
-#
 # Add a spacer
 content.append(Spacer(1, 20))
-
-#
 
 # Add body content
 body_content = [

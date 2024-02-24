@@ -4,11 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e1a00219-e493-472a-a80a-26117a761181" name="Changes" comment="report generation continuation">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Web/static/reportGenerator/reportGenerator.py" beforeDir="false" afterPath="$PROJECT_DIR$/Web/static/reportGenerator/reportGenerator.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Web/static/reportGenerator/reportLogo.png" beforeDir="false" afterPath="$PROJECT_DIR$/Web/static/reportGenerator/reportLogo.png" afterDir="false" />
-    </list>
+    <list default="true" id="e1a00219-e493-472a-a80a-26117a761181" name="Changes" comment="report generation continuation and restructure" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -79,6 +75,23 @@
       <workItem from="1708259311469" duration="1692000" />
       <workItem from="1708261098910" duration="1875000" />
     </task>
+    <task id="LOCAL-00001" summary="report generation continuation">
+      <option name="closed" value="true" />
+      <created>1708785964483</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1708785964483</updated>
+    </task>
+    <task id="LOCAL-00002" summary="report generation continuation and restructure">
+      <option name="closed" value="true" />
+      <created>1708786213220</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1708786213220</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -86,7 +99,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="report generation continuation" />
-    <option name="LAST_COMMIT_MESSAGE" value="report generation continuation" />
+    <MESSAGE value="report generation continuation and restructure" />
+    <option name="LAST_COMMIT_MESSAGE" value="report generation continuation and restructure" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Cranium_Cryptics_Web_Application$reportGenerator.coverage" NAME="reportGenerator Coverage Results" MODIFIED="1708784795335" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Web/static/reportGenerator" />
