@@ -4,7 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e1a00219-e493-472a-a80a-26117a761181" name="Changes" comment="report generation continuation and restructure" />
+    <list default="true" id="e1a00219-e493-472a-a80a-26117a761181" name="Changes" comment="report generation continuation and restructure">
+      <change afterPath="$PROJECT_DIR$/Web/static/reportGenerator/img.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Web/static/reportGenerator/reportGenerator.py" beforeDir="false" afterPath="$PROJECT_DIR$/Web/static/reportGenerator/reportGenerator.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -44,9 +48,10 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "Python.app.executor": "Run",
+    "Python.reportGenerator.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "master",
+    "git-widget-placeholder": "Uzman",
     "last_opened_file_path": "D:/Cranium-Cryptics-Web-Application/.venv",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -103,7 +108,7 @@
     <option name="LAST_COMMIT_MESSAGE" value="report generation continuation and restructure" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/Cranium_Cryptics_Web_Application$reportGenerator.coverage" NAME="reportGenerator Coverage Results" MODIFIED="1708784795335" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Web/static/reportGenerator" />
+    <SUITE FILE_PATH="coverage/Cranium_Cryptics_Web_Application$reportGenerator.coverage" NAME="reportGenerator Coverage Results" MODIFIED="1708796984831" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Web/static/reportGenerator" />
     <SUITE FILE_PATH="coverage/Cranium_Cryptics_Web_Application$app.coverage" NAME="app Coverage Results" MODIFIED="1708776509992" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Web" />
   </component>
 </project>
