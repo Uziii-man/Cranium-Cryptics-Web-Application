@@ -94,11 +94,6 @@
                                     <h3 class="Alzheimer-status stat1">Status : Not Scanned</h3>
                                 {% endif %}
 
-                                {% if predicted_class %}
-                                    <h3 class="Alzheimer-type stat1">Detected Type : {{ predicted_class[1] }}</h3>
-                                {% else %}
-                                    <h3 class="Alzheimer-type stat1">Detected Type : None</h3>
-                                {% endif %}
 
                                 {% if score %}
                                     <h3 class="alzheimer-probability stat1">Probability : {{ score }}</h3>
