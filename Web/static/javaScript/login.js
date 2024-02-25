@@ -16,7 +16,6 @@ const getElementVal = (id) => {
 
 var hForm = firebase.database().ref('UserData')
 
-
 document.getElementById("loginForm").addEventListener('submit', submitLoginForm);
 
 function submitLoginForm(e) {
@@ -31,28 +30,39 @@ function submitLoginForm(e) {
 
 const viewData = (loginUsername, loginPassword) => {
 
-    hForm.child(loginUsername).once('value', function(snapshot) {
+hForm.child(loginUsername).once('value', function(snapshot) {
         var userData = snapshot.val();
         if (userData) {
             var storedPassword = userData.password;
+            var storedEmail = userData.email;
             if (loginPassword === storedPassword) {
-              window.location.href = '/Dashboard'
-              console.log("Login successful");
+              displayAlert("Login Successfull")
+              setTimeout(() => {
+                window.location.href = '/Dashboard';
+            }, 1500);
               
             } else {
-              console.log("Incorrect password");
-              alert("Incorrect password")
+              displayAlert("Incorrect password")
             }
           } else {
-            console.log("User not found");
-            alert("User not Found")
+            displayAlert("User not Found")
           }
-    });
+  });
+
+  // Customized alert messages
+function displayAlert(message) {
+  var issue = document.getElementById("customAlert");
+  var alertMessage = document.getElementById("alertMessage");
+  alertMessage.innerHTML = message;
+  issue.style.display = "block";
+  
+
+  //Closes the alert popup when anywhere in the screen is clicked
+  window.onclick = function(event) {
+    if (event.target == issue) {
+      issue.style.display = "none";
+    }
+  }
 
 }
-
-
-
-
-
-
+}
