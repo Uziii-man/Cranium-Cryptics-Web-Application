@@ -1,4 +1,3 @@
-
 const firebaseConfig = {
   apiKey: "AIzaSyChuCsLIaZDj4nfI1jE9Dpbkt2CFZSKR1c",
   authDomain: "craniumcryptics.firebaseapp.com",
@@ -12,55 +11,67 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 
 const getElementVal = (id) => {
-return document.getElementById(id).value;
+  return document.getElementById(id).value;
 };
 
-var hForm = firebase.database().ref('UserData')
+var hForm = firebase.database().ref('UserData');
 
-document.getElementById("regForm").addEventListener('submit', submitForm)
+document.getElementById("regForm").addEventListener('submit', submitForm);
 
-function submitForm(e){
-e.preventDefault();
+function submitForm(e) {
+  e.preventDefault();
 
-var email = getElementVal('reg_email')
-var userName = getElementVal('reg_username')
-var password = getElementVal('reg_password')
-var confirmPassword = getElementVal('reg_confirm')
+  var email = getElementVal('reg_email');
+  var userName = getElementVal('reg_username');
+  var password = getElementVal('reg_password');
+  var confirmPassword = getElementVal('reg_confirm');
 
-// Checking inout field validations
-if (!isValidEmail(email)) {
-  displayAlert("Please Enter A Valid Email Address");
-  return;
-}
+  // Checking input field validations
+  if (!isValidEmail(email)) {
+    displayAlert("Please Enter A Valid Email Address");
+    return;
+  }
 
+  if (!isValidPassword(password)) {
+    displayAlert("Password Should Be  6 Characters Long.");
+    return;
+  }
 
-if (!isValidPassword(password)) {
-  displayAlert("Password Should Be At Least 6 Characters Long.");
-  return;
-}
+  if (password !== confirmPassword) {
+    displayAlert("Password And Confirm Password Do Not Match.");
+    return;
+  }
 
-if (password !== confirmPassword) {
-  displayAlert("Password and confirm password do not match.");
-  return;
-}
+  if(!isValidUsername(userName)){
+    displayAlert("Username Should Be 8 Characters Long");
+    return;
+  }
 
-saveMessages(email,userName,password,confirmPassword)
-displayAlert("Registration Successfull")
-
+  doesUsernameExist(userName)
+    .then(usernameExists => {
+      if (usernameExists) {
+        displayAlert("Username Already Exists. Please Choose A Different One.");
+        return;
+      }
+  
+  saveMessages(email, userName, password, confirmPassword);
+  displayAlert("Registration Successfull");
+  setTimeout(() => {
+  window.location.href = '/login';
+    }, 2000);
+  });
 }
 
 // Storing Data to firebase DB
 const saveMessages = (email, userName, password, confirmPassword) => {
-var newhForm = hForm.child(userName);
+  var newhForm = hForm.child(userName);
 
-newhForm.set({
-  email : email,
-  userName : userName,
-  password : password,
-  confirmPassword : confirmPassword,
-
-  })
-
+  newhForm.set({
+    email: email,
+    userName: userName,
+    password: password,
+    confirmPassword: confirmPassword
+  });
 };
 
 // Validating Email
@@ -69,14 +80,24 @@ function isValidEmail(email) {
   return emailRegex.test(email);
 }
 
-//Should implement duplication check for username
-
-// VAlidating password
-function isValidPassword(password) {
-  
-  return password.length >= 6;
+//Duplication check for username
+function doesUsernameExist(username) {
+  return new Promise((resolve, reject) => {
+    hForm.child(username).once('value', (snapshot) => {
+      resolve(snapshot.exists());
+    });
+  });
 }
 
+// Validating username
+function isValidUsername(email) {
+  return email.length >= 8
+}
+
+// Validating password
+function isValidPassword(password) {
+  return password.length >= 6;
+}
 
 // Customized alert messages
 function displayAlert(message) {
@@ -84,13 +105,11 @@ function displayAlert(message) {
   var alertMessage = document.getElementById("alertMessage");
   alertMessage.innerHTML = message;
   issue.style.display = "block";
-  
 
-  //Closes the alert popup when anywhere in the screen is clicked
-  window.onclick = function(event) {
+  // Closes the alert popup when anywhere in the screen is clicked
+  window.onclick = function (event) {
     if (event.target == issue) {
       issue.style.display = "none";
     }
-  }
-  
+  };
 }
