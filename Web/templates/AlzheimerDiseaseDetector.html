@@ -96,7 +96,7 @@
 
 
                                 {% if score %}
-                                    <h3 class="alzheimer-probability stat1">Probability : {{ score }}</h3>
+                                    <h3 class="alzheimer-probability stat1">Probability : {{ score[0] }}</h3>
                                 {% else %}
                                     <h3 class="alzheimer-probability stat1">Probability : 0.00</h3>
                                 {% endif %}
@@ -105,15 +105,15 @@
                         <section class="detected-disease">
                            <h2  class="tumor-type-heading">Detected Image Edge</h2>
                             <div class="tumor-details">
-                                {% if class_name %}
-                                    <h3 class="type-status stat">Type : {{ predicted_class[0] }}</h3>
+                                {% if predicted_class %}
+                                    <h3 class="type-status stat1">Type : {{ predicted_class[1] }}</h3>
                                 {% else %}
-                                      <h3 class="type-status stat">Type : Not Scanned</h3>
+                                      <h3 class="type-status stat1">Type : Not Scanned</h3>
                                 {% endif %}
-                                {% if prediction_score %}
-                                    <h3  class="probability-status-type stat">Probability : {{ predicted_class[1] }}</h3>
+                                {% if score %}
+                                    <h3  class="probability-status-type stat1">Probability : {{ score[1] }}</h3>
                                 {% else %}
-                                    <h3  class="probability-status-type stat">Probability : 0.00</h3>
+                                    <h3  class="probability-status-type stat1">Probability : 0.00</h3>
                                 {% endif %}
                             </div>
                         </section>
