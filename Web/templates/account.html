@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/css/MainPage.css">
+    <link rel="icon" type="image/x-icon" href="../static/images/logo1.png" sizes="64x64 32x32">
+    <title>Cranium Cryptics</title>
+</head>
+<body>
+    <div  class="app-container">
+        <div class="left-pane">
+            <div class="menu-button" onclick="toggleMenu()">
+                <h1 class="main-menu">Menu</h1>
+                <span class="menu-burger">&#9776;</span>
+            </div>
+            <div class="menu-container">
+                <div class="Menu-main-list">
+                    <ul class="menu-list">
+                        <li  class="menu-detail-list current_page hello">
+                        <a href="/Dashboard"><image src="../static/images/dashboard.png" class="menu-img">Dashboard</image></a></li>
+                        <li  class="menu-detail-list" onmouseout="nav_back_highliter()" onmouseover="nav_highliter();">
+                        <a href="/BrainTumourDetector"><image src="../static/images/dashboard.png" class="menu-img">Tumor Detection</image></a></li>
+                        <li  class="menu-detail-list" onmouseout="nav_back_highliter()" onmouseover="nav_highliter();">
+                        <a href="/BrainStrokeDetector"><image src="../static/images/dashboard.png" class="menu-img" >Stroke Detection</image></a></li>
+                        <li  class="menu-detail-list" onmouseout="nav_back_highliter()" onmouseover="nav_highliter();">
+                        <a href="/AlzheimerDiseaseDetector"><image src="../static/images/dashboard.png" class="menu-img">Alzheimer Detection</image></a></li>
+                        <li  class="menu-detail-list" onmouseout="nav_back_highliter()" onmouseover="nav_highliter();">
+                        <a href="/ReportGenerator"><image src="../static/images/dashboard.png" class="menu-img">Report Generator</image></a></li>
+                    </ul>
+                    <section class="logout-section">
+                        <a href="#" class="logout-account">
+                            <image src="../static/images/account.png" class="menu-img logout-img" id="account-dt"></image>
+                            <p>Account</p>
+                        </a>
+
+                        <a href="/login" class="logout-account-section">
+                            <image src="../static/images/logout.png" class="menu-img logout-img"></image>
+                            <p>Logout</p>
+                        </a>
+                    </section>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="right-pane">
+            <div class="dashboard-header">
+                <section class="dashboard-heading">
+                    <h2><span class="heading-span">Cranium</span> Cryptics</h2>
+                    <img src="../static/images/logo1.png" height="20px" width="20px">
+                </section>
+                <section class="profile-header" onmouseover="ProfilePopView()" onmouseout="removeProfileView()">
+                    <image src="../static/images/profile.jpeg" class="profile-image"></image>
+                    <h2>Lakshan Cooray</h2>
+                </section>
+            </div>
+
+                <section class="profile-section">
+                    <div class="container">
+                        <h1>Edit Profile</h1>
+                          <hr>
+                        <div class="row">
+                          <!-- left column -->
+                          <div class="col-md-3">
+                            <div class="text-center">
+                              <img src="//placehold.it/100" class="avatar img-circle" alt="avatar">
+                              <h6>Upload a different photo...</h6>
+                              
+                              <input type="file" class="form-control">
+                            </div>
+                          </div>
+                          
+                          <!-- edit form column -->
+                          <div class="col-md-9 personal-info">
+                            <div class="alert alert-info alert-dismissable">
+                              <a class="panel-close close" data-dismiss="alert">×</a> 
+                              <i class="fa fa-coffee"></i>
+                              This is an <strong>.alert</strong>. Use this to show important messages to the user.
+                            </div>
+                            <h3>Personal info</h3>
+                            
+                            <form class="form-horizontal" role="form">
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label">Username:</label>
+                                    <div class="col-md-8">
+                                      <input class="form-control" type="text" value="janeuser">
+                                    </div>
+                                  </div>
+                              <div class="form-group">
+                                <label class="col-lg-3 control-label">Email:</label>
+                                <div class="col-lg-8">
+                                  <input class="form-control" type="text" value="janesemail@gmail.com">
+                                </div>
+                              </div>
+
+       
+                              <div class="form-group">
+                                <label class="col-md-3 control-label">Password:</label>
+                                <div class="col-md-8">
+                                  <input class="form-control" type="password" value="11111122333">
+                                </div>
+                              </div>
+                              <div class="form-group">
+                                <label class="col-md-3 control-label">Confirm password:</label>
+                                <div class="col-md-8">
+                                  <input class="form-control" type="password" value="11111122333">
+                                </div>
+                              </div>
+                              <div class="form-group">
+                                <label class="col-md-3 control-label"></label>
+                                <div class="col-md-8">
+                                  <input type="button" class="btn btn-primary" value="Save Changes">
+                                  <span></span>
+                                  <input type="reset" class="btn btn-default" value="Cancel">
+                                </div>
+                              </div>
+                            </form>
+                          </div>
+                      </div>
+                    </div>
+                    <hr>
+                </section>
+                
+   
+                <section class="dashboard-copyright">
+                    <p class="copy-text">Developed by Cranium Cryptics Team &copy; 2024. All rights reserved.</p>
+                </section>
+
+                <section class="profile-popup" onmouseover="ProfilePopView()" onmouseout="removeProfileView()">
+                    <div>
+                       <ul class="profile-viewer-list">
+                            <li class="profile-viewer-list-element profile-list1">
+                                <a href="#" class="pop-link">
+                                    <img src="../static/images/profile2.png" class="menu-img profile-img" alt="View Profile">View Profile
+                                </a>
+                            </li>
+                            <li class="profile-viewer-list-element" id="line-profile"></li>
+                            <li class="profile-viewer-list-element profile-list2">
+                                <a href="/login" class="pop-link">
+                                    <img src="../static/images/signout-removebg-preview.png" class="menu-img profile-img2" alt="Sign Out">Sign Out
+                                </a>
+                            </li>
+                       </ul>
+                    </div>
+                </section>
+
+            </div>
+        </div>
+    </div>
+
+    <div>
+
+    </div>
+
+    <script src="../static/javaScript/MainPage.js">
+        workSpaceGenerator();
+    </script>
+</body>
+</html>
