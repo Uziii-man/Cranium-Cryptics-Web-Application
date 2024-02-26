@@ -31,7 +31,7 @@
                         <a href="/ReportGenerator"><image src="../static/images/dashboard.png" class="menu-img">Report Generator</image></a></li>
                     </ul>
                     <section class="logout-section">
-                        <a href="#" class="logout-account">
+                        <a href="/account" class="logout-account">
                             <image src="../static/images/account.png" class="menu-img logout-img" id="account-dt"></image>
                             <p>Account</p>
                         </a>
@@ -60,7 +60,8 @@
             <div class="dashboard-panes">
                 <section class="dashboard-main-section">
                     <div class="main-right">
-                        <form id="imageForm" class="display-section" id="dropArea" >
+                        <form id="imageForm" class="display-section" id="dropArea" method="post" action="/generateReport"
+                           enctype="multipart/form-data">
                             <h2 class="image-upload-heading">Upload the MRI image here</h2>
                             <label for="fileInput">
                             <div class="image-holding-section" id="imagePreview">
@@ -78,7 +79,8 @@
                                      {% endif %}
                             </div>
                             </label>
-                            <input type="file" id="fileInput" class="upload-button" accept="image/*" onchange="previewImage()" required>
+                            <input type="file" id="fileInput" class="upload-button" accept="image/*" onchange="previewImage()" required
+                            name="imagefile" onclick="">
                             <button class="scan-button">Generate Report</button>
                         </form>
                     </div>
@@ -135,7 +137,7 @@
                     <div>
                         <ul class="profile-viewer-list">
                             <li class="profile-viewer-list-element profile-list1">
-                                <a href="#" class="pop-link">
+                                <a href="/account" class="pop-link">
                                     <img src="../static/images/profile2.png" class="menu-img profile-img" alt="View Profile">View Profile
                                 </a>
                             </li>
