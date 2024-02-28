@@ -53,7 +53,7 @@
                 </section>
                 <section class="profile-header" onmouseover="ProfilePopView()" onmouseout="removeProfileView()">
                     <image src="../static/images/profile.jpeg" class="profile-image"></image>
-                    <h2>Lakshan Cooray</h2>
+                    <h2 class="user-name">Lakshan Cooray</h2>
                 </section>
             </div>
             <div class="dashboard-panes">
@@ -78,8 +78,8 @@
                             </div>
 
                         </label>
-                        <input type="file" id="fileInput" class="upload-button" accept="image/*" onchange="previewImage()" required
-                        name="imagefile" onclick="displayUpdateTumorStatus()">
+                        <input type="file" id="fileInput" class="upload-button" accept="image/*" onchange="previewImage();
+                           displayUpdateTumorStatus()" required name="imagefile">
                         <button class="scan-button" id="scanButton">Scan Image</button>
                     </form>
 

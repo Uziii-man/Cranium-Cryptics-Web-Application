@@ -53,7 +53,7 @@
                 </section>
                 <section class="profile-header" onmouseover="ProfilePopView()" onmouseout="removeProfileView()">
                     <image src="../static/images/profile.jpeg" class="profile-image"></image>
-                    <h2>Lakshan Cooray</h2>
+                    <h2 class="user-name">Lakshan Cooray</h2>
                 </section>
             </div>
 
@@ -64,8 +64,8 @@
                       <div class="col-md-3">
                          <h3 class="personal-info-header">Profile Image</h3>
                          <div class="text-center">
-                            <img src="../static/images/profile.jpeg" class="avatar img-circle" alt="avatar">
-                            <input type="file" class="form-control fc1">
+                            <img id="previewImage" src="../static/images/profile.jpeg" class="avatar img-circle" alt="avatar">
+                            <input type="file" class="form-control fc1" id="uploadInput">
                          </div>
                       </div>
 
@@ -76,22 +76,22 @@
                             <form class="form-horizontal" role="form">
                                 <div class="form-group">
                                     <label class="col control-label">Username:</label>
-                                    <input class="form-control" type="text" value="janeuser">
+                                    <input class="form-control user-control control-bar" type="text">
                                   </div>
 
                                   <div class="form-group">
                                     <label class="col-lg-3 control-label">Email:</label>
-                                    <input class="form-control" type="text" value="janesemail@gmail.com">
+                                    <input class="form-control email-control control-bar" type="text">
                                   </div>
 
                                   <div class="form-group">
                                     <label class="col control-label">Password:</label>
-                                    <input class="form-control" type="password" value="11111122333">
+                                    <input class="form-control password-control control-bar" type="password">
                                   </div>
 
                                   <div class="form-group">
                                      <label class="col control-label">Confirm password:</label>
-                                     <input class="form-control" type="password" value="11111122333">
+                                     <input class="form-control confirm-password-control control-bar" type="password">
                                   </div>
 
                                   <div class="form-group">
@@ -99,7 +99,7 @@
                                     <div class="col-md-8">
                                       <input type="button" class="btn btn-primary" value="Save Changes">
                                       <span></span>
-                                      <input type="reset" class="btn btn-default" value="Cancel">
+                                      <input type="button" class="btn btn-default" value="Reset" onclick="clearFileInput()">
                                     </div>
                                   </div>
 
@@ -121,7 +121,7 @@
                                 </a>
                             </li>
                             <li class="profile-viewer-list-element" id="line-profile"></li>
-                            <li class="profile-viewer-list-element profile-list2">
+                            <li class="profile-viewer-list-element profile-list2" >
                                 <a href="/login" class="pop-link">
                                     <img src="../static/images/signout-removebg-preview.png" class="menu-img profile-img2" alt="Sign Out">Sign Out
                                 </a>
@@ -139,5 +139,8 @@
     <script src="../static/javaScript/MainPage.js">
         workSpaceGenerator();
     </script>
+    <script src="../static/javaScript/login.js"></script>
+    <script src="../static/javaScript/register.js"></script>
+    <script src="../static/javaScript/account.js"></script>
 </body>
 </html>

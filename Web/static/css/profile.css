@@ -167,3 +167,7 @@
 .login-button{
     border-radius: 4px;
 }
+
+.dashboard-copyright{
+    height: 15vh;
+}

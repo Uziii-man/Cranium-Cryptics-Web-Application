@@ -394,7 +394,8 @@ def predict_alzheimer():
 
 @app.route('/generateReport', methods=['POST'])
 def generateReport():
-    disease_status = {"Tumour": 0, "Tumour Type": 0, "Alzheimer": 0, "Stroke": 0, "Edge": 0}
+    disease_status = {"Tumour": "Not Detected", "Tumour Type": "Not Detected", "Alzheimer": "Not Detected",
+                      "Stroke": "Not Detected", "Edge": "Not Detected"}
     disease_score = {"Tumour": 0, "Tumour Type": 0, "Alzheimer": 0, "Stroke": 0, "Edge": 0}
     label_mapping_detector = {0: "Tumor", 1: "Normal"}
     label_mapping_classification = {0: 'Glioma', 1: 'Meningioma', 3: 'Pituitary', 2: 'NoTumor'}
@@ -450,6 +451,26 @@ def generateReport():
 
             print(predicted_class)
 
+            disease_status["Tumour"] = label_mapping_detector[detector_prediction]
+            disease_score["Tumour"] = "{:.2f}".format(detector_score)
+
+            disease_status["Tumour Type"] = predicted_class
+            disease_score["Tumour Type"] = "{:.2f}".format(detector_score)
+
+            return render_template('ReportGenerator.html', image_path=image_path, score=disease_score,
+                                   predicted_class=disease_status)
+
+        else:
+            disease_status["Tumour"] = label_mapping_detector[detector_prediction]
+            disease_score["Tumour"] = "{:.2f}".format(detector_score)
+
+            disease_status["Tumour Type"] = label_mapping_detector[detector_prediction]
+            disease_score["Tumour Type"] = "{:.2f}".format(detector_score)
+
+            return render_template('ReportGenerator.html', image_path=image_path, score=disease_score,
+                                   predicted_class=disease_status)
+
+
     elif all_disease_prediction == 1:
         image = load_img(image_path, target_size=(256, 256))
         plt.imshow(image)
@@ -475,7 +496,32 @@ def generateReport():
         # Get the score of the predicted class
         score = probabilities[predicted_class_index]
 
+        disease_status["Alzheimer"] = predicted_class
+        disease_score["Alzheimer"] = "{:.2f}".format(score)
+
         print(predicted_class)
+
+        return render_template('ReportGenerator.html', image_path=image_path, score=disease_score,
+                               predicted_class=disease_status)
+
+
+    elif all_disease_prediction == 2:
+        label_mapping = {0: 'Ischemic', 1: 'Not Detected'}
+        image = np.expand_dims(sobel_image, axis=0)
+        predictions = model_resnet50_stroke.predict(image)
+        class_name = np.argmax(predictions)
+
+        # Get the prediction score
+        prediction_score = predictions[0][class_name]
+
+        print(label_mapping[class_name])
+
+        disease_status["Stroke"] = label_mapping[class_name]
+
+        disease_score["Stroke"] = "{:.2f}".format(prediction_score)
+
+        return render_template('ReportGenerator.html', image_path=image_path, score=disease_score,
+                               predicted_class=disease_status)
 
     return render_template('ReportGenerator.html', image_path=image_path)
 
