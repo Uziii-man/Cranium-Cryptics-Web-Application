@@ -34,6 +34,7 @@ function submitForm(e) {
 
   if (!isValidPassword(password)) {
     displayAlert("Password Should Be  6 Characters Long With 1 Symbol And 1 Capital Letter.");
+    displayAlert("Password Should Be  6 Characters Long.")
     return;
   }
 
@@ -51,6 +52,7 @@ function submitForm(e) {
     .then(usernameExists => {
       if (usernameExists) {
         displayAlert("Username Already Exists. Enter A Different One. Try Using @ Or Underscores.");
+        displayAlert("Username Already Exists. Please Choose A Different One.");
         return;
       }
   
@@ -76,6 +78,7 @@ const saveMessages = (email, userName, password, confirmPassword) => {
 
 // Validating Email
 function isValidEmail(email) {
+
   var domain = email.split('@')[1];
   var recognizableProviders = ["gmail.com", "yahoo.com", "hotmail.com", "outlook.com", "aol.com"];
 
@@ -88,6 +91,8 @@ function isValidEmail(email) {
   }
 
   var emailRegex = /^[^\s@]+@(?:[^\s@]+\.)+[^\s@]+$/;
+
+  var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   return emailRegex.test(email);
 }
 
@@ -99,6 +104,7 @@ function doesUsernameExist(username) {
     });
   });
 }
+
 
 // Validating Username
 function isValidUsername(username) {
@@ -130,6 +136,16 @@ function isValidPassword(password) {
     }
 
     return true;
+
+// Validating username
+function isValidUsername(email) {
+  return email.length >= 8
+}
+
+// Validating password
+function isValidPassword(password) {
+  return password.length >= 6;
+
 }
 
 // Customized alert messages
