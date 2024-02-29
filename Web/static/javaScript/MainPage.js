@@ -37,23 +37,14 @@ function toggleMenu() {
 }
 
 
-const updateUserName = document.querySelector('.user-name');
+menuBurger.addEventListener('', function() {
+    menuBurger.classList.add('rotate'); 
+});
 
-const storedData = localStorage.getItem('userData');
-const userData = JSON.parse(storedData);
-const usersData= JSON.stringify(userData)
+menuBurger.addEventListener('mouseleave', function() {
+    menuBurger.classList.remove('rotate'); 
+});
 
-updateUserName.innerHTML = userData.userName;
-
-const userControl = document.querySelector('.user-control');
-const emailControl = document.querySelector('.email-control');
-const passwordControl = document.querySelector('.password-control');
-const confirmPasswordControl = document.querySelector('.confirm-password-control');
-
-userControl.value = userData.userName;
-emailControl.value = userData.email;
-passwordControl.value = userData.confirmPassword;
-confirmPasswordControl.value = userData.confirmPassword;
 
 
 function ProfilePopView(){
@@ -108,11 +99,3 @@ function nav_back_highliter() {
     let current_button = document.querySelector(".current_page");
     current_button.style.boxShadow = "0 0 15px rgba(100, 100, 100, 0.60)"
 }
-
-function logout() {
-    localStorage.removeItem('userData');
-}
-
-
-
-

@@ -31,7 +31,6 @@ function submitLoginForm(e) {
 const viewData = (loginUsername, loginPassword) => {
 
 hForm.child(loginUsername).once('value', function(snapshot) {
-
         var userData = snapshot.val();
         if (userData) {
             var storedPassword = userData.password;
@@ -42,19 +41,6 @@ hForm.child(loginUsername).once('value', function(snapshot) {
                 window.location.href = '/Dashboard';
             }, 1500);
               
-
-        const userData = snapshot.val();
-        if (userData) {
-            const storedPassword = userData.password;
-            const storedEmail = userData.email;
-            if (loginPassword === storedPassword) {
-              displayAlert("Login Successfull")
-              getData(loginUsername);
-              setTimeout(() => {
-                window.location.href = '/Dashboard';
-            }, 1500);
-
-
             } else {
               displayAlert("Incorrect password")
             }
@@ -81,30 +67,4 @@ function displayAlert(message) {
 }
 }
 
-
 // 
-
-function getData(userName) {
-    const user_ref = firebase.database().ref('UserData/' + userName); // Use the userName parameter
-    user_ref.once('value', (snapshot) => {
-        const data = snapshot.val();
-        if (data) {
-            // Create a data object containing the user data
-            const userData = {
-                userName: data.userName,
-                password: data.password,
-                email : data.email,
-            };
-
-            // Convert the data object to JSON format
-            const jsonData = JSON.stringify(userData);
-
-            // Store the JSON data in local storage
-            localStorage.setItem('userData', jsonData);
-
-
-        } else {
-            console.error("User data not found");
-        }
-    });
-}
