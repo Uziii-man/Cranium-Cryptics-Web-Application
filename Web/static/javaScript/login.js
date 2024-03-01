@@ -31,18 +31,6 @@ function submitLoginForm(e) {
 const viewData = (loginUsername, loginPassword) => {
 
 hForm.child(loginUsername).once('value', function(snapshot) {
-
-        var userData = snapshot.val();
-        if (userData) {
-            var storedPassword = userData.password;
-            var storedEmail = userData.email;
-            if (loginPassword === storedPassword) {
-              displayAlert("Login Successfull")
-              setTimeout(() => {
-                window.location.href = '/Dashboard';
-            }, 1500);
-              
-
         const userData = snapshot.val();
         if (userData) {
             const storedPassword = userData.password;
@@ -53,7 +41,6 @@ hForm.child(loginUsername).once('value', function(snapshot) {
               setTimeout(() => {
                 window.location.href = '/Dashboard';
             }, 1500);
-
 
             } else {
               displayAlert("Incorrect password")
@@ -69,7 +56,7 @@ function displayAlert(message) {
   var alertMessage = document.getElementById("alertMessage");
   alertMessage.innerHTML = message;
   issue.style.display = "block";
-  
+
 
   //Closes the alert popup when anywhere in the screen is clicked
   window.onclick = function(event) {
@@ -80,9 +67,6 @@ function displayAlert(message) {
 
 }
 }
-
-
-// 
 
 function getData(userName) {
     const user_ref = firebase.database().ref('UserData/' + userName); // Use the userName parameter
