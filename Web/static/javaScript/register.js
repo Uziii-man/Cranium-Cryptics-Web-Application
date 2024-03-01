@@ -33,7 +33,7 @@ function submitForm(e) {
   }
 
   if (!isValidPassword(password)) {
-    displayAlert("Password Should Be  6 Characters Long.");
+    displayAlert("Password Should Be  6 Characters Long With 1 Symbol And 1 Capital Letter.");
     return;
   }
 
@@ -50,10 +50,10 @@ function submitForm(e) {
   doesUsernameExist(userName)
     .then(usernameExists => {
       if (usernameExists) {
-        displayAlert("Username Already Exists. Please Choose A Different One.");
+        displayAlert("Username Already Exists. Enter A Different One. Try Using @ Or Underscores.");
         return;
       }
-  
+
   saveMessages(email, userName, password, confirmPassword);
   displayAlert("Registration Successfull");
   setTimeout(() => {
@@ -76,7 +76,18 @@ const saveMessages = (email, userName, password, confirmPassword) => {
 
 // Validating Email
 function isValidEmail(email) {
-  var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  var domain = email.split('@')[1];
+  var recognizableProviders = ["gmail.com", "yahoo.com", "hotmail.com", "outlook.com", "aol.com"];
+
+  if (domain.toLowerCase().includes(".lk") || domain.toLowerCase().includes(".gov")) {
+      return true;
+  }
+
+  if (!recognizableProviders.includes(domain.toLowerCase())) {
+      return false;
+  }
+
+  var emailRegex = /^[^\s@]+@(?:[^\s@]+\.)+[^\s@]+$/;
   return emailRegex.test(email);
 }
 
@@ -89,14 +100,36 @@ function doesUsernameExist(username) {
   });
 }
 
-// Validating username
-function isValidUsername(email) {
-  return email.length >= 8
+// Validating Username
+function isValidUsername(username) {
+  if (username.length < 8) {
+      return false;
+  }
+
+  var usernameRegex = /^[a-zA-Z0-9_@]*[a-zA-Z0-9]+[a-zA-Z0-9_@]*$/;
+  return usernameRegex.test(username);
 }
 
-// Validating password
+//Validating Password
 function isValidPassword(password) {
-  return password.length >= 6;
+
+    if (password.length < 6) {
+        return false;
+    }
+
+
+    var symbolRegex = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/;
+    if (!symbolRegex.test(password)) {
+        return false;
+    }
+
+
+    var capitalLetterRegex = /[A-Z]/;
+    if (!capitalLetterRegex.test(password)) {
+        return false;
+    }
+
+    return true;
 }
 
 // Customized alert messages

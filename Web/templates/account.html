@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../static/css/MainPage.css">
+    <link rel="stylesheet" href="../static/css/profile.css">
     <link rel="icon" type="image/x-icon" href="../static/images/logo1.png" sizes="64x64 32x32">
     <title>Cranium Cryptics</title>
 </head>
@@ -17,7 +18,7 @@
             <div class="menu-container">
                 <div class="Menu-main-list">
                     <ul class="menu-list">
-                        <li  class="menu-detail-list current_page hello">
+                        <li  class="menu-detail-list" onmouseout="nav_back_highliter()" onmouseover="nav_highliter();">
                         <a href="/Dashboard"><image src="../static/images/dashboard.png" class="menu-img">Dashboard</image></a></li>
                         <li  class="menu-detail-list" onmouseout="nav_back_highliter()" onmouseover="nav_highliter();">
                         <a href="/BrainTumourDetector"><image src="../static/images/dashboard.png" class="menu-img">Tumor Detection</image></a></li>
@@ -29,7 +30,7 @@
                         <a href="/ReportGenerator"><image src="../static/images/dashboard.png" class="menu-img">Report Generator</image></a></li>
                     </ul>
                     <section class="logout-section">
-                        <a href="#" class="logout-account">
+                        <a href="/account" class="logout-account current_page hello login-button">
                             <image src="../static/images/account.png" class="menu-img logout-img" id="account-dt"></image>
                             <p>Account</p>
                         </a>
@@ -52,77 +53,61 @@
                 </section>
                 <section class="profile-header" onmouseover="ProfilePopView()" onmouseout="removeProfileView()">
                     <image src="../static/images/profile.jpeg" class="profile-image"></image>
-                    <h2>Lakshan Cooray</h2>
+                    <h2 class="user-name">Lakshan Cooray</h2>
                 </section>
             </div>
 
-                <section class="profile-section">
-                    <div class="container">
-                        <h1>Edit Profile</h1>
-                          <hr>
-                        <div class="row">
-                          <!-- left column -->
-                          <div class="col-md-3">
-                            <div class="text-center">
-                              <img src="//placehold.it/100" class="avatar img-circle" alt="avatar">
-                              <h6>Upload a different photo...</h6>
-                              
-                              <input type="file" class="form-control">
-                            </div>
-                          </div>
-                          
-                          <!-- edit form column -->
-                          <div class="col-md-9 personal-info">
-                            <div class="alert alert-info alert-dismissable">
-                              <a class="panel-close close" data-dismiss="alert">×</a> 
-                              <i class="fa fa-coffee"></i>
-                              This is an <strong>.alert</strong>. Use this to show important messages to the user.
-                            </div>
-                            <h3>Personal info</h3>
-                            
+            <div class="dashboard-panes">
+
+                <h1 class="heading-edit-profile">Edit Profile</h1>
+                <div class="form-work">
+                      <div class="col-md-3">
+                         <h3 class="personal-info-header">Profile Image</h3>
+                         <div class="text-center">
+                            <img id="previewImage" src="../static/images/profile.jpeg" class="avatar img-circle" alt="avatar">
+                            <input type="file" class="form-control fc1" id="uploadInput">
+                         </div>
+                      </div>
+
+                      <div class="col-md-9 personal-info">
+
+                            <h3 class="personal-info-header">Personal information</h3>
+
                             <form class="form-horizontal" role="form">
                                 <div class="form-group">
-                                    <label class="col-md-3 control-label">Username:</label>
+                                    <label class="col control-label">Username:</label>
+                                    <input class="form-control user-control control-bar" type="text">
+                                  </div>
+
+                                  <div class="form-group">
+                                    <label class="col-lg-3 control-label">Email:</label>
+                                    <input class="form-control email-control control-bar" type="text">
+                                  </div>
+
+                                  <div class="form-group">
+                                    <label class="col control-label">Password:</label>
+                                    <input class="form-control password-control control-bar" type="password">
+                                  </div>
+
+                                  <div class="form-group">
+                                     <label class="col control-label">Confirm password:</label>
+                                     <input class="form-control confirm-password-control control-bar" type="password">
+                                  </div>
+
+                                  <div class="form-group">
+                                    <label class="col control-label"></label>
                                     <div class="col-md-8">
-                                      <input class="form-control" type="text" value="janeuser">
+                                      <input type="button" class="btn btn-primary" value="Save Changes">
+                                      <span></span>
+                                      <input type="button" class="btn btn-default" value="Reset" onclick="clearFileInput()">
                                     </div>
                                   </div>
-                              <div class="form-group">
-                                <label class="col-lg-3 control-label">Email:</label>
-                                <div class="col-lg-8">
-                                  <input class="form-control" type="text" value="janesemail@gmail.com">
-                                </div>
-                              </div>
 
-       
-                              <div class="form-group">
-                                <label class="col-md-3 control-label">Password:</label>
-                                <div class="col-md-8">
-                                  <input class="form-control" type="password" value="11111122333">
-                                </div>
-                              </div>
-                              <div class="form-group">
-                                <label class="col-md-3 control-label">Confirm password:</label>
-                                <div class="col-md-8">
-                                  <input class="form-control" type="password" value="11111122333">
-                                </div>
-                              </div>
-                              <div class="form-group">
-                                <label class="col-md-3 control-label"></label>
-                                <div class="col-md-8">
-                                  <input type="button" class="btn btn-primary" value="Save Changes">
-                                  <span></span>
-                                  <input type="reset" class="btn btn-default" value="Cancel">
-                                </div>
-                              </div>
                             </form>
-                          </div>
                       </div>
-                    </div>
-                    <hr>
-                </section>
-                
-   
+                </div>
+            </div>
+
                 <section class="dashboard-copyright">
                     <p class="copy-text">Developed by Cranium Cryptics Team &copy; 2024. All rights reserved.</p>
                 </section>
@@ -136,7 +121,7 @@
                                 </a>
                             </li>
                             <li class="profile-viewer-list-element" id="line-profile"></li>
-                            <li class="profile-viewer-list-element profile-list2">
+                            <li class="profile-viewer-list-element profile-list2" >
                                 <a href="/login" class="pop-link">
                                     <img src="../static/images/signout-removebg-preview.png" class="menu-img profile-img2" alt="Sign Out">Sign Out
                                 </a>
@@ -144,8 +129,6 @@
                        </ul>
                     </div>
                 </section>
-
-            </div>
         </div>
     </div>
 
@@ -156,5 +139,8 @@
     <script src="../static/javaScript/MainPage.js">
         workSpaceGenerator();
     </script>
+    <script src="../static/javaScript/login.js"></script>
+    <script src="../static/javaScript/register.js"></script>
+    <script src="../static/javaScript/account.js"></script>
 </body>
 </html>
