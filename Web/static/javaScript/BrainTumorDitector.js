@@ -1,3 +1,23 @@
+window.onload = function () {
+    document.getElementById("download").addEventListener("click", () => {
+        const targetUrl = '/report'; // Route in your Flask app to fetch page content
+        fetch(targetUrl)
+            .then(response => response.text())
+            .then(html => {
+                const opt = {
+                    margin: 1,
+                    filename: 'myfile.pdf',
+                    image: { type: 'jpeg', quality: 0.98 },
+                    html2canvas: { scale: 2 },
+                    jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+                };
+                html2pdf().from(html).set(opt).save();
+            })
+            .catch(error => console.error('Error fetching page content:', error));
+    });
+};
+
+
 function previewImage() {
     const fileInput = document.getElementById('fileInput');
     const imageHolder = document.querySelector('.holder');
@@ -229,6 +249,8 @@ function handleFileInputChange() {
 
 // Attach event listener to file input change event
 document.querySelector(".scan-button").addEventListener("click", handleFileInputChange);
+
+
 
 
 
