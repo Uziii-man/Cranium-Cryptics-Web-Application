@@ -1,9 +1,3 @@
-import express, { Router } from 'express';
-import { initializeApp } from 'firebase/app';
-import {getStorage, ref, getDownloadURL, uploadBytesResumable} from 'firebase/storage';
-import multer from 'multer';
-
-
 // Function to handle file input change event
 function handleFileInputChange(event) {
     const file = event.target.files[0]; // Get the selected file
@@ -141,9 +135,6 @@ function updateUserDetails(e) {
 
    clearFileInput();
 
-   const image_path = document.getElementById('previewImage').src;
-   upload_image(firebaseConfig, image_path, accountName);
-
 }
 
 
@@ -209,44 +200,6 @@ function isValidEmail(email){
   return emailRegex.test(email);
 }
 
-
-function upload_image(firebaseConfig, file, accountName) {
-    const router: Router = express.Router();
-    initializeApp(firebaseConfig);
-
-    const storage = getStorage();
-
-    const upload  = multer({ storage: multer.memoryStorage() });
-
-    router.post('/', upload.single('filename'), async (req, res) => {
-        try{
-            const file = req.file;
-            const storageRef = ref(storage, 'files/ProfileImages/' + accountName + '/profileImage');
-            const uploadTask = uploadBytesResumable(storageRef, file);
-            const url = getDownloadURL(uploadTask.snapshot.ref);
-
-            const metadata = {
-                contentType: file.mimetype
-            };
-
-            const snapshot = await uploadBytesResumable(storageRef, req.file.buffer, metadata);
-
-            const downloadURL = await getDownloadURL(snapshot.ref);
-
-            console.log('File successfully uploaded.');
-            return res.send({
-                message: 'file uploaded to firebase storage',
-                name: req.file.originalname,
-                type: req.file.mimetype,
-                downloadURL: downloadURL
-            })
-        } catch (error) {
-            return res.status(400).send(error.message)
-        }
-    });
-
-
-}
 
 
 
