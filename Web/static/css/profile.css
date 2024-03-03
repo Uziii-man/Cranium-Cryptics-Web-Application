@@ -171,3 +171,10 @@
 .dashboard-copyright{
     height: 15vh;
 }
+
+.detail-error{
+    position: absolute;
+    align-items: center;
+    display: none;
+
+}

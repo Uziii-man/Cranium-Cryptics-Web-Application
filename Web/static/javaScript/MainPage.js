@@ -52,8 +52,8 @@ const confirmPasswordControl = document.querySelector('.confirm-password-control
 
 userControl.value = userData.userName;
 emailControl.value = userData.email;
-passwordControl.value = userData.confirmPassword;
-confirmPasswordControl.value = userData.confirmPassword;
+passwordControl.value = userData.password;
+confirmPasswordControl.value = userData.password;
 
 
 function ProfilePopView(){
