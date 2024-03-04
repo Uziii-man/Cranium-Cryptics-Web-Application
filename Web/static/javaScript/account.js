@@ -94,6 +94,15 @@ function updateUserDetails(e) {
           userName: formUserName,
         };
       firebase.database().ref('UserData/' + accountName).update(updates);
+
+       userData.email = formEmail;
+       userData.password = formPassword;
+       userData.confirmPassword = formConfirmPassword;
+
+       localStorage.setItem('userData', JSON.stringify(userData));
+
+       clearFileInput();
+
       alert("User details updated successfully");
   }else{
 
@@ -101,6 +110,7 @@ function updateUserDetails(e) {
     .then(snapshot => {
       if (snapshot.exists()) {
         alert("Username already exists. Please choose a different username.");
+        return;
       } else {
         // Username doesn't exist, update the user details
         const updates = {
@@ -115,6 +125,14 @@ function updateUserDetails(e) {
        entryRef.remove()
        firebase.database().ref('UserData/' + formUserName).update(updates);
 
+       userData.userName = formUserName;
+       userData.email = formEmail;
+       userData.password = formPassword;
+       userData.confirmPassword = formConfirmPassword;
+
+       localStorage.setItem('userData', JSON.stringify(userData));
+
+       clearFileInput();
 
         alert("User details updated successfully");
       }
@@ -125,15 +143,6 @@ function updateUserDetails(e) {
     });
 
   }
-
-   userData.userName = formUserName;
-   userData.email = formEmail;
-   userData.password = formPassword;
-   userData.confirmPassword = formConfirmPassword;
-
-   localStorage.setItem('userData', JSON.stringify(userData));
-
-   clearFileInput();
 
 }
 
@@ -168,22 +177,6 @@ function isValidUsername(username) {
   return usernameRegex.test(username);
 }
 
-// function doesUsernameExist(username) {
-//     alert(username)
-//
-//     if (username === userData.userName) {
-//         alert(123)
-//         return true;
-//     }else{
-//         return new Promise((resolve, reject) => {
-//             hForm.child(username).once('value', (snapshot) => {
-//                 resolve(snapshot.exists());
-//             });
-//         });
-//     }
-// }
-
-
 function isValidEmail(email){
   var domain = email.split('@')[1];
   var recognizableProviders = ["gmail.com", "yahoo.com", "hotmail.com", "outlook.com", "aol.com"];
@@ -199,6 +192,37 @@ function isValidEmail(email){
   var emailRegex = /^[^\s@]+@(?:[^\s@]+\.)+[^\s@]+$/;
   return emailRegex.test(email);
 }
+
+
+var fileItem;
+var fileName;
+
+function getFile(e){
+    fileItem = e.target.files[0];
+    fileName = fileItem.name;
+}
+
+function uploadImage(){
+    const defaultApp = firebase.app();
+    let storageRef = firebase.storage().ref('ProfileImages/' + userData.userName);
+    let uploadTask = storageRef.put(fileItem);
+
+    uploadTask.on('state_changed', function(snapshot){
+        console.log(snapshot);
+    }, (error) => {
+        console.log(error);
+    }, () => {
+        uploadTask.snapshot.ref.getDownloadURL().then((url) => {
+            console.log('File available at', url);
+        });
+    });
+
+}
+
+
+
+
+
 
 
 
