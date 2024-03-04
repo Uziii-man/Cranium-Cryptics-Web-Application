@@ -56,6 +56,38 @@ passwordControl.value = userData.password;
 confirmPasswordControl.value = userData.password;
 
 
+const previewImageElement = document.querySelector("#previewImage");
+const previewImageSrc = previewImageElement.src;
+
+// if (previewImageSrc.includes("/static/images/profile.jpeg")) {
+//     const profileImage = document.querySelector('.profile-image');
+//     profileImage.src = "./static/images/profile.jpeg";
+// } else {
+    const firebaseConfig = {
+          apiKey: "AIzaSyChuCsLIaZDj4nfI1jE9Dpbkt2CFZSKR1c",
+          authDomain: "craniumcryptics.firebaseapp.com",
+          databaseURL: "https://craniumcryptics-default-rtdb.firebaseio.com",
+          projectId: "craniumcryptics",
+          storageBucket: "craniumcryptics.appspot.com",
+          messagingSenderId: "415799673124",
+          appId: "1:415799673124:web:31e4bf310fda12df4c73b1"
+  };
+
+  // Initialize Firebase if it's not already initialized
+  if (!firebase.apps.length) {
+    firebase.initializeApp(firebaseConfig);
+  }
+    let storageRef = firebase.storage().ref('ProfileImages/' + userData.userName);
+    if(storageRef !== null){
+    storageRef.getDownloadURL().then((url) => {
+        const profileImage = document.querySelector('.profile-image');
+        profileImage.src = url;
+    }).catch((error) => {
+        alert('Error getting download URL:', error);
+    });
+}
+
+
 function ProfilePopView(){
    pop.style.display = "flex";
 }
@@ -112,6 +144,8 @@ function nav_back_highliter() {
 function logout() {
     localStorage.removeItem('userData');
 }
+
+
 
 
 

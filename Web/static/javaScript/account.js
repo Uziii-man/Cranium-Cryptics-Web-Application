@@ -1,9 +1,3 @@
-import express, { Router } from 'express';
-import { initializeApp } from 'firebase/app';
-import {getStorage, ref, getDownloadURL, uploadBytesResumable} from 'firebase/storage';
-import multer from 'multer';
-
-
 // Function to handle file input change event
 function handleFileInputChange(event) {
     const file = event.target.files[0]; // Get the selected file
@@ -100,6 +94,15 @@ function updateUserDetails(e) {
           userName: formUserName,
         };
       firebase.database().ref('UserData/' + accountName).update(updates);
+
+       userData.email = formEmail;
+       userData.password = formPassword;
+       userData.confirmPassword = formConfirmPassword;
+
+       localStorage.setItem('userData', JSON.stringify(userData));
+
+       clearFileInput();
+
       alert("User details updated successfully");
   }else{
 
@@ -107,6 +110,7 @@ function updateUserDetails(e) {
     .then(snapshot => {
       if (snapshot.exists()) {
         alert("Username already exists. Please choose a different username.");
+        return;
       } else {
         // Username doesn't exist, update the user details
         const updates = {
@@ -121,6 +125,14 @@ function updateUserDetails(e) {
        entryRef.remove()
        firebase.database().ref('UserData/' + formUserName).update(updates);
 
+       userData.userName = formUserName;
+       userData.email = formEmail;
+       userData.password = formPassword;
+       userData.confirmPassword = formConfirmPassword;
+
+       localStorage.setItem('userData', JSON.stringify(userData));
+
+       clearFileInput();
 
         alert("User details updated successfully");
       }
@@ -131,18 +143,6 @@ function updateUserDetails(e) {
     });
 
   }
-
-   userData.userName = formUserName;
-   userData.email = formEmail;
-   userData.password = formPassword;
-   userData.confirmPassword = formConfirmPassword;
-
-   localStorage.setItem('userData', JSON.stringify(userData));
-
-   clearFileInput();
-
-   const image_path = document.getElementById('previewImage').src;
-   upload_image(firebaseConfig, image_path, accountName);
 
 }
 
@@ -177,22 +177,6 @@ function isValidUsername(username) {
   return usernameRegex.test(username);
 }
 
-// function doesUsernameExist(username) {
-//     alert(username)
-//
-//     if (username === userData.userName) {
-//         alert(123)
-//         return true;
-//     }else{
-//         return new Promise((resolve, reject) => {
-//             hForm.child(username).once('value', (snapshot) => {
-//                 resolve(snapshot.exists());
-//             });
-//         });
-//     }
-// }
-
-
 function isValidEmail(email){
   var domain = email.split('@')[1];
   var recognizableProviders = ["gmail.com", "yahoo.com", "hotmail.com", "outlook.com", "aol.com"];
@@ -210,43 +194,36 @@ function isValidEmail(email){
 }
 
 
-function upload_image(firebaseConfig, file, accountName) {
-    const router: Router = express.Router();
-    initializeApp(firebaseConfig);
+var fileItem;
+var fileName;
 
-    const storage = getStorage();
+function getFile(e){
+    fileItem = e.target.files[0];
+    fileName = fileItem.name;
+}
 
-    const upload  = multer({ storage: multer.memoryStorage() });
+function uploadImage(){
+    const defaultApp = firebase.app();
+    let storageRef = firebase.storage().ref('ProfileImages/' + userData.userName);
+    let uploadTask = storageRef.put(fileItem);
 
-    router.post('/', upload.single('filename'), async (req, res) => {
-        try{
-            const file = req.file;
-            const storageRef = ref(storage, 'files/ProfileImages/' + accountName + '/profileImage');
-            const uploadTask = uploadBytesResumable(storageRef, file);
-            const url = getDownloadURL(uploadTask.snapshot.ref);
-
-            const metadata = {
-                contentType: file.mimetype
-            };
-
-            const snapshot = await uploadBytesResumable(storageRef, req.file.buffer, metadata);
-
-            const downloadURL = await getDownloadURL(snapshot.ref);
-
-            console.log('File successfully uploaded.');
-            return res.send({
-                message: 'file uploaded to firebase storage',
-                name: req.file.originalname,
-                type: req.file.mimetype,
-                downloadURL: downloadURL
-            })
-        } catch (error) {
-            return res.status(400).send(error.message)
-        }
+    uploadTask.on('state_changed', function(snapshot){
+        console.log(snapshot);
+    }, (error) => {
+        console.log(error);
+    }, () => {
+        uploadTask.snapshot.ref.getDownloadURL().then((url) => {
+            console.log('File available at', url);
+        });
     });
 
-
 }
+
+
+
+
+
+
 
 
 
