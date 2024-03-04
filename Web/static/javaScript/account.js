@@ -1,4 +1,41 @@
 // Function to handle file input change event
+
+var fileItem;
+var fileName;
+const profileImage = document.querySelector('#previewImage');
+
+function displayPreviewImage(){
+        const firebaseConfig = {
+          apiKey: "AIzaSyChuCsLIaZDj4nfI1jE9Dpbkt2CFZSKR1c",
+          authDomain: "craniumcryptics.firebaseapp.com",
+          databaseURL: "https://craniumcryptics-default-rtdb.firebaseio.com",
+          projectId: "craniumcryptics",
+          storageBucket: "craniumcryptics.appspot.com",
+          messagingSenderId: "415799673124",
+          appId: "1:415799673124:web:31e4bf310fda12df4c73b1"
+  };
+
+  // Initialize Firebase if it's not already initialized
+  if (!firebase.apps.length) {
+    firebase.initializeApp(firebaseConfig);
+  }
+
+    let storageRef = firebase.storage().ref('ProfileImages/' + userData.userName);
+    if(storageRef !== null){
+    storageRef.getDownloadURL().then((url) => {
+        const profileImage = document.querySelector('#previewImage');
+        const uploadInput = document.querySelector('#uploadInput');
+        profileImage.src = url;
+        uploadInput.value = url;
+    }).catch((error) => {
+        console.log('Error getting download URL:', error);
+    });
+}
+
+}
+
+displayPreviewImage();
+
 function handleFileInputChange(event) {
     const file = event.target.files[0]; // Get the selected file
     if (file) {
@@ -101,6 +138,10 @@ function updateUserDetails(e) {
 
        localStorage.setItem('userData', JSON.stringify(userData));
 
+       if(fileItem !== undefined){
+           uploadImage(accountName);
+       }
+
        clearFileInput();
 
       alert("User details updated successfully");
@@ -110,6 +151,7 @@ function updateUserDetails(e) {
     .then(snapshot => {
       if (snapshot.exists()) {
         alert("Username already exists. Please choose a different username.");
+        clearFileInput();
         return;
       } else {
         // Username doesn't exist, update the user details
@@ -131,6 +173,10 @@ function updateUserDetails(e) {
        userData.confirmPassword = formConfirmPassword;
 
        localStorage.setItem('userData', JSON.stringify(userData));
+
+       if(fileItem !== undefined){
+           uploadImage(formUserName);
+       }
 
        clearFileInput();
 
@@ -194,17 +240,15 @@ function isValidEmail(email){
 }
 
 
-var fileItem;
-var fileName;
 
 function getFile(e){
     fileItem = e.target.files[0];
     fileName = fileItem.name;
 }
 
-function uploadImage(){
+function uploadImage(userName){
     const defaultApp = firebase.app();
-    let storageRef = firebase.storage().ref('ProfileImages/' + userData.userName);
+    let storageRef = firebase.storage().ref('ProfileImages/' + userName);
     let uploadTask = storageRef.put(fileItem);
 
     uploadTask.on('state_changed', function(snapshot){
