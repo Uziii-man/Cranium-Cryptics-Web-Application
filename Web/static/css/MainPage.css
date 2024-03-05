@@ -649,6 +649,10 @@ body, html {
     box-shadow: 0 0 15px rgba(225, 225, 225, 0.6);
 }
 
+.profile-image{
+    border: 2px solid #e5e2e2;
+}
+
 
 @keyframes pulse {
     0% {

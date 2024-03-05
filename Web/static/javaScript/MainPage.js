@@ -41,7 +41,7 @@ const updateUserName = document.querySelector('.user-name');
 
 const storedData = localStorage.getItem('userData');
 const userData = JSON.parse(storedData);
-const usersData= JSON.stringify(userData)
+usersData= JSON.stringify(userData)
 
 updateUserName.innerHTML = userData.userName;
 
@@ -50,14 +50,16 @@ const emailControl = document.querySelector('.email-control');
 const passwordControl = document.querySelector('.password-control');
 const confirmPasswordControl = document.querySelector('.confirm-password-control');
 
-userControl.value = userData.userName;
-emailControl.value = userData.email;
-passwordControl.value = userData.password;
-confirmPasswordControl.value = userData.password;
+if(userControl !== null){
+    userControl.value = userData.userName;
+    emailControl.value = userData.email;
+    passwordControl.value = userData.password;
+    confirmPasswordControl.value = userData.password;
+}
+
 
 
 const previewImageElement = document.querySelector("#previewImage");
-const previewImageSrc = previewImageElement.src;
 
 // if (previewImageSrc.includes("/static/images/profile.jpeg")) {
 //     const profileImage = document.querySelector('.profile-image');
@@ -77,13 +79,14 @@ const previewImageSrc = previewImageElement.src;
   if (!firebase.apps.length) {
     firebase.initializeApp(firebaseConfig);
   }
+
     let storageRef = firebase.storage().ref('ProfileImages/' + userData.userName);
     if(storageRef !== null){
     storageRef.getDownloadURL().then((url) => {
         const profileImage = document.querySelector('.profile-image');
         profileImage.src = url;
     }).catch((error) => {
-        alert('Error getting download URL:', error);
+        console.log('Error getting download URL:', error);
     });
 }
 
