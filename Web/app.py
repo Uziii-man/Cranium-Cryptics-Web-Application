@@ -542,80 +542,22 @@ def generateReport():
     return render_template('ReportGenerator.html', image_path=image_path)
 
 
-def generate_dynamic_data():
+# pip install requests
 
-    tumourDiseaseStatus = disease_status.get("Tumour")
-    tumourDiseaseProbabilityStatus = disease_score.get("Tumour Score")
+# The authentication key (API Key).
+# Get your own by registering at https://app.pdf.co
+API_KEY = "lakshancooray23@gmail.com_bx1ri33VsBaJRE18N2Kavme02m3ARIY1Y1LW44dj4P3dv7rF83rJ22YhZFGg7qS0"
 
-    tumourTypeStatus = disease_status.get("Tumour Type")
-    tumourTypeProbabilityStatus = disease_score.get("Tumour Type Score")
+# Base URL for PDF.co Web API requests
+BASE_URL = "https://api.pdf.co/v1"
 
-    AlzheimerDiseaseStatus = disease_status.get("Alzheimer")
-    AlzheimerDiseaseProbabilityStatus = disease_score.get("Alzheimer Score")
+# HTML template
+file_read = open("templates/report.html", mode='r', encoding='utf-8')
+SampleHtml = file_read.read()
+file_read.close()
 
-    strokeDieseaseStatus  = disease_status.get("Stroke")
-    strokeDieseaseProbabiltyStatus = disease_score.get("Stroke Score")
-
-    edgeStatus  = disease_status.get("Edge")
-    edgeProbabiltyStatus = disease_score.get("Edge Score")
-
-
-    data = {
-        'edge_data': edgeStatus,
-        'edge_probability': edgeProbabiltyStatus,
-        'tumour_data': tumourDiseaseStatus,
-        'tumour_probability': tumourDiseaseProbabilityStatus,
-        'tumour_type_data': tumourTypeStatus,
-        'tumour_type_probability': tumourTypeProbabilityStatus,
-        'stroke_data': strokeDieseaseStatus,
-        'stroke_probability': strokeDieseaseProbabiltyStatus,
-        'alzheimers_data': AlzheimerDiseaseStatus,
-        'alzheimers_probability': AlzheimerDiseaseProbabilityStatus,
-    }
-    return data
-
-# Change the data in the html
-def reportGennerator():
-    dynamic_data = generate_dynamic_data()
-    return render_template('report.html', data=dynamic_data)
-
-
-# download the pdf after changing the data
-def download_pdf():
-    dynamic_data = generate_dynamic_data()
-    html_content = render_template('report.html', data=dynamic_data)
-
-    # Save the HTML content to a temporary file
-    with open('temp_file.html', 'w', encoding='utf-8') as temp_file:
-        temp_file.write(html_content)
-
-
-   # Configure pdfkit to use A4 page size
-    options = {
-        'page-size': 'A4',
-    }
-    # Convert HTML to PDF using pdfkit
-    pdfkit.from_file('temp_file.html', 'temp_file.pdf', options=options)
-
-    # Send the PDF file as a response and delete the temporary files
-    return send_file('temp_file.pdf', as_attachment=True, download_name='generated_report_Uzman.pdf', mimetype='application/pdf', cache_timeout=0)
-
-# # pip install requests
-
-# # The authentication key (API Key).
-# # Get your own by registering at https://app.pdf.co
-# API_KEY = "lakshancooray23@gmail.com_bx1ri33VsBaJRE18N2Kavme02m3ARIY1Y1LW44dj4P3dv7rF83rJ22YhZFGg7qS0"
-
-# # Base URL for PDF.co Web API requests
-# BASE_URL = "https://api.pdf.co/v1"
-
-# # HTML template
-# file_read = open("templates/report.html", mode='r', encoding='utf-8')
-# SampleHtml = file_read.read()
-# file_read.close()
-
-# # Destination PDF file name
-# DestinationFile = ".\\result.pdf"
+# Destination PDF file name
+DestinationFile = ".\\result.pdf"
 
 
 def generate_pdf(args=None):
