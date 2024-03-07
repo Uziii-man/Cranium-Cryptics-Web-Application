@@ -190,6 +190,15 @@ function updateUserDetails(e) {
 
   }
 
+    let storageRef = firebase.storage().ref('ProfileImages/' + userData.userName);
+    if(storageRef !== null){
+    storageRef.getDownloadURL().then((url) => {
+        const profileImage = document.querySelector('.profile-image');
+        profileImage.src = url;
+    }).catch((error) => {
+        alert('Error getting download URL:', error);
+    });
+  }
 }
 
 
