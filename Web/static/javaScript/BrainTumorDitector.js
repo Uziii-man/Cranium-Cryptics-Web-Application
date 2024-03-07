@@ -230,17 +230,6 @@ function handleFileInputChange() {
 // Attach event listener to file input change event
 document.querySelector(".scan-button").addEventListener("click", handleFileInputChange);
 
-function handleFileUpload() {
-    var fileInput = document.getElementById('fileInput');
-    var reportLink = document.getElementById('reportLink');
-
-    if (fileInput.files.length > 0) {
-        reportLink.setAttribute('disabled', true);
-    } else {
-        reportLink.removeAttribute('disabled');
-    }
-}
-
 
 
 
