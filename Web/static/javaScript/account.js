@@ -194,6 +194,7 @@ function updateUserDetails(e) {
     if(storageRef !== null){
     storageRef.getDownloadURL().then((url) => {
         const profileImage = document.querySelector('.profile-image');
+        console.log("Hello World !!!");
         profileImage.src = url;
     }).catch((error) => {
         alert('Error getting download URL:', error);
