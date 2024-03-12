@@ -86,6 +86,8 @@
                                 <button class="scan-button">Generate Report</button>
                                 {% if predicted_class %}
                                     <a href="/report" class="report-link" id="reportLink">Check Report</a>
+                                {% elif predicted_class_names %}
+                                    <a href="#" class="report-link" id="reportLink">Check Report</a>
                                 {% else %}
                                     <a href="#" class="report-link" id="reportLink">Check Report</a>
                                 {% endif %}
@@ -103,6 +105,10 @@
                                 <div class="description-disease report-tumour">
                                     <h2>{{ predicted_class["Tumour"] }}</h2>
                                 </div>
+                            {% elif predicted_class_names %}
+                                <div class="description-disease report-tumour">
+                                    <h2>{{ predicted_class_names["Tumour"] }}</h2>
+                                </div>
                             {% else %}
                                 <div class="description-disease report-tumour">
                                     <h2>Not Scanned</h2>
@@ -118,6 +124,10 @@
                             {% if predicted_class %}
                                 <div class="description-disease report-tumour-type">
                                     <h2>{{ predicted_class["Tumour Type"] }}</h2>
+                                </div>
+                            {% elif predicted_class_names %}
+                                <div class="description-disease report-tumour-type">
+                                    <h2>{{ predicted_class_names["Tumour Type"] }}</h2>
                                 </div>
                             {% else %}
                                 <div class="description-disease report-tumour-type">
@@ -136,6 +146,10 @@
                                 <div class="description-disease report-stroke">
                                     <h2>{{ predicted_class["Stroke"] }}</h2>
                                 </div>
+                            {% elif predicted_class_names %}
+                                <div class="description-disease report-stroke">
+                                    <h2>{{ predicted_class_names["Stroke"] }}</h2>
+                                </div>
                             {% else %}
                                 <div class="description-disease report-stroke">
                                     <h2>Not Scanned</h2>
@@ -151,6 +165,10 @@
                             {% if predicted_class %}
                                 <div class="description-disease report-alzheimer">
                                     <h2>{{ predicted_class["Alzheimer"] }}</h2>
+                                </div>
+                            {% elif predicted_class_names %}
+                                <div class="description-disease report-alzheimer">
+                                    <h2>{{ predicted_class_names["Alzheimer"] }}</h2>
                                 </div>
                             {% else %}
                                 <div class="description-disease report-alzheimer">

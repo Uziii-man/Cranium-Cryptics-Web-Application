@@ -84,6 +84,11 @@ def account():
     return render_template('account.html')
 
 
+@app.route('/forgot')
+def forgot():
+    return render_template('forgotPassword.html')
+
+
 @app.route('/tumor', methods=['POST'])
 def predict_tumour_type():
     # Assigning the voting for tumor detection
@@ -579,7 +584,7 @@ def generateReport():
         disease_status["Edge"] = "Not Brain Image"
         disease_score["Edge"] = "{:.2f}".format(brain_detection_score)
         return render_template('ReportGenerator.html', image_path=image_path, score=disease_score,
-                               predicted_class=disease_status)
+                               predicted_class_names=disease_status)
 
     gamma_image = apply_gamma_correction(image, 1.5)
     plt.imshow(gamma_image)

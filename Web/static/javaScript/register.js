@@ -33,7 +33,7 @@ function submitForm(e) {
   }
 
   if (!isValidPassword(password)) {
-    displayAlert("Password Should Be  6 Characters Long With 1 Symbol And 1 Capital Letter.");
+    displayAlert("Password Should Be at least 6 Characters Long With 1 Symbol And 1 Capital Letter.");
     return;
   }
 
