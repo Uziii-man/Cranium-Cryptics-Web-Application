@@ -1,3 +1,4 @@
+from PIL.Image import fromarray
 from flask import Flask, render_template, request, make_response
 from keras.preprocessing.image import load_img
 from matplotlib import pyplot as plt
@@ -7,9 +8,6 @@ import cv2
 from scipy.ndimage import gaussian_filter
 from sklearn.utils import resample
 from keras.models import load_model
-import os
-import json
-import requests
 
 app = Flask(__name__)
 
@@ -36,6 +34,8 @@ model_tumor_classification_vgg16 = load_model(
 model_resnet50_stroke = load_model('C:/Users/laksh/OneDrive/Desktop/Web/models/ischemic_stroke_vgg16.h5')
 model_efficient_net_alzheimer = load_model(
     'C:/Users/laksh/OneDrive/Desktop/Web/models/alzhimer_classification_efficientNet.h5')
+
+model_brain_image_detection = load_model('C:/Users/laksh/OneDrive/Desktop/Web/models/brain_image_detection.h5')
 
 
 # Load the model
@@ -89,6 +89,8 @@ def predict_tumour_type():
     # Assigning the voting for tumor detection
     label_mapping_detector = {0: "Tumor", 1: "Normal"}
 
+    label_mapping_brain = {1: 'BrainImages', 0: 'NotBrainImage'}
+
     # Label mapping for side detection
     label_mapping_side = {0: 'Axial', 1: 'Coronal', 3: 'Sagittal'}
 
@@ -103,6 +105,32 @@ def predict_tumour_type():
     imagefile.save(image_path)
 
     classification_image = load_img(image_path, target_size=(256, 256))
+
+    image = load_img(image_path, target_size=(256, 256))
+    image = np.array(image)
+    gray_scale_image = apply_gaussian_gray_scale_filter(image)
+
+    plt.imshow(gray_scale_image, cmap='gray')
+    plt.title("Gray Scale Image")
+    plt.show()
+
+    print(gray_scale_image.shape)
+
+    # Prepare the grayscale image for prediction
+    brain_image = np.expand_dims(gray_scale_image, axis=0)
+
+    # Predict the class probabilities for the brain image
+    class_probabilities = model_brain_image_detection.predict(brain_image)
+
+    # Get the predicted class index
+    predicted_class_index = np.argmax(class_probabilities)
+
+    # Get the corresponding class name from the label mapping
+    predicted_class_name = label_mapping_brain[predicted_class_index]
+
+    # Get the score for the predicted class
+    brain_detection_score = class_probabilities[0][predicted_class_index]
+
     detector_image = load_img(image_path, target_size=(256, 256))
 
     # Plotting the classification image
@@ -141,6 +169,14 @@ def predict_tumour_type():
 
     prediction_array = [0, 0]
     score_array = [0, 0]
+
+    if predicted_class_name == 'NotBrainImage':
+        prediction_array[0] = "Not Brain Image"
+        prediction_array[1] = "Not Brain Image"
+        score_array[0] = "{:.2f}".format(brain_detection_score)
+        score_array[1] = "{:.2f}".format(brain_detection_score)
+        return render_template('BrainTumourDetector.html', image_path=image_path, predicted_class=prediction_array,
+                               score=score_array)
 
     all_disease_vgg_19_probability = model_multi_disease.predict(classification_image_array)[0]
     print(all_disease_vgg_19_probability)
@@ -247,6 +283,7 @@ def apply_sobel8_filter(image):
 def predict_stroke():
     # Label mapping for side detection
     label_mapping_side = {0: 'Axial', 1: 'Coronal', 3: 'Sagittal'}
+    label_mapping_brain = {1: 'BrainImages', 0: 'NotBrainImage'}
 
     imagefile = request.files['imagefile']
     image_path = "./static/predictingStrokeImages/" + imagefile.filename
@@ -254,6 +291,40 @@ def predict_stroke():
     image = load_img(image_path, target_size=(256, 256))
     plt.imshow(image)
     plt.show()
+
+    image = np.array(image)
+
+    gray_scale_image = apply_gaussian_gray_scale_filter(image)
+
+    plt.imshow(gray_scale_image, cmap='gray')
+    plt.title("Gray Scale Image")
+    plt.show()
+
+    print(gray_scale_image.shape)
+
+    # Prepare the grayscale image for prediction
+    brain_image = np.expand_dims(gray_scale_image, axis=0)
+
+    # Predict the class probabilities for the brain image
+    class_probabilities = model_brain_image_detection.predict(brain_image)
+
+    # Get the predicted class index
+    predicted_class_index = np.argmax(class_probabilities)
+
+    # Get the corresponding class name from the label mapping
+    predicted_class_name = label_mapping_brain[predicted_class_index]
+
+    # Get the score for the predicted class
+    brain_detection_score = class_probabilities[0][predicted_class_index]
+
+    print(predicted_class_name)
+
+    if predicted_class_name == 'NotBrainImage':
+        class_name = ["Not Brain Image", "Not Brain Image"]
+        prediction_score = ["{:.2f}".format(brain_detection_score), "{:.2f}".format(brain_detection_score)]
+        return render_template('BrainStrokeDetector.html', image_path=image_path, class_name=class_name,
+                               prediction_score=prediction_score)
+
     image = apply_sobel8_filter(image)
     plt.imshow(image)
     plt.show()
@@ -317,12 +388,23 @@ def apply_random_up_sampler_gaussian_filter(image):
     return filtered_img
 
 
+def apply_gaussian_gray_scale_filter(image):
+    # Apply Gaussian blur
+    blurred_image = cv2.GaussianBlur(image, (5, 5), 0)
+
+    # Convert image to grayscale
+    gray_scale_image = cv2.cvtColor(blurred_image, cv2.COLOR_BGR2GRAY)
+
+    return gray_scale_image
+
+
 from keras.preprocessing.image import img_to_array
 
 
 @app.route('/alzheimer', methods=['POST'])
 def predict_alzheimer():
     label_mapping_side = {0: 'Axial', 1: 'Coronal', 3: 'Sagittal'}
+    label_mapping_brain = {1: 'BrainImages', 0: 'NotBrainImage'}
 
     imagefile = request.files['imagefile']
     image_path = "./static/PredictingAlzheimerImages/" + imagefile.filename
@@ -337,6 +419,29 @@ def predict_alzheimer():
 
     classification_image = load_img(image_path, target_size=(256, 256))
 
+    gray_scale_image = apply_gaussian_gray_scale_filter(image)
+
+    plt.imshow(gray_scale_image, cmap='gray')
+    plt.title("Gray Scale Image")
+    plt.show()
+
+    print(gray_scale_image.shape)
+
+    # Prepare the grayscale image for prediction
+    brain_image = np.expand_dims(gray_scale_image, axis=0)
+
+    # Predict the class probabilities for the brain image
+    class_probabilities = model_brain_image_detection.predict(brain_image)
+
+    # Get the predicted class index
+    predicted_class_index = np.argmax(class_probabilities)
+
+    # Get the corresponding class name from the label mapping
+    predicted_class_name = label_mapping_brain[predicted_class_index]
+
+    # Get the score for the predicted class
+    brain_detection_score = class_probabilities[0][predicted_class_index]
+
     multi_image_array = apply_gamma_correction(classification_image, 1.5)
 
     # Convert PIL Classification image to array
@@ -344,6 +449,13 @@ def predict_alzheimer():
 
     # Expand dimensions to match the input shape expected by the model
     multi_image_array = np.expand_dims(multi_image_array, axis=0)
+
+    if predicted_class_name == 'NotBrainImage':
+        class_name = ["Not Brain Image", "Not Brain Image"]
+        prediction_score = ["{:.2f}".format(brain_detection_score), "{:.2f}".format(brain_detection_score)]
+        return render_template('AlzheimerDiseaseDetector.html', image_path=image_path,
+                               predicted_class=class_name,
+                               score=prediction_score)
 
     all_disease_vgg_19_probability = model_multi_disease.predict(multi_image_array)[0]
     all_disease_score = all_disease_vgg_19_probability[np.argmax(all_disease_vgg_19_probability)]
@@ -411,6 +523,7 @@ def generateReport():
 
     disease_score = {"Tumour": 0.00, "Tumour Type": 0.00, "Alzheimer": 0.00, "Stroke": 0.00, "Edge": 0.00}
 
+    label_mapping_brain = {1: 'BrainImages', 0: 'NotBrainImage'}
     label_mapping_side = {0: 'Axial', 1: 'Coronal', 3: 'Sagittal'}
     label_mapping_detector = {0: "Tumor", 1: "Normal"}
     label_mapping_classification = {0: 'Glioma', 1: 'Meningioma', 3: 'Pituitary', 2: 'NoTumor'}
@@ -430,6 +543,43 @@ def generateReport():
     plt.imshow(image)
 
     image = img_to_array(image)
+
+    gray_scale_image = apply_gaussian_gray_scale_filter(image)
+
+    plt.imshow(gray_scale_image, cmap='gray')
+    plt.title("Gray Scale Image")
+    plt.show()
+
+    print(gray_scale_image.shape)
+
+    # Prepare the grayscale image for prediction
+    brain_image = np.expand_dims(gray_scale_image, axis=0)
+
+    # Predict the class probabilities for the brain image
+    class_probabilities = model_brain_image_detection.predict(brain_image)
+
+    # Get the predicted class index
+    predicted_class_index = np.argmax(class_probabilities)
+
+    # Get the corresponding class name from the label mapping
+    predicted_class_name = label_mapping_brain[predicted_class_index]
+
+    # Get the score for the predicted class
+    brain_detection_score = class_probabilities[0][predicted_class_index]
+
+    if predicted_class_name == 'NotBrainImage':
+        disease_status["Tumour"] = "Not Brain Image"
+        disease_score["Tumour"] = "{:.2f}".format(brain_detection_score)
+        disease_status["Tumour Type"] = "Not Brain Image"
+        disease_score["Tumour Type"] = "{:.2f}".format(brain_detection_score)
+        disease_status["Alzheimer"] = "Not Brain Image"
+        disease_score["Alzheimer"] = "{:.2f}".format(brain_detection_score)
+        disease_status["Stroke"] = "Not Brain Image"
+        disease_score["Stroke"] = "{:.2f}".format(brain_detection_score)
+        disease_status["Edge"] = "Not Brain Image"
+        disease_score["Edge"] = "{:.2f}".format(brain_detection_score)
+        return render_template('ReportGenerator.html', image_path=image_path, score=disease_score,
+                               predicted_class=disease_status)
 
     gamma_image = apply_gamma_correction(image, 1.5)
     plt.imshow(gamma_image)
