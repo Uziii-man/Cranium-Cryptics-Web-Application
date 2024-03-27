@@ -10,14 +10,20 @@
     <title>Cranium Cryptics</title>
 </head>
 <body>
+    <!-- The body of the page -->
     <div  class="app-container">
+        <!-- The main container of the application -->
+        <!-- The left pane of the application -->
         <div class="left-pane">
+            <!-- The menu button of the application -->
             <div class="menu-button" onclick="toggleMenu()">
                 <h1 class="main-menu">Menu</h1>
                 <span class="menu-burger">&#9776;</span>
             </div>
+            <!-- The menu container of the application -->
             <div class="menu-container">
                 <div class="Menu-main-list">
+                    <!-- The main list of the menu -->
                     <ul class="menu-list">
                         <li  class="menu-detail-list" onmouseout="nav_back_highliter()" onmouseover="nav_highliter();">
                         <a href="/Dashboard"><image src="../static/images/dashboard.png" class="menu-img">Dashboard</image></a></li>
@@ -30,12 +36,14 @@
                         <li  class="menu-detail-list current_page hello">
                         <a href="/ReportGenerator"><image src="../static/images/dashboard.png" class="menu-img">Report Generator</image></a></li>
                     </ul>
+                    <!-- The logout section of the menu -->
                     <section class="logout-section">
+                        <!-- The logout section of the menu -->
                         <a href="/account" class="logout-account">
                             <image src="../static/images/account.png" class="menu-img logout-img" id="account-dt"></image>
                             <p>Account</p>
                         </a>
-
+                        <!-- The logout section of the menu -->
                         <a href="/login" class="logout-account-section">
                             <image src="../static/images/logout.png" class="menu-img logout-img"></image>
                             <p>Logout</p>
@@ -45,25 +53,34 @@
                 </div>
             </div>
         </div>
-
+        <!-- The right pane of the application -->
         <div class="right-pane">
+            <!-- The dashboard header of the application -->
             <div class="dashboard-header">
+                <!-- The heading of the dashboard -->
                 <section class="dashboard-heading">
                     <h2><span class="heading-span">Cranium</span> Cryptics</h2>
                     <img src="../static/images/logo1.png" height="20px" width="20px">
                 </section>
+                <!-- The profile section of the dashboard -->
                 <section class="profile-header" onmouseover="ProfilePopView()" onmouseout="removeProfileView()">
                     <image src="../static/images/profile.jpeg" class="profile-image"></image>
                     <h2 class="user-name">Lakshan Cooray</h2>
                 </section>
             </div>
+            <!-- The main section of the dashboard -->
             <div class="dashboard-panes">
+
                 <section class="dashboard-main-section">
+                   <!-- The main section of the dashboard -->
                     <div class="main-right">
+                       <!-- The main right section of the dashboard -->
                         <form id="imageForm" class="display-section" id="dropArea" method="post" action="/generateReport"
                            enctype="multipart/form-data">
+                            <!-- The image upload section of the dashboard -->
                             <h2 class="image-upload-heading">Upload the MRI image here</h2>
                             <label for="fileInput">
+                            <!-- The image preview section of the dashboard -->
                             <div class="image-holding-section" id="imagePreview">
                                 <div class="preview-container">
                                     {% if image_path %}
@@ -79,10 +96,12 @@
                                      {% endif %}
                             </div>
                             </label>
+                            <!-- The image upload button of the dashboard -->
                             <input type="file" id="fileInput" class="upload-button" accept="image/*" onchange="previewImage();displayUpdateReportStatus();disableLink();" required
                             name="imagefile">
 
                             <div class="generate-report-tab">
+                                <!-- The generate report button of the dashboard -->
                                 <button class="scan-button">Generate Report</button>
                                 {% if predicted_class %}
                                     <a href="/report" class="report-link" id="reportLink">Check Report</a>
@@ -94,33 +113,36 @@
                             </div>
                         </form>
                     </div>
+                    <!-- The main left section of the dashboard -->
                     <div class="main-left">
-
+                        <!-- The report section of the dashboard -->
                         <section class="tumor main-board">
                             <div class="heading-disease heading-top">
                                 <h1>Tumour Status</h1>
                             </div>
-
+                            <!-- The report section of the dashboard (Tumour) -->
                             {% if predicted_class %}
                                 <div class="description-disease report-tumour">
                                     <h2>{{ predicted_class["Tumour"] }}</h2>
                                 </div>
+                            <!-- The report section of the dashboard (Tumour)-->
                             {% elif predicted_class_names %}
                                 <div class="description-disease report-tumour">
                                     <h2>{{ predicted_class_names["Tumour"] }}</h2>
                                 </div>
+                            <!-- The report section of the dashboard (Not scanned) -->
                             {% else %}
                                 <div class="description-disease report-tumour">
                                     <h2>Not Scanned</h2>
                                 </div>
                             {% endif %}
                         </section>
-
+                        <!-- The report section of the dashboard -->
                         <section class="tumour-classification main-board">
                             <div class="heading-disease">
                                 <h1>Tumour Type</h1>
                             </div>
-
+                            <!-- The report section of the dashboard (Tumour Type)-->
                             {% if predicted_class %}
                                 <div class="description-disease report-tumour-type">
                                     <h2>{{ predicted_class["Tumour Type"] }}</h2>
@@ -136,12 +158,12 @@
                             {% endif %}
 
                         </section>
-
+                        <!-- The report section of the dashboard -->
                         <section class="Stroke main-board">
                             <div class="heading-disease">
                                 <h1>Stroke Status</h1>
                             </div>
-
+                            <!-- The report section of the dashboard (Stroke)-->
                             {%  if predicted_class %}
                                 <div class="description-disease report-stroke">
                                     <h2>{{ predicted_class["Stroke"] }}</h2>
@@ -156,7 +178,7 @@
                                 </div>
                             {% endif %}
                         </section>
-
+                        <!-- The report section of the dashboard (Alzheimer)-->
                         <section class="alzheimer main-board">
                              <div class="heading-disease heading-bottom">
                                 <h1>Alzheimer Status</h1>
@@ -182,10 +204,12 @@
 
                 </section>
 
+                <!-- The footer section of the dashboard -->
                 <section class="dashboard-copyright">
                     <p class="copy-text">Developed by Cranium Cryptics Team &copy; 2024. All rights reserved.</p>
                 </section>
 
+                <!-- The profile popup section of the dashboard -->
                 <section class="profile-popup" onmouseover="ProfilePopView()" onmouseout="removeProfileView()">
                     <div>
                         <ul class="profile-viewer-list">
@@ -209,6 +233,7 @@
         </div>
     </div>
 
+    <!-- The scan box of the application -->
     <div class="scan-box">
         <div class="scanning-animation" id="scanningAnimation">
                <img src="../static/images/logo1.png" class="logo-img" alt="img-logo">
@@ -216,6 +241,7 @@
         </div>
     </div>
 
+    <!-- The script section of the report generator -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/7.14.1-0/firebase.js"></script>
     <script src="../static/javaScript/MainPage.js">
         workSpaceGenerator();

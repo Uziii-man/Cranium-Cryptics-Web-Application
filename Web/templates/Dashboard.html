@@ -9,13 +9,17 @@
 </head>
 <body>
     <div  class="app-container">
+        <!-- The below code is the left pane of the dashboard.-->
         <div class="left-pane">
             <div class="menu-button" onclick="toggleMenu()">
                 <h1 class="main-menu">Menu</h1>
                 <span class="menu-burger">&#9776;</span>
             </div>
+            <!-- The below code is the menu container of the dashboard.-->
             <div class="menu-container">
+                <!-- The below code is the main list of the menu.-->
                 <div class="Menu-main-list">
+                    <!-- The below code is the list of the menu.-->
                     <ul class="menu-list">
                         <li  class="menu-detail-list current_page hello">
                         <a href="/Dashboard"><image src="../static/images/dashboard.png" class="menu-img">Dashboard</image></a></li>
@@ -28,7 +32,9 @@
                         <li  class="menu-detail-list" onmouseout="nav_back_highliter()" onmouseover="nav_highliter();">
                         <a href="/ReportGenerator"><image src="../static/images/dashboard.png" class="menu-img">Report Generator</image></a></li>
                     </ul>
+                    <!-- The below code is the logout section of the menu.-->
                     <section class="logout-section">
+                        <!-- The below code is the logout section of the menu.-->
                         <a href="/account" class="logout-account">
                             <image src="../static/images/account.png" class="menu-img logout-img" id="account-dt"></image>
                             <p>Account</p>
@@ -43,45 +49,54 @@
                 </div>
             </div>
         </div>
-
+        <!-- The below code is the right pane of the dashboard.-->
         <div class="right-pane">
+            <!-- The below code is the header of the dashboard.-->
             <div class="dashboard-header">
+                <!-- The below code is the heading of the dashboard.-->
                 <section class="dashboard-heading">
                     <h2><span class="heading-span">Cranium</span> Cryptics</h2>
                     <img src="../static/images/logo1.png" height="20px" width="20px">
                 </section>
+                <!-- The below code is the profile section of the dashboard.-->
                 <section class="profile-header" onmouseover="ProfilePopView()" onmouseout="removeProfileView()">
                     <image src="../static/images/profile.jpeg" class="profile-image"></image>
                     <h2 class="user-name">Lakshan Cooray</h2>
                 </section>
             </div>
+            <!-- The below code is the main content of the dashboard.-->
             <div class="dashboard-panes">
+                <!-- The below code is the main section of the dashboard.-->
                 <section class="dashboard-main-section">
+                    <!-- The below code is the text section of the dashboard.-->
                     <div class="dashboard-text">
                           <h1 class="dashboard-heading1">Decoding Brain Health: MRI Image Analysis for Precise Diagnosis</h1>
                           <p class="dashboard-subheading">Streamline your diagnosis process with our rapid MRI image analysis,
                               delivering precise results at the touch of a button</p>
                           <a href="/ReportGenerator" class="btn"><button class="report-generating-button">Generate Report</button></a>
                     </div>
-
+                    <!-- The below code is the image section of the dashboard.-->
                     <div class="dashboard-image">
                         <img src="../static/images/background__1_-removebg-preview.png" alt="Brain Image" class="img-db">
                     </div>
                 </section>
-
+                <!-- The below code is the subsection of the dashboard.-->
                 <section class="dashboard-sub-section">
+                    <!-- image detection cards 1 -->
                     <div class="image-detection-cards card-1"> 
                         <image class="card-image" src="../static/images/braintumour.jpg"></image>
                         <h1 class="card-header">Tumour Detector</h1>
                         <p class="card-name">Detects brain tumors using advanced imaging analysis</p>
                         <a href="/BrainTumourDetector" class="card-link"><button onclick="redirectTumour()">Try it</button></a>
                     </div>
+                    <!-- image detection cards 2 -->
                     <div class="image-detection-cards card-2"> 
                         <image class="card-image" src="../static/images/ischemicstroke.jpg"></image>
                         <h1 class="card-header">Stroke Detector</h1>
                         <p class="card-name">Identifies ischemic strokes by analyzing medical images</p>
                         <a href="/BrainStrokeDetector" class="card-link"><button onclick="redirectStroke()">Try it</button></a>
                     </div>
+                    <!-- image detection cards 3 -->
                     <div class="image-detection-cards card-3"> 
                         <image class="card-image" src="../static/images/alzhimer-removebg-preview.png"></image>
                         <h1 class="card-header">Alzheimer Detector</h1>
@@ -90,19 +105,25 @@
                     </div>
                 </section>
 
+                <!-- The below code is the footer of the dashboard.-->
                 <section class="dashboard-copyright">
                     <p class="copy-text">Developed by Cranium Cryptics Team &copy; 2024. All rights reserved.</p>
                 </section>
 
+                <!-- The below code is the profile popup of the dashboard.-->
                 <section class="profile-popup" onmouseover="ProfilePopView()" onmouseout="removeProfileView()">
                     <div>
+                        <!-- The below code is the profile popup of the dashboard.-->
                        <ul class="profile-viewer-list">
+                           <!-- account -->
                             <li class="profile-viewer-list-element profile-list1">
                                 <a href="/account" class="pop-link">
                                     <img src="../static/images/profile2.png" class="menu-img profile-img" alt="View Profile">View Profile
                                 </a>
                             </li>
+                           <!-- Line -->
                             <li class="profile-viewer-list-element" id="line-profile"></li>
+                           <!-- sign out -->
                             <li class="profile-viewer-list-element profile-list2">
                                 <a href="/login" class="pop-link">
                                     <img src="../static/images/signout-removebg-preview.png" class="menu-img profile-img2" alt="Sign Out">Sign Out
@@ -119,7 +140,7 @@
     <div>
         
     </div>
-
+    <!-- The below code is the javaScript code of the dashboard.-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/7.14.1-0/firebase.js"></script>
     <script src="../static/javaScript/MainPage.js">
         workSpaceGenerator();

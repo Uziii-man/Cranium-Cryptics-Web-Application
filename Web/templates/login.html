@@ -16,23 +16,28 @@
    });
   </script>
 </head>
+<!-- body of the login page -->
 <body class="align">
+  <!-- form for the login page -->
   <div class="form-space">
+      <!-- image section of the login page -->
       <section class="signin-image">
           <img src="../static/images/logo1.png" height="80px" width="80px">
           <h1>Sign in to <span class="heading-span">Cranium</span> Cryptics</h1>
       </section>
 
+      <!-- form section of the login page -->
       <div class="login-container">
 
         <form class="form login" id="loginForm">
-
+            <!-- username field -->
             <div class="form__field">
               <label for="login__username" class="content-login">Username:</label>
               <input id="login__username" type="text" name="username" class="form__input"
                      placeholder="Username" required>
             </div>
 
+            <!-- password field -->
             <div class="form__field">
                 <div class="password-content">
                     <label for="login__password" class="content-login">Password:</label>
@@ -40,13 +45,13 @@
                 </div>
                 <input id="login__password" type="password" name="password" class="form__input" placeholder="Password" required>
             </div>
-
+            <!-- submit button -->
             <div class="form__field">
                 <input type="submit" value="Sign In">
             </div>
 
         </form>
-
+        <!-- registration  page link -->
         <div class="signin-registration">
              <p class="error-message"></p>
              <p class="text--center">Not Registered? <a href="/Register" class="register-link">Register here</a></p>
@@ -65,9 +70,10 @@
     </div>
   </div>
 
-</body>
+<!-- firebase script -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/7.14.1-0/firebase.js"></script>
+  <!-- login page script -->
 <script src="../static/javaScript/login.js"></script>
+</body>
 </html>
 
-<!--  -->
