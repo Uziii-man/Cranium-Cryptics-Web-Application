@@ -10,8 +10,6 @@
     align-items: center;
     width: 100%;
     height: 100%;
-    padding-top: 1%;
-    padding-bottom: 1%;
 }
 
 .main-left{
@@ -65,6 +63,7 @@
     align-items: center;
     width: 100%;
     height: 100%;
+    padding-bottom: 10vh;
 }
 
 .main-right{
@@ -80,7 +79,8 @@
     display: flex;
     width: 100%;
     box-shadow: none;
-    padding-top: 8vh;
+    padding-top: 3vh;
+    padding-bottom: 5vh;
 }
 
 .scan-button{

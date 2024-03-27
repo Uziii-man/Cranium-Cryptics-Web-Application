@@ -8,6 +8,13 @@
   <title>Cranium Cryptics</title>
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet">
   <link rel="stylesheet" href="../static/css/signin.css">
+  <script>
+      history.pushState(null, null, document.URL);
+      window.addEventListener('popstate', function () {
+          alert("Hey! You are not allowed to go back!")
+      history.pushState(null, null, document.URL);
+   });
+  </script>
 </head>
 <body class="align">
   <div class="form-space">

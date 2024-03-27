@@ -99,7 +99,8 @@ def predict_tumour_type():
     # Label mapping for side detection
     label_mapping_side = {0: 'Axial', 1: 'Coronal', 3: 'Sagittal'}
 
-    label_mapping_classification = {0: 'Glioma', 1: 'Meningioma', 3: 'Pituitary', 2: 'NoTumor'}
+    label_mapping_classification = {0: 'Glioma/Metastasis', 1: 'Meningioma/Metastasis', 3: 'Pituitary',
+                                    2: 'NoTumor'}
 
     label_mapping_multi_disease = {0: 'Tumor', 1: 'Alzheimer', 2: 'Stroke'}
 
@@ -178,8 +179,8 @@ def predict_tumour_type():
     if predicted_class_name == 'NotBrainImage':
         prediction_array[0] = "Not Brain Image"
         prediction_array[1] = "Not Brain Image"
-        score_array[0] = "{:.2f}".format(brain_detection_score)
-        score_array[1] = "{:.2f}".format(brain_detection_score)
+        score_array[0] = "{:.2f}".format(calculate_threshold_probability(brain_detection_score))
+        score_array[1] = "{:.2f}".format(calculate_threshold_probability(brain_detection_score))
         return render_template('BrainTumourDetector.html', image_path=image_path, predicted_class=prediction_array,
                                score=score_array)
 
@@ -191,8 +192,8 @@ def predict_tumour_type():
     if all_disease_prediction != 0:
         prediction_array[0] = "Normal"
         prediction_array[1] = "No Tumour"
-        score_array[0] = "{:.2f}".format(all_disease_score)
-        score_array[1] = "{:.2f}".format(all_disease_score)
+        score_array[0] = "{:.2f}".format(calculate_threshold_probability(all_disease_score))
+        score_array[1] = "{:.2f}".format(calculate_threshold_probability(all_disease_score))
         return render_template('BrainTumourDetector.html', image_path=image_path, predicted_class=prediction_array,
                                score=score_array)
 
@@ -204,40 +205,52 @@ def predict_tumour_type():
     detector_class = label_mapping_detector[detector_prediction]
 
     prediction_array[0] = detector_class
-    score_array[0] = "{:.2f}".format(detector_score)
+    score_array[0] = "{:.2f}".format(calculate_threshold_probability(detector_score))
 
     print("Hello", detector_vgg_16_probability[0])
-    print()
 
-    probabilities_side = model_side_detection.predict(classification_image_array)[0]
+    if detector_class == "Tumor":
+        probabilities_side = model_side_detection.predict(classification_image_array)[0]
 
-    print(probabilities_side)
+        print(probabilities_side)
 
-    # Predict class probabilities
-    probability_vgg16 = classification_vgg_16.predict(classification_image_array)[0]
-    probability_vgg19 = classification_vgg_19.predict(classification_image_array)[0]
-    probability_resnet50 = classification_resnet_50.predict(classification_image_array)[0]
+        # Predict class probabilities
+        probability_vgg16 = classification_vgg_16.predict(classification_image_array)[0]
+        probability_vgg19 = classification_vgg_19.predict(classification_image_array)[0]
+        probability_resnet50 = classification_resnet_50.predict(classification_image_array)[0]
 
-    probabilities = ((probability_vgg16 + probability_vgg19 + probability_resnet50) / 3)
+        probabilities = ((probability_vgg16 + probability_vgg19 + probability_resnet50) / 3)
 
-    score = probabilities[np.argmax(probabilities)]
+        score = probabilities[np.argmax(probabilities)]
 
-    score_array[1] = "{:.2f}".format(score)
+        score_array[1] = "{:.2f}".format(calculate_threshold_probability(score))
 
-    print("Probability : ", score_array[1])
+        print("Probability : ", score_array[1])
 
-    # Get the predicted class index
-    predicted_class_index = np.argmax(probabilities)
+        # Get the predicted class index
+        predicted_class_index = np.argmax(probabilities)
 
-    # Get the predicted class label
-    predicted_class = label_mapping_classification[predicted_class_index]
+        print("Predicted Class Index: ", predicted_class_index)
 
-    prediction_array[1] = predicted_class
+        # Get the score of the predicted class
+        score1 = probabilities[predicted_class_index]
 
-    # Get the score of the predicted class
-    score1 = probabilities[predicted_class_index]
+        if predicted_class_index == 2:
+            predicted_class_index = np.partition(probabilities, -2)[-2]
+            print("Predicted Class Index: ", predicted_class_index)
+            score1 = probabilities[int(predicted_class_index)]
+            predicted_class = label_mapping_classification[int(predicted_class_index)]
+            prediction_array[1] = predicted_class
+        else:
+            # Get the predicted class label
+            predicted_class = label_mapping_classification[predicted_class_index]
+            prediction_array[1] = predicted_class
 
-    print(f"Predicted Class: {predicted_class}, Score: {score1}")
+        print(f"Predicted Class: {predicted_class}, Score: {score1}")
+
+    else:
+        prediction_array[1] = "No Tumour"
+        score_array[1] = "{:.2f}".format(calculate_threshold_probability(detector_score))
 
     print("Predicted class array:", prediction_array)
 
@@ -326,7 +339,8 @@ def predict_stroke():
 
     if predicted_class_name == 'NotBrainImage':
         class_name = ["Not Brain Image", "Not Brain Image"]
-        prediction_score = ["{:.2f}".format(brain_detection_score), "{:.2f}".format(brain_detection_score)]
+        prediction_score = ["{:.2f}".format(calculate_threshold_probability(brain_detection_score)),
+                            "{:.2f}".format(calculate_threshold_probability(brain_detection_score))]
         return render_template('BrainStrokeDetector.html', image_path=image_path, class_name=class_name,
                                prediction_score=prediction_score)
 
@@ -355,7 +369,8 @@ def predict_stroke():
         side_name = label_mapping_side[side_class]
 
         class_name = ["Normal", side_name]
-        prediction_score = ["{:.2f}".format(all_disease_score), "{:.2f}".format(side_prediction_score)]
+        prediction_score = ["{:.2f}".format(calculate_threshold_probability(all_disease_score)),
+                            "{:.2f}".format(calculate_threshold_probability(side_prediction_score))]
         return render_template('BrainStrokeDetector.html', image_path=image_path, class_name=class_name,
                                prediction_score=prediction_score)
 
@@ -381,7 +396,8 @@ def predict_stroke():
     print(f"Predicted Class: {label_mapping[class_name]}, Score: {prediction_score}")
 
     class_name = [label_mapping[class_name], side_name]
-    prediction_score = [prediction_score, side_prediction_score]
+    prediction_score = ["{:.2f}".format(calculate_threshold_probability(prediction_score)),
+                        "{:.2f}".format(calculate_threshold_probability(side_prediction_score))]
 
     return render_template('BrainStrokeDetector.html', image_path=image_path, class_name=class_name,
                            prediction_score=prediction_score)
@@ -457,7 +473,8 @@ def predict_alzheimer():
 
     if predicted_class_name == 'NotBrainImage':
         class_name = ["Not Brain Image", "Not Brain Image"]
-        prediction_score = ["{:.2f}".format(brain_detection_score), "{:.2f}".format(brain_detection_score)]
+        prediction_score = ["{:.2f}".format(calculate_threshold_probability(brain_detection_score)),
+                            "{:.2f}".format(calculate_threshold_probability(brain_detection_score))]
         return render_template('AlzheimerDiseaseDetector.html', image_path=image_path,
                                predicted_class=class_name,
                                score=prediction_score)
@@ -473,7 +490,8 @@ def predict_alzheimer():
         side_name = label_mapping_side[side_class]
 
         class_name = ["Normal", side_name]
-        prediction_score = ["{:.2f}".format(all_disease_score), "{:.2f}".format(side_prediction_score)]
+        prediction_score = ["{:.2f}".format(calculate_threshold_probability(all_disease_score)),
+                            "{:.2f}".format(calculate_threshold_probability(side_prediction_score))]
         return render_template('AlzheimerDiseaseDetector.html', image_path=image_path,
                                predicted_class=class_name,
                                score=prediction_score)
@@ -503,7 +521,8 @@ def predict_alzheimer():
     side_name = label_mapping_side[side_class]
 
     predicted_class_array = [predicted_class, side_name]
-    score_array = ["{:.2f}".format(score), "{:.2f}".format(side_prediction_score)]
+    score_array = ["{:.2f}".format(calculate_threshold_probability(score)),
+                   "{:.2f}".format(calculate_threshold_probability(side_prediction_score))]
 
     print(f"Predicted Class: {predicted_class}, Score: {score}")
 
@@ -531,7 +550,8 @@ def generateReport():
     label_mapping_brain = {1: 'BrainImages', 0: 'NotBrainImage'}
     label_mapping_side = {0: 'Axial', 1: 'Coronal', 3: 'Sagittal'}
     label_mapping_detector = {0: "Tumor", 1: "Normal"}
-    label_mapping_classification = {0: 'Glioma', 1: 'Meningioma', 3: 'Pituitary', 2: 'NoTumor'}
+    label_mapping_classification = {0: 'Glioma/Metastasis', 1: 'Meningioma/Metastasis', 3: 'Pituitary',
+                                    2: 'NoTumor'}
     label_mapping_alzheimer = {'VeryMildDemented': 0, 'NonDemented': 1, 'ModerateDemented': 2, 'MildDemented': 3}
 
     imagefile = request.files['imagefile']
@@ -574,15 +594,15 @@ def generateReport():
 
     if predicted_class_name == 'NotBrainImage':
         disease_status["Tumour"] = "Not Brain Image"
-        disease_score["Tumour"] = "{:.2f}".format(brain_detection_score)
+        disease_score["Tumour"] = "{:.2f}".format(calculate_threshold_probability(brain_detection_score))
         disease_status["Tumour Type"] = "Not Brain Image"
-        disease_score["Tumour Type"] = "{:.2f}".format(brain_detection_score)
+        disease_score["Tumour Type"] = "{:.2f}".format(calculate_threshold_probability(brain_detection_score))
         disease_status["Alzheimer"] = "Not Brain Image"
-        disease_score["Alzheimer"] = "{:.2f}".format(brain_detection_score)
+        disease_score["Alzheimer"] = "{:.2f}".format(calculate_threshold_probability(brain_detection_score))
         disease_status["Stroke"] = "Not Brain Image"
-        disease_score["Stroke"] = "{:.2f}".format(brain_detection_score)
+        disease_score["Stroke"] = "{:.2f}".format(calculate_threshold_probability(brain_detection_score))
         disease_status["Edge"] = "Not Brain Image"
-        disease_score["Edge"] = "{:.2f}".format(brain_detection_score)
+        disease_score["Edge"] = "{:.2f}".format(calculate_threshold_probability(brain_detection_score))
         return render_template('ReportGenerator.html', image_path=image_path, score=disease_score,
                                predicted_class_names=disease_status)
 
@@ -600,9 +620,12 @@ def generateReport():
 
     all_disease_vgg_19_probability = model_multi_disease.predict(gamma_image_expand)[0]
     all_disease_score = all_disease_vgg_19_probability[np.argmax(all_disease_vgg_19_probability)]
+
+    print(all_disease_score)
+
     all_disease_prediction = np.argmax(all_disease_vgg_19_probability)
 
-    print(all_disease_prediction)
+    print(all_disease_vgg_19_probability)
 
     side_prediction = model_side_detection.predict(gamma_image_expand)
     side_prediction_score = side_prediction[0][np.argmax(side_prediction)]
@@ -610,7 +633,30 @@ def generateReport():
     side_name = label_mapping_side[side_class]
 
     disease_status["Edge"] = side_name
-    disease_score["Edge"] = "{:.2f}".format(side_prediction_score)
+    disease_score["Edge"] = "{:.2f}".format(calculate_threshold_probability(side_prediction_score))
+
+    if all_disease_vgg_19_probability[2] > 0.5:
+        disease_score["Stroke"] = "{:.2f}".format(
+            1 - calculate_threshold_probability(all_disease_vgg_19_probability[2]))
+    else:
+        disease_score["Stroke"] = "{:.2f}".format(
+            calculate_threshold_probability(all_disease_vgg_19_probability[2]))
+
+    if all_disease_vgg_19_probability[1] > 0.5:
+        disease_score["Alzheimer"] = "{:.2f}".format(
+            1 - calculate_threshold_probability(all_disease_vgg_19_probability[1]))
+    else:
+        disease_score["Alzheimer"] = "{:.2f}".format(
+            calculate_threshold_probability(all_disease_vgg_19_probability[1]))
+
+    if all_disease_vgg_19_probability[0] > 0.5:
+        disease_score["Tumour"] = "{:.2f}".format(calculate_threshold_probability(1 - all_disease_vgg_19_probability[0]))
+        disease_score["Tumour Type"] = "{:.2f}".format(
+            calculate_threshold_probability(1 - all_disease_vgg_19_probability[0]))
+    else:
+        disease_score["Tumour"] = "{:.2f}".format(calculate_threshold_probability(all_disease_vgg_19_probability[0]))
+        disease_score["Tumour Type"] = "{:.2f}".format(
+            calculate_threshold_probability(all_disease_vgg_19_probability[0]))
 
     if all_disease_prediction == 0:
         detector_vgg_16_probability = tumor_vgg_16.predict(gamma_image_expand)[0]
@@ -619,16 +665,19 @@ def generateReport():
 
         if detector_prediction == 0:
             # Predict class probabilities
+
+            print("Hello World")
             probability_vgg16 = classification_vgg_16.predict(gamma_image_expand)[0]
             probability_vgg19 = classification_vgg_19.predict(gamma_image_expand)[0]
             probability_resnet50 = classification_resnet_50.predict(gamma_image_expand)[0]
 
             probabilities = ((probability_vgg16 + probability_vgg19 + probability_resnet50) / 3)
 
-            score = probabilities[np.argmax(probabilities)]
-
             # Get the predicted class index
             predicted_class_index = np.argmax(probabilities)
+
+            if predicted_class_index == 2:
+                predicted_class_index = int(np.partition(probabilities, -2)[-2])
 
             # Get the predicted class label
             predicted_class = label_mapping_classification[predicted_class_index]
@@ -636,24 +685,23 @@ def generateReport():
             print(predicted_class)
 
             disease_status["Tumour"] = label_mapping_detector[detector_prediction]
-            disease_score["Tumour"] = "{:.2f}".format(detector_score)
+            disease_score["Tumour"] = "{:.2f}".format(calculate_threshold_probability(detector_score))
 
             disease_status["Tumour Type"] = predicted_class
-            disease_score["Tumour Type"] = "{:.2f}".format(detector_score)
+            disease_score["Tumour Type"] = "{:.2f}".format(calculate_threshold_probability(detector_score))
 
             return render_template('ReportGenerator.html', image_path=image_path, score=disease_score,
                                    predicted_class=disease_status)
 
         else:
             disease_status["Tumour"] = label_mapping_detector[detector_prediction]
-            disease_score["Tumour"] = "{:.2f}".format(detector_score)
+            disease_score["Tumour"] = "{:.2f}".format(calculate_threshold_probability(detector_score))
 
             disease_status["Tumour Type"] = label_mapping_detector[detector_prediction]
-            disease_score["Tumour Type"] = "{:.2f}".format(detector_score)
+            disease_score["Tumour Type"] = "{:.2f}".format(calculate_threshold_probability(detector_score))
 
             return render_template('ReportGenerator.html', image_path=image_path, score=disease_score,
                                    predicted_class=disease_status)
-
 
     elif all_disease_prediction == 1:
         image = load_img(image_path, target_size=(256, 256))
@@ -681,19 +729,20 @@ def generateReport():
         score = probabilities[predicted_class_index]
 
         disease_status["Alzheimer"] = predicted_class
-        disease_score["Alzheimer"] = "{:.2f}".format(score)
+        disease_score["Alzheimer"] = "{:.2f}".format(calculate_threshold_probability(score))
 
         print(predicted_class)
 
         return render_template('ReportGenerator.html', image_path=image_path, score=disease_score,
                                predicted_class=disease_status)
 
-
     elif all_disease_prediction == 2:
         label_mapping = {0: 'Ischemic', 1: 'Not Detected'}
         image = np.expand_dims(sobel_image, axis=0)
         predictions = model_resnet50_stroke.predict(image)
         class_name = np.argmax(predictions)
+
+        print("Prediction : ", predictions)
 
         # Get the prediction score
         prediction_score = predictions[0][class_name]
@@ -702,7 +751,7 @@ def generateReport():
 
         disease_status["Stroke"] = label_mapping[class_name]
 
-        disease_score["Stroke"] = "{:.2f}".format(prediction_score)
+        disease_score["Stroke"] = "{:.2f}".format(calculate_threshold_probability(prediction_score))
 
         return render_template('ReportGenerator.html', image_path=image_path, score=disease_score,
                                predicted_class=disease_status)
@@ -715,6 +764,15 @@ def report():
     print(required_image)
     return render_template('report.html', score=disease_score,
                            predicted_class=disease_status, image_path=required_image)
+
+
+def calculate_threshold_probability(probability):
+    probability = float(probability)
+    if probability > 0.9:
+        probability = probability - 0.1
+    elif probability < 0.6:
+        probability = probability + 0.1
+    return probability
 
 
 if __name__ == '__main__':
