@@ -884,11 +884,12 @@ def generateReport():
 @app.route('/report')
 def report():
     print(required_image)
+    # return the output variables to the frontend of the web application
     return render_template('report.html', score=disease_score,
                            predicted_class=disease_status, image_path=required_image)
 
 
-# Method to generate the report
+# Method to calculate the threshold probability
 def calculate_threshold_probability(probability):
     probability = float(probability)
     if probability > 0.9:
