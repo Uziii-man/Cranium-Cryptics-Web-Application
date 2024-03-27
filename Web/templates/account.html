@@ -16,7 +16,9 @@
                 <span class="menu-burger">&#9776;</span>
             </div>
             <div class="menu-container">
+                <!---Menu List-->
                 <div class="Menu-main-list">
+                    <!---Menu List for Navigation-->
                     <ul class="menu-list">
                         <li  class="menu-detail-list" onmouseout="nav_back_highliter()" onmouseover="nav_highliter();">
                         <a href="/Dashboard"><image src="../static/images/dashboard.png" class="menu-img">Dashboard</image></a></li>
@@ -29,12 +31,14 @@
                         <li  class="menu-detail-list" onmouseout="nav_back_highliter()" onmouseover="nav_highliter();">
                         <a href="/ReportGenerator"><image src="../static/images/dashboard.png" class="menu-img">Report Generator</image></a></li>
                     </ul>
+                    <!---Menu List for Account Settings-->
                     <section class="logout-section">
+                        <!---link for to direct to account-->
                         <a href="/account" class="logout-account current_page hello login-button">
                             <image src="../static/images/account.png" class="menu-img logout-img" id="account-dt"></image>
                             <p>Account</p>
                         </a>
-
+                        <!---link for to direct to logout-->
                         <a href="/login" class="logout-account-section">
                             <image src="../static/images/logout.png" class="menu-img logout-img"></image>
                             <p>Logout</p>
@@ -45,24 +49,31 @@
             </div>
         </div>
 
+        <!---Right Pane-->
         <div class="right-pane">
             <div class="dashboard-header">
                 <section class="dashboard-heading">
+                    <!---Dashboard Heading for Cranium Cryptic-->
                     <h2><span class="heading-span">Cranium</span> Cryptics</h2>
                     <img src="../static/images/logo1.png" height="20px" width="20px">
                 </section>
+                <!---Profile Section-->
                 <section class="profile-header" onmouseover="ProfilePopView()" onmouseout="removeProfileView()">
                     <image src="../static/images/profile.jpeg" class="profile-image"></image>
                     <h2 class="user-name">Lakshan Cooray</h2>
                 </section>
             </div>
 
+            <!---Dashboard Panes-->
             <div class="dashboard-panes">
-
+                <!---Edit Profile Pane-->
                 <h1 class="heading-edit-profile">Edit Profile</h1>
+                <!---Form for Edit Profile-->
                 <div class="form-work">
                       <div class="col-md-3">
+                         <!---Profile Image-->
                          <h3 class="personal-info-header">Profile Image</h3>
+                          <!---Profile Image Upload-->
                          <div class="text-center">
                             <img id="previewImage" src="../static/images/profile.jpeg" class="avatar img-circle" alt="avatar">
                             <input type="file" class="form-control fc1" id="uploadInput" accept="image/png, image/jpeg"
@@ -71,30 +82,31 @@
                       </div>
 
                       <div class="col-md-9 personal-info">
-
+                            <!---Personal Information-->
                             <h3 class="personal-info-header">Personal information</h3>
-
+                            <!---Form for Personal Information-->
                             <form  class="form-horizontal" id="profileForm">
+                                <!-- User Name -->
                                 <div class="form-group">
                                     <label for="change__userName" class="col control-label">Username:</label>
                                     <input id="change__userName" name="change__userName" class="form-control user-control control-bar" type="text" required readonly>
                                 </div>
-
+                                <!-- Email -->
                                 <div class="form-group">
                                     <label for="change__email" class="col-lg-3 control-label">Email:</label>
                                     <input id="change__email" name="change__email" class="form-control email-control control-bar" type="email" required>
                                 </div>
-
+                                <!-- Password -->
                                 <div class="form-group">
                                     <label for="change__password" class="col control-label">Password:</label>
                                     <input id="change__password" name="change__password" class="form-control password-control control-bar" type="password" required>
                                 </div>
-
+                                <!-- Confirm Password -->
                                 <div class="form-group">
                                     <label for="change__password__confirm" class="col control-label">Confirm password:</label>
                                     <input id="change__password__confirm" name="change__password__confirm" class="form-control confirm-password-control control-bar" type="password" required>
                                 </div>
-
+                                <!-- Buttons of the Form -->
                                 <div class="form-group">
                                     <div class="col-md-8">
                                         <button type="button" class="btn btn-primary" onclick="updateUserDetails(event);">Save Changes</button>
@@ -105,13 +117,14 @@
                       </div>
                 </div>
             </div>
-
+            <!---Dashboard Footer-->
                 <section class="dashboard-copyright">
                     <p class="copy-text">Developed by Cranium Cryptics Team &copy; 2024. All rights reserved.</p>
                 </section>
-
+                <!---Profile Popup-->
                 <section class="profile-popup" onmouseover="ProfilePopView()" onmouseout="removeProfileView()">
                     <div>
+                        <!---Profile Popup List-->
                        <ul class="profile-viewer-list">
                             <li class="profile-viewer-list-element profile-list1">
                                 <a href="#" class="pop-link">
@@ -133,9 +146,10 @@
     <div class="detail-error">
        This is a message
     </div>
-
+    <!---Firebase SDK-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/7.14.1-0/firebase.js"></script>
 
+    <!---Script Section-->
     <script src="../static/javaScript/MainPage.js">
         workSpaceGenerator();
         displayUserName();

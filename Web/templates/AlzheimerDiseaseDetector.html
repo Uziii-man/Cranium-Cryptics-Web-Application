@@ -16,8 +16,10 @@
                 <h1 class="main-menu">Menu</h1>
                 <span class="menu-burger">&#9776;</span>
             </div>
+            <!-- Menu Container -->
             <div class="menu-container">
                 <div class="Menu-main-list">
+                    <!-- Menu List for navigation -->
                     <ul class="menu-list">
                         <li  class="menu-detail-list" onmouseout="nav_back_highliter()" onmouseover="nav_highliter();">
                         <a href="/Dashboard"><image src="../static/images/dashboard.png" class="menu-img">Dashboard</image></a></li>
@@ -30,12 +32,14 @@
                         <li  class="menu-detail-list" onmouseout="nav_back_highliter()" onmouseover="nav_highliter();">
                         <a href="/ReportGenerator"><image src="../static/images/dashboard.png" class="menu-img">Report Generator</image></a></li>
                     </ul>
+                    <!-- Logout Section -->
                     <section class="logout-section">
+                        <!-- Logout Section account page director -->
                         <a href="/account" class="logout-account">
                             <image src="../static/images/account.png" class="menu-img logout-img" id="account-dt"></image>
                             <p>Account</p>
                         </a>
-
+                        <!-- Logout Section login page director -->
                         <a href="/login" class="logout-account-section">
                             <image src="../static/images/logout.png" class="menu-img logout-img"></image>
                             <p>Logout</p>
@@ -45,8 +49,9 @@
                 </div>
             </div>
         </div>
-
+        <!-- Right Pane of the web application-->
         <div class="right-pane">
+            <!-- Dashboard Header Section -->
             <div class="dashboard-header">
                 <section class="dashboard-heading">
                     <h2><span class="heading-span">Cranium</span> Cryptics</h2>
@@ -57,13 +62,15 @@
                     <h2 class="user-name">Lakshan Cooray</h2>
                 </section>
             </div>
+            <!-- Dashboard Panes -->
             <div class="dashboard-panes">
                 <section class="dashboard-main-section">
-
+                    <!-- Image Upload Section -->
                     <form class="display-section" id="dropArea" method="post" action="/alzheimer"
                           enctype="multipart/form-data">
                         <h2 class="image-upload-heading">Upload the MRI image here</h2>
                         <label for="fileInput">
+                            <!-- Image Preview Section -->
                             <div class="image-holding-section" id="imagePreview">
                                 <div class="preview-container">
                                     {% if image_path %}
@@ -79,12 +86,15 @@
                                 {% endif %}
                             </div>
                         </label>
+                        <!-- Image Upload Button -->
                         <input type="file" id="fileInput" class="upload-button" accept="image/*" onchange="previewImage();
                                 displayUpdateAlzheimerStatus();"  name="imagefile" required>
                         <button class="scan-button" >Scan Image</button>
                     </form>
 
+                    <!-- Result Section -->
                     <div class="result-section">
+                        <!-- Disease Status Section -->
                         <section class="disease-status">
                             <h2 class="tumour-status-heading">Alzheimer Detection Status</h2>
                             <div class="tumor-details">
@@ -94,7 +104,6 @@
                                     <h3 class="Alzheimer-status stat1">Status : Not Scanned</h3>
                                 {% endif %}
 
-
                                 {% if score %}
                                     <h3 class="alzheimer-probability stat1">Probability : {{ score[0] }}</h3>
                                 {% else %}
@@ -102,8 +111,10 @@
                                 {% endif %}
                             </div>
                         </section>
+                         <!-- Detected Disease Section -->
                         <section class="detected-disease">
                            <h2  class="tumor-type-heading">Detected Image Edge</h2>
+                            <!-- Detected Disease Type Details -->
                             <div class="tumor-details">
                                 {% if predicted_class %}
                                     <h3 class="type-status stat1">Type : {{ predicted_class[1] }}</h3>
@@ -120,18 +131,22 @@
                     </div>
                 </section>
 
+                <!-- Report Section -->
                 <section class="dashboard-copyright">
                     <p class="copy-text">Developed by Cranium Cryptics Team &copy; 2024. All rights reserved.</p>
                 </section>
 
+                <!-- Profile Popup Section to direct logout and profile view -->
                 <section class="profile-popup" onmouseover="ProfilePopView()" onmouseout="removeProfileView()">
                     <div>
                         <ul class="profile-viewer-list">
+                            <!-- Profile Viewer List Elements -->
                             <li class="profile-viewer-list-element profile-list1">
                                 <a href="/account" class="pop-link">
                                     <img src="../static/images/profile2.png" class="menu-img profile-img" alt="View Profile">View Profile
                                 </a>
                             </li>
+                            <!-- Line Divider -->
                             <li class="profile-viewer-list-element" id="line-profile"></li>
                             <li class="profile-viewer-list-element profile-list2">
                                 <a href="/login" class="pop-link">
@@ -146,7 +161,7 @@
             </div>
         </div>
     </div>
-
+    <!-- Scan Box Section -->
     <div class="scan-box">
         <div class="scanning-animation" id="scanningAnimation">
                <img src="../static/images/logo1.png" class="logo-img" alt="img-logo">
@@ -154,6 +169,7 @@
         </div>
     </div>
 
+    <!-- Script Section -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/7.14.1-0/firebase.js"></script>
     <script src="../static/javaScript/MainPage.js">
         workSpaceGenerator();

@@ -116,11 +116,6 @@ function updateUserDetails(e) {
     return;
   }
 
-  if (!isValidUsername(formUserName)) {
-    alert("Username Should Be 8 Characters Long");
-    return;
-  }
-
   const entryRef = database.ref('UserData/' + formUserName);
 
   if(accountName === formUserName){

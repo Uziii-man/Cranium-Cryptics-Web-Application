@@ -9,14 +9,20 @@
     <title>Cranium Cryptics</title>
 </head>
 <body>
+    <!-- Body of the HTML page -->
     <div  class="app-container">
+        <!-- Left Pane of the HTML page -->
         <div class="left-pane">
+            <!-- Menu Button -->
             <div class="menu-button" onclick="toggleMenu()">
                 <h1 class="main-menu">Menu</h1>
                 <span class="menu-burger">&#9776;</span>
             </div>
+            <!-- Menu Container -->
             <div class="menu-container">
+                <!-- Menu List -->
                 <div class="Menu-main-list">
+                    <!-- Menu List Items for Navigation -->
                     <ul class="menu-list">
                         <li  class="menu-detail-list" onmouseout="nav_back_highliter()" onmouseover="nav_highliter();">
                         <a href="/Dashboard"><image src="../static/images/dashboard.png" class="menu-img">Dashboard</image></a></li>
@@ -29,12 +35,14 @@
                         <li  class="menu-detail-list" onmouseout="nav_back_highliter()" onmouseover="nav_highliter();">
                         <a href="/ReportGenerator"><image src="../static/images/dashboard.png" class="menu-img">Report Generator</image></a></li>
                     </ul>
+                    <!-- Logout Section -->
                     <section class="logout-section">
+                        <!-- Account Section -->
                         <a href="/account" class="logout-account">
                             <image src="../static/images/account.png" class="menu-img logout-img" id="account-dt"></image>
                             <p>Account</p>
                         </a>
-
+                        <!-- Logout Section -->
                         <a href="/login" class="logout-account-section">
                             <image src="../static/images/logout.png" class="menu-img logout-img"></image>
                             <p>Logout</p>
@@ -44,26 +52,35 @@
                 </div>
             </div>
         </div>
-
+        <!-- Right Pane of the HTML page -->
         <div class="right-pane">
+            <!-- Dashboard Header -->
             <div class="dashboard-header">
+                <!-- Dashboard Heading -->
                 <section class="dashboard-heading">
                     <h2><span class="heading-span">Cranium</span> Cryptics</h2>
                     <img src="../static/images/logo1.png" height="20px" width="20px">
                 </section>
+                <!-- Profile Section -->
                 <section class="profile-header" onmouseover="ProfilePopView()" onmouseout="removeProfileView()">
                     <image src="../static/images/profile.jpeg" class="profile-image"></image>
                     <h2 class="user-name">Lakshan Cooray</h2>
                 </section>
             </div>
+            <!-- Dashboard Panes -->
             <div class="dashboard-panes">
+                <!-- Dashboard Main Section -->
                 <section class="dashboard-main-section">
-
+                    <!-- Image Upload Section -->
                     <form id="imageForm" class="display-section" id="dropArea" method="post" action="/tumor"
                           enctype="multipart/form-data">
+                        <!-- Image Upload Heading -->
                         <h2 class="image-upload-heading">Upload the MRI image here</h2>
+                        <!-- Image Upload Section -->
                         <label for="fileInput">
+                             <!-- Image Preview Section -->
                              <div class="image-holding-section" id="imagePreview">
+                                <!-- Image Preview Container -->
                                 <div class="preview-container">
                                     {% if image_path %}
                                         <img src="{{ image_path }}" alt="Preview" class="holder"/>
@@ -72,20 +89,25 @@
                                     {% endif %}
                                         <div class="magnifying-glass-effect"></div>
                                 </div>
+                                <!-- Image Preview Text -->
                                     {% if not image_path %}
                                         <span class="span-image">Select an image</span>
                                     {% endif %}
                             </div>
 
                         </label>
+                        <!-- Image Upload Button -->
                         <input type="file" id="fileInput" class="upload-button" accept="image/*" onchange="previewImage();
                            displayUpdateTumorStatus()" required name="imagefile">
                         <button class="scan-button" id="scanButton">Scan Image</button>
                     </form>
-
+                    <!-- Result Section -->
                     <div class="result-section">
+                        <!-- Result Heading -->
                         <section class="disease-status">
+                            <!-- Tumor Detection Status -->
                             <h2 class="tumour-status-heading">Tumor Detection Status</h2>
+                            <!-- Tumor Detection Details -->
                             <div class="tumor-details">
                                 {% if predicted_class %}
                                     <h3 id="status" class="tumor-status stat">Status : {{ predicted_class[0] }}</h3>
@@ -99,8 +121,11 @@
                                 {% endif %}
                             </div>
                         </section>
+                        <!-- Detected Disease Section -->
                         <section class="detected-disease">
+                            <!-- Detected Tumor Type -->
                             <h2  class="tumor-type-heading">Detected Tumour Type</h2>
+                            <!-- Detected Tumor Details -->
                             <div class="tumor-details">
                                 {% if predicted_class %}
                                     <h3 class="type-status stat">Type : {{ predicted_class[1] }}</h3>
@@ -116,21 +141,24 @@
                         </section>
                     </div>
                 </section>
-
+                <!-- Dashboard Footer -->
                 <section class="dashboard-copyright">
                     <p class="copy-text">Developed by Cranium Cryptics Team &copy; 2024. All rights reserved.</p>
                 </section>
 
-
+                <!-- Profile Popup -->
                 <section class="profile-popup" onmouseover="ProfilePopView()" onmouseout="removeProfileView()">
                     <div>
+                        <!-- Profile Viewer List -->
                         <ul class="profile-viewer-list">
                             <li class="profile-viewer-list-element profile-list1">
                                 <a href="/account" class="pop-link">
                                     <img src="../static/images/profile2.png" class="menu-img profile-img" alt="View Profile">View Profile
                                 </a>
                             </li>
+                            <!-- Line -->
                             <li class="profile-viewer-list-element" id="line-profile"></li>
+                            <!-- Sign Out -->
                             <li class="profile-viewer-list-element profile-list2">
                                 <a href="/login" class="pop-link">
                                     <img src="../static/images/signout-removebg-preview.png" class="menu-img profile-img2" alt="Sign Out">Sign Out
@@ -144,7 +172,7 @@
             </div>
         </div>
     </div>
-
+   <!-- Scan Box -->
     <div class="scan-box">
         <div class="scanning-animation" id="scanningAnimation">
                <img src="../static/images/logo1.png" class="logo-img" alt="img-logo">
@@ -152,7 +180,7 @@
         </div>
     </div>
 
-
+    <!-- JavaScript Section -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/7.14.1-0/firebase.js"></script>
     <script src="../static/javaScript/MainPage.js">
         const image_path = "{{ image_path }}";

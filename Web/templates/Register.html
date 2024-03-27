@@ -9,41 +9,46 @@
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet">
   <link rel="stylesheet" href="../static/css/register.css">
 </head>
+<!-- body of the register page -->
 <body class="align">
+   <!-- navigation bar -->
    <div class="form-space">
+       <!-- logo and heading -->
        <section class="signin-image">
           <img src="../static/images/logo1.png" height="70px" width="70px">
           <h1 class="register-heading">Register to <span class="heading-span">Cranium</span> Cryptics</h1>
        </section>
+       <!-- form for registration -->
        <div class="login-container">
 
            <form class="form login" id="regForm">
-
+               <!-- hospital email -->
                <div class="form__field">
                    <label for="reg_email" class="content-login">Email:</label>
                    <input id="reg_email" type="text" name="hospitalname" class="form__input" placeholder="Enter Email" required>
                </div>
-
+               <!-- hospital username -->
                <div class="form__field">
                    <label for="reg_username" class="content-login">Username:</label>
                    <input id="reg_username" type="text" name="password" class="form__input" placeholder="Enter Username" required>
                </div>
-
+               <!-- hospital password -->
                <div class="form__field">
                    <label for="reg_password" class="content-login">Password:</label>
                    <input id="reg_password" type="password" name="username" class="form__input" placeholder="Enter Password" required>
                </div>
-
+               <!-- confirm password -->
                <div class="form__field">
                  <label for="reg_confirm" class="content-login">Confirm Password:</label>
                  <input id="reg_confirm" type="password" name="password" class="form__input" placeholder="Re Enter Password" required>
                </div>
-
+              <!-- submit button -->
               <div class="form__field">
                 <input type="submit" value="Register">
               </div>
 
            </form>
+           <!-- error message -->
     <dev class="registration-bottom">
          <p class="error-message"></p>
          <p class="text--center">Already Registered? <a href="/login" class="signin-link">Sign In Here</a></p>
@@ -62,6 +67,7 @@
 
 </body>
 
+<!-- javaScript for the register page -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/7.14.1-0/firebase.js"></script>
 <script src="../static/javaScript/register.js"></script>
 
