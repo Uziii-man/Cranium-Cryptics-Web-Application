@@ -1,9 +1,11 @@
+/* This file contains the styling for the registration page */
 *{
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
+/* body styling */
 body {
   display: flex;
   justify-content: center;
@@ -12,6 +14,7 @@ body {
   margin: 0;
 }
 
+/* form styling */
 .form-space{
   display: flex;
   flex-direction: column;
@@ -23,6 +26,7 @@ body {
   padding-bottom: 1%;
 }
 
+/* image styling */
 .signin-image{
   display: flex;
   flex-direction: column;
@@ -30,12 +34,14 @@ body {
   align-items: center;
 }
 
+/* container styling */
 .register-heading{
     align-items: center;
     font-size: 25px;
     margin-bottom: 2vh;
 }
 
+/* login container styling */
 .login-container {
   display: flex;
   flex-direction: column;
@@ -50,26 +56,31 @@ body {
   margin-bottom: 1vh;
 }
 
+/* error message styling */
 .error-message{
   display: flex;
   margin-bottom: 1vh
 }
 
+/* login styling */
 .login {
   width: 90%;
 }
 
+/* form field styling */
 .form__field {
   margin-bottom: 15px;
   margin-top: 1vh;
   font-family: var(--fontPoppins);
 }
 
+/* form field label styling */
 .form__field label {
   display: block;
   margin-bottom: 2px;
 }
 
+/* form field input styling */
 .form__field input[type='text'],
 .form__field input[type='password'],
 .form__field input[type='submit'] {
@@ -82,11 +93,13 @@ body {
   font-family: var(--fontPoppins);
 }
 
+/* form field input styling */
 .content-login{
   font-family: var(--fontPoppins);
   font-size: 18px;
 }
 
+/* form field input styling */
 .form__field input[type='submit'] {
   background-color: #3b5160;
   height: 8vh;
@@ -95,24 +108,29 @@ body {
   cursor: pointer;
 }
 
+/* form field input styling */
 .form__field input[type='submit']:hover {
   background-color: black;
 }
 
+/* form field input styling */
 .text--center {
   text-align: center;
 }
 
+/* form field input styling */
 .signin-link{
   text-decoration: none;
   color: blue;
   font-weight: bold;
 }
 
+/* form field input styling */
 .signin-link:hover{
   color:#1e2c34;
 }
 
+/* form field input styling */
 .registration-bottom{
   display: flex;
   flex-direction: column;
@@ -124,6 +142,7 @@ body {
   width: 90%;
 }
 
+/* form field input styling */
 .error-message{
   display: flex;
   margin-bottom: 1vh;
@@ -132,8 +151,8 @@ body {
   font-family: var(--fontPoppins);
 }
 
+/* form field input styling */
 .issue {
-
   display: none; 
   position: fixed;
   text-align: center; 
@@ -156,6 +175,7 @@ body {
   background-color: rgba(0, 0, 0, 0.4);
 }
 
+/* form field input styling */
 .issue-content {
   background-color: #414040;
   margin: 5% auto;
@@ -165,4 +185,290 @@ body {
   border-radius: 15px;
   width: 30%;
   position: relative;
+}
+
+/* form field input styling */
+@media screen and (max-width: 1000px) {
+.login-container {
+    width: 50%;
+  }
+
+  .login {
+    margin: 0;
+    width: 90%;
+  }
+
+  .form__field {
+    margin-bottom: 15px;
+  }
+
+.form__field label {
+    display: block;
+    margin-bottom: 5px;
+  }
+
+     .form__field input[type='submit'] {
+        height: 8vh;
+    }
+
+    .registration-bottom{
+        font-size: 14px;
+    }
+
+    .register-heading{
+        font-size: 20px;
+    }
+
+    .error-message{
+        font-size: 14px;
+    }
+
+    .content-login{
+        font-size: 16px;
+    }
+
+    .form__field input[type='text'], .form__field input[type='password']{
+        font-size: 14px;
+    }
+
+    .form__field input[type='submit']{
+        font-size: 14px;
+    }
+
+    .signin-link{
+        font-size: 14px;
+    }
+
+    .issue-content{
+        width: 50%;
+    }
+
+    .error-message{
+        font-size: 14px;
+    }
+
+    .form__field input[type='submit']{
+        height: 8vh;
+    }
+
+    .form__field input[type='submit']{
+        font-size: 14px;
+    }
+
+    .form__field input[type='submit']{
+        height: 8vh;
+    }
+}
+
+
+@media screen and (max-width: 700px) {
+    .login-container {
+        width: 70%;
+    }
+
+    .login {
+        margin: 0;
+        width: 90%;
+    }
+
+    .form__field {
+        margin-bottom: 15px;
+    }
+
+    .form__field label {
+        display: block;
+        margin-bottom: 5px;
+    }
+
+    .form__field input[type='submit'] {
+        height: 8vh;
+    }
+
+    .registration-bottom{
+        font-size: 14px;
+    }
+
+    .register-heading{
+        font-size: 20px;
+    }
+
+    .error-message{
+        font-size: 14px;
+    }
+
+    .content-login{
+        font-size: 16px;
+    }
+
+    .form__field input[type='text'], .form__field input[type='password']{
+        font-size: 14px;
+    }
+
+    .form__field input[type='submit']{
+        font-size: 14px;
+    }
+
+    .signin-link{
+        font-size: 14px;
+    }
+
+    .issue-content{
+        width: 70%;
+    }
+
+    .error-message{
+        font-size: 14px;
+    }
+
+    .form__field input[type='submit']{
+        height: 8vh;
+    }
+
+    .form__field input[type='submit']{
+        font-size: 14px;
+    }
+
+    .form__field input[type='submit']{
+        height: 8vh;
+    }
+}
+
+
+@media screen and (max-width: 500px) {
+
+    .login {
+        margin: 0;
+        width: 90%;
+    }
+
+    .form__field {
+        margin-bottom: 15px;
+    }
+
+    .form__field label {
+        display: block;
+        margin-bottom: 5px;
+    }
+
+    .form__field input[type='submit'] {
+        height: 8vh;
+    }
+
+    .registration-bottom{
+        font-size: 14px;
+    }
+
+    .register-heading{
+        font-size: 20px;
+    }
+
+    .error-message{
+        font-size: 14px;
+    }
+
+    .content-login{
+        font-size: 16px;
+    }
+
+    .form__field input[type='text'], .form__field input[type='password']{
+        font-size: 14px;
+    }
+
+    .form__field input[type='submit']{
+        font-size: 14px;
+    }
+
+    .signin-link{
+        font-size: 14px;
+    }
+
+    .issue-content{
+        width: 90%;
+    }
+
+    .error-message{
+        font-size: 14px;
+    }
+
+    .form__field input[type='submit']{
+        height: 8vh;
+    }
+
+    .form__field input[type='submit']{
+        font-size: 14px;
+    }
+
+    .form__field input[type='submit']{
+        height: 8vh;
+    }
+}
+
+
+@media screen and (max-height: 500px){
+    .login-container {
+        width: 90%;
+    }
+
+    .login {
+        margin: 0;
+        width: 90%;
+    }
+
+    .form__field {
+        margin-bottom: 15px;
+    }
+
+    .form__field label {
+        display: block;
+        margin-bottom: 5px;
+    }
+
+    .form__field input[type='submit'] {
+        height: 8vh;
+    }
+
+    .registration-bottom{
+        font-size: 14px;
+    }
+
+    .register-heading{
+        font-size: 20px;
+    }
+
+    .error-message{
+        font-size: 14px;
+    }
+
+    .content-login{
+        font-size: 16px;
+    }
+
+    .form__field input[type='text'], .form__field input[type='password']{
+        font-size: 14px;
+    }
+
+    .form__field input[type='submit']{
+        font-size: 14px;
+    }
+
+    .signin-link{
+        font-size: 14px;
+    }
+
+    .issue-content{
+        width: 90%;
+    }
+
+    .error-message{
+        font-size: 14px;
+    }
+
+    .form__field input[type='submit']{
+        height: 8vh;
+    }
+
+    .form__field input[type='submit']{
+        font-size: 14px;
+    }
+
 }

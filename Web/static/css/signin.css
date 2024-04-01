@@ -157,4 +157,65 @@ body {
   position: relative;
 }
 
-/*  */
+
+@media screen and (max-width: 1000px) {
+  .login-container {
+    width: 50%;
+  }
+
+  .login {
+    margin: 0;
+    width: 90%;
+  }
+
+  .form__field {
+    margin-bottom: 15px;
+  }
+
+  .form__field label {
+    display: block;
+    margin-bottom: 5px;
+  }
+}
+
+
+@media screen and (max-width: 900px) {
+  .login-container {
+    width: 80%;
+  }
+
+    .login {
+        margin: 0;
+        width: 90%;
+    }
+
+    .form__field {
+        margin-bottom: 15px;
+    }
+
+    .form__field label {
+        display: block;
+        margin-bottom: 5px;
+    }
+}
+
+
+@media screen and (max-width: 768px) {
+  .login-container {
+    width: 80%;
+  }
+
+    .login {
+        margin: 0;
+        width: 90%;
+    }
+
+    .form__field {
+        margin-bottom: 15px;
+    }
+
+    .form__field label {
+        display: block;
+        margin-bottom: 5px;
+    }
+}
