@@ -10,15 +10,20 @@
     <title>Cranium Cryptics</title>
 </head>
 <body>
+    <!-- Body Content -->
     <div  class="app-container">
+        <!-- Left Pane -->
         <div class="left-pane">
             <div class="menu-button" onclick="toggleMenu()">
                 <h1 class="main-menu">Menu</h1>
                 <span class="menu-burger">&#9776;</span>
             </div>
+            <!-- Menu Container -->
             <div class="menu-container">
                 <div class="Menu-main-list">
+                    <!-- Menu List -->
                     <ul class="menu-list">
+                        <!-- Menu Detail List -->
                         <li  class="menu-detail-list" onmouseout="nav_back_highliter()" onmouseover="nav_highliter();">
                         <a href="/Dashboard"><image src="../static/images/dashboard.png" class="menu-img">Dashboard</image></a></li>
                         <li  class="menu-detail-list" onmouseout="nav_back_highliter()" onmouseover="nav_highliter();">
@@ -30,12 +35,15 @@
                         <li  class="menu-detail-list" onmouseout="nav_back_highliter()" onmouseover="nav_highliter();">
                         <a href="/ReportGenerator"><image src="../static/images/dashboard.png" class="menu-img">Report Generator</image></a></li>
                     </ul>
+
+                    <!-- Logout Section -->
                     <section class="logout-section">
+                        <!-- Account Section -->
                         <a href="/account" class="logout-account">
                             <image src="../static/images/account.png" class="menu-img logout-img" id="account-dt"></image>
                             <p>Account</p>
                         </a>
-
+                        <!-- Logout Director -->
                         <a href="/login" class="logout-account-section">
                             <image src="../static/images/logout.png" class="menu-img logout-img"></image>
                             <p>Logout</p>
@@ -45,26 +53,34 @@
                 </div>
             </div>
         </div>
-
+        <!-- Right Pane -->
         <div class="right-pane">
+           <!-- Dashboard Header -->
             <div class="dashboard-header">
+                <!-- Dashboard Heading -->
                 <section class="dashboard-heading">
                     <h2><span class="heading-span">Cranium</span> Cryptics</h2>
                     <img src="../static/images/logo1.png" height="20px" width="20px">
                 </section>
+                <!-- Profile Section -->
                 <section class="profile-header" onmouseover="ProfilePopView()" onmouseout="removeProfileView()">
                     <image src="../static/images/profile.jpeg" class="profile-image"></image>
                     <h2 class="user-name">Lakshan Cooray</h2>
                 </section>
             </div>
+              <!-- Dashboard Panes -->
             <div class="dashboard-panes">
+                <!-- Dashboard Main Section -->
                 <section class="dashboard-main-section">
-
+                <!-- Image Upload Section -->
                     <form class="display-section" id="dropArea"  method="post" action="/stroke"
                           enctype="multipart/form-data">
+                        <!-- Image Upload Heading -->
                         <h2 class="image-upload-heading">Upload the MRI image here</h2>
                         <label for="fileInput">
+                                <!-- Image Holding Section -->
                                 <div class="image-holding-section" id="imagePreview">
+                                <!-- Image Preview Container -->
                                 <div class="preview-container">
                                     {% if image_path %}
                                         <img src="{{ image_path }}" alt="Preview" class="holder">
@@ -79,14 +95,18 @@
                                     {% endif %}
                                 </div>
                         </label>
+                         <!-- Image Upload Button -->
                         <input type="file" id="fileInput" class="upload-button" accept="image/*" onchange="previewImage();
                                     displayUpdateStrokeStatus()" required name="imagefile" >
                         <button class="scan-button" >Scan Image</button>
                     </form>
-
+                    <!-- Result Section -->
                     <div class="result-section">
+                        <!-- Result Heading -->
                         <section class="disease-status">
+                            <!-- Tumor Detection Status -->
                             <h2 class="tumour-status-heading">Stroke Detection Status</h2>
+                            <!-- Detected Stroke Section -->
                             <div class="tumor-details">
                                 {% if class_name %}
                                      <h3 class="stroke-status stat">Status : {{ class_name[0] }}</h3>
@@ -101,9 +121,11 @@
                                 {% endif %}
                             </div>
                         </section>
-
+                        <!-- Detected Disease Section -->
                         <section class="detected-disease">
+                            <!-- Detected Stroke Type Heading -->
                             <h2  class="tumor-type-heading">Detected Image Edge</h2>
+                              <!-- Detected Stroke Type Section -->
                             <div class="tumor-details">
                                 {% if class_name %}
                                     <h3 class="type-status stat">Type : {{ class_name[1] }}</h3>
@@ -119,20 +141,24 @@
                         </section>
                     </div>
                 </section>
-
+                <!-- Dashboard Footer -->
                 <section class="dashboard-copyright">
                     <p class="copy-text">Developed by Cranium Cryptics Team &copy; 2024. All rights reserved.</p>
                 </section>
-
+                <!-- Profile Popup -->
                 <section class="profile-popup" onmouseover="ProfilePopView()" onmouseout="removeProfileView()">
                     <div>
+                        <!-- Profile Viewer List -->
                         <ul class="profile-viewer-list">
+                            <!-- Profile Viewer List Elements -->
                             <li class="profile-viewer-list-element profile-list1">
                                 <a href="/account" class="pop-link">
                                     <img src="../static/images/profile2.png" class="menu-img profile-img" alt="View Profile">View Profile
                                 </a>
                             </li>
+                            <!-- Line -->
                             <li class="profile-viewer-list-element" id="line-profile"></li>
+                            <!-- Profile Viewer List Elements -->
                             <li class="profile-viewer-list-element profile-list2">
                                 <a href="/login" class="pop-link">
                                     <img src="../static/images/signout-removebg-preview.png" class="menu-img profile-img2" alt="Sign Out">Sign Out
@@ -146,14 +172,14 @@
             </div>
         </div>
     </div>
-
+    <!-- Scan Box -->
     <div class="scan-box">
         <div class="scanning-animation" id="scanningAnimation">
                <img src="../static/images/logo1.png" class="logo-img" alt="img-logo">
                <p>Scanning...</p>
         </div>
     </div>
-
+    <!-- Script Section -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/7.14.1-0/firebase.js"></script>
     <script src="../static/javaScript/MainPage.js">
         workSpaceGenerator();
