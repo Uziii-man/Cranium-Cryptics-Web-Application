@@ -1,7 +1,6 @@
 from PIL.Image import fromarray
 from flask import Flask, render_template, request, make_response
 from keras.preprocessing.image import load_img
-from matplotlib import pyplot as plt
 import numpy as np
 from PIL import Image
 import cv2
@@ -26,16 +25,18 @@ classification_vgg_19 = load_model('C:/Users/laksh/OneDrive/Desktop/Web/models/b
 classification_resnet_50 = load_model(
     'C:/Users/laksh/OneDrive/Desktop/Web/models/brain_tumor_classification_resnet50.h5')
 
-# Side Detection Model
-side_detection_vgg_16 = load_model('C:/Users/laksh/OneDrive/Desktop/Web/models/brain_side_vgg16.h5')
-
+# Side detection Models
 model_side_detection = load_model('C:/Users/laksh/OneDrive/Desktop/Web/models/brain_side_vgg16.h5')
-model_tumor_classification_vgg16 = load_model(
-    'C:/Users/laksh/OneDrive/Desktop/Web/models/brain_tumor_classification_vgg19.h5')
-model_resnet50_stroke = load_model('C:/Users/laksh/OneDrive/Desktop/Web/models/ischemic_stroke_vgg16.h5')
+
+# Stroke Detection Models
+model_vgg16_stroke = load_model('C:/Users/laksh/OneDrive/Desktop/Web/models/ischemic_stroke_vgg16.h5')
+model_resnet50_stroke = load_model('C:/Users/laksh/OneDrive/Desktop/Web/models/ischemic_stroke_resnet50.h5')
+
+# Alzheimer Disease Detection Model
 model_efficient_net_alzheimer = load_model(
     'C:/Users/laksh/OneDrive/Desktop/Web/models/alzhimer_classification_efficientNet.h5')
 
+# Brain Image Detection Model
 model_brain_image_detection = load_model('C:/Users/laksh/OneDrive/Desktop/Web/models/brain_image_detection.h5')
 
 
@@ -107,9 +108,6 @@ def predict_tumour_type():
 
     label_mapping_brain = {1: 'BrainImages', 0: 'NotBrainImage'}
 
-    # Label mapping for side detection
-    label_mapping_side = {0: 'Axial', 1: 'Coronal', 3: 'Sagittal'}
-
     label_mapping_classification = {0: 'Glioma/Metastasis', 1: 'Meningioma/Metastasis', 3: 'Pituitary',
                                     2: 'NoTumor'}
 
@@ -130,11 +128,6 @@ def predict_tumour_type():
     # apply gray scale with gaussian blur
     gray_scale_image = apply_gaussian_gray_scale_filter(image)
 
-    # show the gray scaled image
-    plt.imshow(gray_scale_image, cmap='gray')
-    plt.title("Gray Scale Image")
-    plt.show()
-
     print(gray_scale_image.shape)
 
     # Prepare the grayscale image for prediction
@@ -154,27 +147,11 @@ def predict_tumour_type():
 
     detector_image = load_img(image_path, target_size=(256, 256))
 
-    # Plotting the classification image
-    plt.imshow(classification_image)
-    plt.title("Classification Image")
-    plt.show()
-
-    # Plotting the detector image
-    plt.imshow(detector_image)
-    plt.title("Detector Image")
-    plt.show()
-
     # Apply gamma correction to the classification image
     classification_image = apply_gamma_correction(classification_image, 1.5)
-    plt.imshow(classification_image)
-    plt.title("Gamma Corrected Classification Image")
-    plt.show()
 
     # Apply gamma correction to the detector image
     detector_image = apply_gamma_correction(detector_image, 1.5)
-    plt.imshow(detector_image)
-    plt.title("Gamma Corrected Detector Image")
-    plt.show()
 
     # Convert PIL Classification image to array
     classification_image_array = img_to_array(classification_image)
@@ -344,18 +321,12 @@ def predict_stroke():
 
     # load the image from the folder
     image = load_img(image_path, target_size=(256, 256))
-    plt.imshow(image)
-    plt.show()
 
     # convert the image into an array
     image = np.array(image)
 
     # apply gray scale and gaussian blur to reduce the noise in the image
     gray_scale_image = apply_gaussian_gray_scale_filter(image)
-
-    plt.imshow(gray_scale_image, cmap='gray')
-    plt.title("Gray Scale Image")
-    plt.show()
 
     print(gray_scale_image.shape)
 
@@ -386,8 +357,6 @@ def predict_stroke():
 
     # Apply sobel 8 filter to the image
     image = apply_sobel8_filter(image)
-    plt.imshow(image)
-    plt.show()
 
     # load the image for classification
     classification_image = load_img(image_path, target_size=(256, 256))
@@ -436,7 +405,7 @@ def predict_stroke():
     image = np.expand_dims(image, axis=0)
 
     # predict the class probabilities
-    predictions = model_resnet50_stroke.predict(image)
+    predictions = model_vgg16_stroke.predict(image)
     class_name = np.argmax(predictions)
 
     # Get the prediction score
@@ -494,23 +463,15 @@ def predict_alzheimer():
 
     # load the image from the image path
     image = load_img(image_path, target_size=(256, 256))
-    plt.imshow(image)
-    plt.show()
 
     # Apply the random up sampler and apply gaussian filter
     image = apply_random_up_sampler_gaussian_filter(image)
-    plt.imshow(image)
-    plt.show()
 
     # load the image to the system for disease identification
     classification_image = load_img(image_path, target_size=(256, 256))
 
     # Apply the gray scale filter to the image
     gray_scale_image = apply_gaussian_gray_scale_filter(image)
-
-    plt.imshow(gray_scale_image, cmap='gray')
-    plt.title("Gray Scale Image")
-    plt.show()
 
     print(gray_scale_image.shape)
 
@@ -650,18 +611,12 @@ def generateReport():
 
     # load the required image to the system
     image = load_img(image_path, target_size=(256, 256))
-    plt.imshow(image)
 
     # convert image to a numpy array
     image = img_to_array(image)
 
     # apply the gray scaler to the image
     gray_scale_image = apply_gaussian_gray_scale_filter(image)
-
-    # display  the applied gray scale image
-    plt.imshow(gray_scale_image, cmap='gray')
-    plt.title("Gray Scale Image")
-    plt.show()
 
     print(gray_scale_image.shape)
 
@@ -697,15 +652,9 @@ def generateReport():
 
     # Apply the gamma filter to reduce the noise
     gamma_image = apply_gamma_correction(image, 1.5)
-    plt.imshow(gamma_image)
-    plt.title("Gamma Corrected Image")
-    plt.show()
 
     # Apply sobel 8 filter for edge detection of the image
     sobel_image = apply_sobel8_filter(gamma_image)
-    plt.imshow(sobel_image)
-    plt.title("Sobel Filter Image")
-    plt.show()
 
     # Apply gamma filter to the image
     gamma_image_expand = np.expand_dims(gamma_image, axis=0)
@@ -818,12 +767,9 @@ def generateReport():
     elif all_disease_prediction == 1:
         # load the image for classification
         image = load_img(image_path, target_size=(256, 256))
-        plt.imshow(image)
-        plt.show()
+
         # Apply the random up sampler and apply gaussian filter
         image = apply_random_up_sampler_gaussian_filter(image)
-        plt.imshow(image)
-        plt.show()
 
         # Convert PIL image to array
         image_array = img_to_array(image)
@@ -861,7 +807,7 @@ def generateReport():
         image = np.expand_dims(sobel_image, axis=0)
 
         # predict the class probabilities
-        predictions = model_resnet50_stroke.predict(image)
+        predictions = model_vgg16_stroke.predict(image)
         class_name = np.argmax(predictions)
 
         print("Prediction : ", predictions)
