@@ -31,6 +31,7 @@ model_side_detection = load_model('C:/Users/laksh/OneDrive/Desktop/Web/models/br
 # Stroke Detection Models
 model_vgg16_stroke = load_model('C:/Users/laksh/OneDrive/Desktop/Web/models/ischemic_stroke_vgg16.h5')
 model_resnet50_stroke = load_model('C:/Users/laksh/OneDrive/Desktop/Web/models/ischemic_stroke_resnet50.h5')
+model_vgg19_stroke = load_model('C:/Users/laksh/OneDrive/Desktop/Web/models/ischemic_stroke_vgg19.h5')
 
 # Alzheimer Disease Detection Model
 model_efficient_net_alzheimer = load_model(
@@ -128,8 +129,6 @@ def predict_tumour_type():
     # apply gray scale with gaussian blur
     gray_scale_image = apply_gaussian_gray_scale_filter(image)
 
-    print(gray_scale_image.shape)
-
     # Prepare the grayscale image for prediction
     brain_image = np.expand_dims(gray_scale_image, axis=0)
 
@@ -179,7 +178,6 @@ def predict_tumour_type():
 
     # If the given image is a brain image, check the high probability disease
     all_disease_vgg_19_probability = model_multi_disease.predict(classification_image_array)[0]
-    print(all_disease_vgg_19_probability)
     all_disease_score = all_disease_vgg_19_probability[np.argmax(all_disease_vgg_19_probability)]
     all_disease_prediction = np.argmax(all_disease_vgg_19_probability)
 
@@ -208,8 +206,6 @@ def predict_tumour_type():
     # assign the highest probability category
     prediction_array[0] = detector_class
     score_array[0] = "{:.2f}".format(calculate_threshold_probability(detector_score))
-
-    print("Hello", detector_vgg_16_probability[0])
 
     # if the tumor detected find the tumour category
     if detector_class == "Tumor":
@@ -404,18 +400,16 @@ def predict_stroke():
     # convert the image into an array
     image = np.expand_dims(image, axis=0)
 
+    vgg_16_prediction = model_vgg16_stroke.predict(image)
+    vgg_19_prediction = model_vgg19_stroke.predict(image)
+    resnet50_prediction = model_resnet50_stroke.predict(image)
+
     # predict the class probabilities
-    predictions = model_vgg16_stroke.predict(image)
+    predictions = (vgg_16_prediction + vgg_19_prediction + resnet50_prediction) / 3
     class_name = np.argmax(predictions)
 
     # Get the prediction score
     prediction_score = predictions[0][class_name]
-
-    print(label_mapping[class_name])
-    print(predictions)
-    print(np.argmax(predictions))
-
-    print(f"Predicted Class: {label_mapping[class_name]}, Score: {prediction_score}")
 
     # get the class name of the predicted image
     class_name = [label_mapping[class_name], side_name]
@@ -458,7 +452,7 @@ def predict_alzheimer():
     # path of the given image
     imagefile = request.files['imagefile']
     image_path = "./static/PredictingAlzheimerImages/" + imagefile.filename
-    print(image_path)
+
     imagefile.save(image_path)
 
     # load the image from the image path
@@ -472,8 +466,6 @@ def predict_alzheimer():
 
     # Apply the gray scale filter to the image
     gray_scale_image = apply_gaussian_gray_scale_filter(image)
-
-    print(gray_scale_image.shape)
 
     # Prepare the grayscale image for prediction
     brain_image = np.expand_dims(gray_scale_image, axis=0)
@@ -561,8 +553,6 @@ def predict_alzheimer():
     score_array = ["{:.2f}".format(calculate_threshold_probability(score)),
                    "{:.2f}".format(calculate_threshold_probability(side_prediction_score))]
 
-    print(f"Predicted Class: {predicted_class}, Score: {score}")
-
     # return the output of the image to its frontend
     return render_template('AlzheimerDiseaseDetector.html', image_path=image_path,
                            predicted_class=predicted_class_array,
@@ -604,9 +594,6 @@ def generateReport():
     global required_image
     required_image = image_path
 
-    print(required_image)
-
-    print(image_path)
     imagefile.save(image_path)
 
     # load the required image to the system
@@ -617,8 +604,6 @@ def generateReport():
 
     # apply the gray scaler to the image
     gray_scale_image = apply_gaussian_gray_scale_filter(image)
-
-    print(gray_scale_image.shape)
 
     # Prepare the grayscale image for prediction
     brain_image = np.expand_dims(gray_scale_image, axis=0)
@@ -663,11 +648,8 @@ def generateReport():
     all_disease_vgg_19_probability = model_multi_disease.predict(gamma_image_expand)[0]
     all_disease_score = all_disease_vgg_19_probability[np.argmax(all_disease_vgg_19_probability)]
 
-    print(all_disease_score)
     # get the maximum class from the output
     all_disease_prediction = np.argmax(all_disease_vgg_19_probability)
-
-    print(all_disease_vgg_19_probability)
 
     # get the side prediction results of the given image
     side_prediction = model_side_detection.predict(gamma_image_expand)
@@ -792,8 +774,6 @@ def generateReport():
         disease_status["Alzheimer"] = predicted_class
         disease_score["Alzheimer"] = "{:.2f}".format(calculate_threshold_probability(score))
 
-        print(predicted_class)
-
         # return the output variables to the frontend of the web application
         return render_template('ReportGenerator.html', image_path=image_path, score=disease_score,
                                predicted_class=disease_status)
@@ -806,16 +786,16 @@ def generateReport():
         # convert the image into an array
         image = np.expand_dims(sobel_image, axis=0)
 
-        # predict the class probabilities
-        predictions = model_vgg16_stroke.predict(image)
-        class_name = np.argmax(predictions)
+        vgg_16_prediction = model_vgg16_stroke.predict(image)
+        vgg_19_prediction = model_vgg19_stroke.predict(image)
+        resnet50_prediction = model_resnet50_stroke.predict(image)
 
-        print("Prediction : ", predictions)
+        # predict the class probabilities
+        predictions = (vgg_16_prediction + vgg_19_prediction + resnet50_prediction) / 3
+        class_name = np.argmax(predictions)
 
         # Get the prediction score
         prediction_score = predictions[0][class_name]
-
-        print(label_mapping[class_name])
 
         # set the predicted class and score for stroke
         disease_status["Stroke"] = label_mapping[class_name]
@@ -834,7 +814,6 @@ def generateReport():
 # Method to generate the report
 @app.route('/report')
 def report():
-    print(required_image)
     # return the output variables to the frontend of the web application
     return render_template('report.html', score=disease_score,
                            predicted_class=disease_status, image_path=required_image)
