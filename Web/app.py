@@ -16,9 +16,9 @@ app = Flask(__name__)
 model_multi_disease = load_model('C:/Users/laksh/OneDrive/Desktop/Web/models/vgg19_multi_disease.h5')
 
 # Tumor Detection Models
-tumor_vgg_16 = load_model('C:/Users/laksh/OneDrive/Desktop/Web/models/TumorDetectionModel_VGG-16.h5')
-tumor_vgg_19 = load_model('C:/Users/laksh/OneDrive/Desktop/Web/models/tumormodel_vgg19.h5')
-tumor_resnet_50 = load_model('C:/Users/laksh/OneDrive/Desktop/Web/models/BrainTumor_Rnetl.h5')
+tumor_vgg_16 = load_model('C:/Users/laksh/OneDrive/Desktop/Web/models/TumorDetectionModel_VGG-16 (1).h5')
+tumor_vgg_19 = load_model('C:/Users/laksh/OneDrive/Desktop/Web/models/TumorDetectionModel_VGG-19.h5')
+tumor_resnet_50 = load_model('C:/Users/laksh/OneDrive/Desktop/Web/models/TumorDetectionModel_ResNet50.h5')
 
 # Tumour Classification Models
 classification_vgg_16 = load_model('C:/Users/laksh/OneDrive/Desktop/Web/models/brain_tumor_classification_vgg16.h5')
@@ -103,7 +103,7 @@ def forgot():
 @app.route('/tumor', methods=['POST'])
 def predict_tumour_type():
     # Assigning the voting for tumor detection
-    label_mapping_detector = {0: "Tumor", 1: "Normal"}
+    label_mapping_detector = {1: "Tumor", 0: "Normal"}
 
     label_mapping_brain = {1: 'BrainImages', 0: 'NotBrainImage'}
 
@@ -217,10 +217,13 @@ def predict_tumour_type():
 
     # get the probabilities of the vgg16 image
     detector_vgg_16_probability = tumor_vgg_16.predict(detector_image_array)[0]
+    detector_vgg_19_probability = tumor_vgg_19.predict(detector_image_array)[0]
+    detector_resnet50_probability = tumor_resnet_50.predict(detector_image_array)[0]
 
     # get the highest probability class probability value of the vgg16 model
-    detector_score = detector_vgg_16_probability[np.argmax(detector_vgg_16_probability)]
-    detector_prediction = np.argmax(detector_vgg_16_probability)
+    detector_score = detector_vgg_16_probability[np.argmax((detector_vgg_16_probability + detector_vgg_19_probability + detector_resnet50_probability) / 3)]
+
+    detector_prediction = np.argmax((detector_vgg_16_probability + detector_vgg_19_probability + detector_resnet50_probability) / 3)
 
     # get the class of the highest probability value
     detector_class = label_mapping_detector[detector_prediction]
@@ -628,7 +631,7 @@ def generateReport():
 
     label_mapping_brain = {1: 'BrainImages', 0: 'NotBrainImage'}
     label_mapping_side = {0: 'Axial', 1: 'Coronal', 3: 'Sagittal'}
-    label_mapping_detector = {0: "Tumor", 1: "Normal"}
+    label_mapping_detector = {1: "Tumor", 0: "Normal"}
     label_mapping_classification = {0: 'Glioma/Metastasis', 1: 'Meningioma/Metastasis', 3: 'Pituitary',
                                     2: 'NoTumor'}
     label_mapping_alzheimer = {'VeryMildDemented': 0, 'NonDemented': 1, 'ModerateDemented': 2, 'MildDemented': 3}
@@ -758,15 +761,17 @@ def generateReport():
     if all_disease_prediction == 0:
         # Apply gamma correction to the classification image
         detector_vgg_16_probability = tumor_vgg_16.predict(gamma_image_expand)[0]
+        detector_vgg_19_probability = tumor_vgg_19.predict(gamma_image_expand)[0]
+        detector_resnet50_probability = tumor_resnet_50.predict(gamma_image_expand)[0]
         # Get the highest probability class probability
         detector_score = detector_vgg_16_probability[np.argmax(detector_vgg_16_probability)]
+        detector_score_19 = detector_vgg_19_probability[np.argmax(detector_vgg_19_probability)]
+        detector_score_50 = detector_resnet50_probability[np.argmax(detector_resnet50_probability)]
         # Get the highest probability class
-        detector_prediction = np.argmax(detector_vgg_16_probability)
+        detector_prediction = np.argmax((detector_vgg_16_probability + detector_score_19 + detector_score_50) / 3)
 
         # Get the detected class
-        if detector_prediction == 0:
-            # Predict class probabilities
-
+        if detector_prediction == 1:
             # Predict class probabilities
             probability_vgg16 = classification_vgg_16.predict(gamma_image_expand)[0]
             probability_vgg19 = classification_vgg_19.predict(gamma_image_expand)[0]
