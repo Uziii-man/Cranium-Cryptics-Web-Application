@@ -1,9 +1,11 @@
 // Function to handle file input change event
 
+// Creating variables to store user data
 var fileItem;
 var fileName;
 const profileImage = document.querySelector('#previewImage');
 
+// Function to connect the firebase database
 function displayPreviewImage(){
         const firebaseConfig = {
           apiKey: "AIzaSyChuCsLIaZDj4nfI1jE9Dpbkt2CFZSKR1c",
@@ -21,6 +23,7 @@ function displayPreviewImage(){
   }
 
     let storageRef = firebase.storage().ref('ProfileImages/' + userData.userName);
+    // If tbe storage reference is not null, get the download URL of the image
     if(storageRef !== null){
     storageRef.getDownloadURL().then((url) => {
         const profileImage = document.querySelector('#previewImage');
@@ -36,6 +39,7 @@ function displayPreviewImage(){
 
 displayPreviewImage();
 
+// Function to handle file input change event
 function handleFileInputChange(event) {
     const file = event.target.files[0]; // Get the selected file
     if (file) {
@@ -53,6 +57,8 @@ function handleFileInputChange(event) {
 // Add event listener for file input change
 document.getElementById('uploadInput').addEventListener('change', handleFileInputChange);
 
+
+// Function to handle form submission
 function clearFileInput() {
     updateUserName.innerHTML = userData.userName;
     const userControl = document.querySelector('.user-control');
@@ -68,8 +74,10 @@ function clearFileInput() {
     userName.innerHTML = userData.userName;
 }
 
+// Add event listener for form submission
 document.getElementById("profileForm").addEventListener('submit', updateUserDetails);
 
+// Function to update user details
 function updateUserDetails(e) {
   e.preventDefault();
 
@@ -100,17 +108,19 @@ function updateUserDetails(e) {
   const formPassword = document.querySelector('#change__password').value;
   const formConfirmPassword = document.querySelector('#change__password__confirm').value;
 
-  // Checking input field validations
+  // Checking input field validations for email
   if (!isValidEmail(formEmail)) {
     alert("Please Enter A Valid Email Address");
     return;
   }
 
+  // Checking input field validations for password
   if (!isValidPassword(formPassword)) {
     alert("Password Should Be 6 Characters Long With 1 Symbol And 1 Capital Letter.");
     return;
   }
 
+  // Checking input field validations if password and confirm password match
   if (formPassword !== formConfirmPassword) {
     alert("Password And Confirm Password Do Not Match.");
     return;
@@ -118,6 +128,7 @@ function updateUserDetails(e) {
 
   const entryRef = database.ref('UserData/' + formUserName);
 
+  // Checking if the username already exists
   if(accountName === formUserName){
        const updates = {
           confirmPassword: formConfirmPassword,
@@ -157,7 +168,6 @@ function updateUserDetails(e) {
           userName: formUserName,
         };
 
-
        const entryRef = database.ref('UserData/' + accountName);
        entryRef.remove()
        firebase.database().ref('UserData/' + formUserName).update(updates);
@@ -182,7 +192,6 @@ function updateUserDetails(e) {
       console.error("Error checking username existence:", error);
       alert("An error occurred. Please try again later.");
     });
-
   }
 
     let storageRef = firebase.storage().ref('ProfileImages/' + userData.userName);
@@ -197,22 +206,19 @@ function updateUserDetails(e) {
         alert('Error getting download URL:', error);
     });
   }
-
 }
 
-
+// Function to validate password
 function isValidPassword(password) {
 
     if (password.length < 6) {
         return false;
     }
 
-
     var symbolRegex = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/;
     if (!symbolRegex.test(password)) {
         return false;
     }
-
 
     var capitalLetterRegex = /[A-Z]/;
     if (!capitalLetterRegex.test(password)) {
@@ -222,6 +228,7 @@ function isValidPassword(password) {
     return true;
 }
 
+// Function to validate username
 function isValidUsername(username) {
   if (username.length > 8) {
       return false;
@@ -231,6 +238,7 @@ function isValidUsername(username) {
   return usernameRegex.test(username);
 }
 
+// Function to validate email address for common email providers
 function isValidEmail(email){
   var domain = email.split('@')[1];
   var recognizableProviders = ["gmail.com", "yahoo.com", "hotmail.com", "outlook.com", "aol.com"];
@@ -247,13 +255,13 @@ function isValidEmail(email){
   return emailRegex.test(email);
 }
 
-
-
+// Function to handle file input change event
 function getFile(e){
     fileItem = e.target.files[0];
     fileName = fileItem.name;
 }
 
+// Function to upload image to firebase storage
 function uploadImage(userName){
     const defaultApp = firebase.app();
     let storageRef = firebase.storage().ref('ProfileImages/' + userName);
@@ -268,21 +276,5 @@ function uploadImage(userName){
             console.log('File available at', url);
         });
     });
-
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

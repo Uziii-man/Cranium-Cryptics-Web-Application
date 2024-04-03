@@ -34,6 +34,7 @@ function previewImage() {
                 magnifyingGlass.style.top = `${mouseY - 10}px`;
             });
 
+            // Show magnifying glass on mouse enter
             imageHolder.addEventListener('mouseenter', function() {
                 magnifyingGlass.style.display = 'block';
                 document.body.style.cursor = 'none'; // Hide cursor
@@ -55,7 +56,6 @@ function previewImage() {
         imageHolder.src = ''; // Clear src attribute
     }
 }
-
 
 
 // Ensure the DOM is fully loaded before trying to access elements
@@ -86,19 +86,23 @@ document.addEventListener("DOMContentLoaded", function () {
     // Handle dropped files
     dropArea.addEventListener('drop', handleDrop, false);
 
+    // Prevent default drag behaviors
     function preventDefaults(e) {
         e.preventDefault();
         e.stopPropagation();
     }
 
+    // Highlight drop area when a file is dragged over it
     function highlight() {
         dropArea.classList.add('active');
     }
 
+    // Unhighlight drop area when a file is dragged away from it
     function unhighlight() {
         dropArea.classList.remove('active');
     }
 
+    // Handle dropped files
     function handleDrop(e) {
         const dt = e.dataTransfer;
         const files = dt.files;
@@ -106,6 +110,7 @@ document.addEventListener("DOMContentLoaded", function () {
         handleFiles(files);
     }
 
+    // Handle files
     function handleFiles(files) {
         if (files.length > 0) {
             const file = files[0];
@@ -128,6 +133,7 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 
+// Function to show or hide the scanning animation for Tumor
 const tumor_status = document.querySelector('.tumor-status');
 const type_status = document.querySelector('.type-status');
 const probability_status = document.querySelector('.probability-status');
@@ -140,6 +146,8 @@ function displayUpdateTumorStatus(){
     probabiliity_status_type.innerHTML = "Probability : 0.00";
 }
 
+
+// Function to show or hide the scanning animation for Alzheimer Disease
 const alzheimer_status = document.querySelector('.Alzheimer-status');
 const alzheimer_probability_status = document.querySelector('.alzheimer-probability');
 const  alzheimer_probability_status_type = document.querySelector('.Alzheimer-type');
@@ -150,6 +158,8 @@ function displayUpdateAlzheimerStatus(){
     alzheimer_probability_status_type.innerHTML = "Detected Type : None";
 }
 
+
+// Function to show or hide the scanning animation for Stroke
 const stroke_status = document.querySelector('.stroke-status');
 const stroke_probability_status = document.querySelector('.stroke-probability');
 
@@ -159,6 +169,7 @@ function displayUpdateStrokeStatus(){
 }
 
 
+// Function to show or hide the scanning animation for Tumour Type
 const reportTumour = document.querySelector('.report-tumour');
 const reportTumourType = document.querySelector('.report-tumour-type');
 const reportStroke = document.querySelector('.report-stroke');
@@ -169,8 +180,9 @@ function displayUpdateReportStatus(){
     reportTumourType.innerHTML = "<h2>Not Scanned</h2>";
     reportStroke.innerHTML = "<h2>Not Scanned</h2>";
     reportAlzheimer.innerHTML = "<h2>Not Scanned</h2>";
-
 }
+
+// Function to handle click events on the scan button
 function clickScan(event, image_path) {
     event.preventDefault();
     alert(image_path);
@@ -180,8 +192,11 @@ function clickScan(event, image_path) {
     }
 }
 
+// Function to handle magnifying glass effect
 const magnifyingGlass = document.querySelector('.magnifying-glass-effect');
 const imageHolder = document.querySelector('.holder');
+
+// Attach event listeners
 imageHolder.addEventListener('mousemove', function(e) {
     const rect = imageHolder.getBoundingClientRect();
     const mouseX = e.clientX - rect.left;
@@ -193,17 +208,18 @@ imageHolder.addEventListener('mousemove', function(e) {
     magnifyingGlass.style.top = `${mouseY - 10}px`;
 });
 
+// Show magnifying glass on mouse enter
 imageHolder.addEventListener('mouseenter', function() {
     magnifyingGlass.style.display = 'block';
     document.body.style.cursor = 'none'; // Hide cursor
 });
 
+
+// Hide magnifying glass on mouse leave
 imageHolder.addEventListener('mouseleave', function() {
     magnifyingGlass.style.display = 'none';
     document.body.style.cursor = 'auto'; // Restore cursor
 });
-
-
 
 
 // Function to show or hide the scanning animation
@@ -214,8 +230,8 @@ function toggleScanningAnimation(show) {
         scanningAnimation.style.justifyContent = "center";
         scanningAnimation.style.alignItems = "center";
     }
-
 }
+
 
 // Function to handle file input change event
 function handleFileInputChange() {
@@ -237,6 +253,7 @@ function handleFileInputChange() {
 document.querySelector(".scan-button").addEventListener("click", handleFileInputChange);
 
 
+// Function to disable the report link
 function disableLink() {
     const reportLink = document.getElementById('reportLink');
 

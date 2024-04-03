@@ -1,3 +1,4 @@
+// Firebase configuration
 const firebaseConfig = {
     apiKey: "AIzaSyChuCsLIaZDj4nfI1jE9Dpbkt2CFZSKR1c",
     authDomain: "craniumcryptics.firebaseapp.com",
@@ -12,6 +13,8 @@ firebase.initializeApp(firebaseConfig);
 
 var hForm = firebase.database().ref('UserData')
 
+
+// Event listener for form submission
 document.getElementById('regForm').addEventListener('submit', function (event) {
     event.preventDefault();
 
@@ -23,6 +26,7 @@ document.getElementById('regForm').addEventListener('submit', function (event) {
     viewData(username, email, password, confirmPassword);
 });
 
+// Function to retrieve user data from the database
 async function viewData(username, email, password, confirmPassword) {
     try {
         const snapshot = await firebase.database().ref('UserData/' + username).once('value');
@@ -65,10 +69,12 @@ async function viewData(username, email, password, confirmPassword) {
     }
 }
 
+
 // Email validation function
 function validateEmail(given_email, email) {
     return given_email === email;
 }
+
 
 // Username validation function
 function validateUsername(given_username, userName) {
@@ -83,17 +89,14 @@ function isValidPassword(password) {
         return false;
     }
 
-
     var symbolRegex = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/;
     if (!symbolRegex.test(password)) {
         return false;
     }
 
-
     var capitalLetterRegex = /[A-Z]/;
     if (!capitalLetterRegex.test(password)) {
         return false;
     }
-
     return true;
 }

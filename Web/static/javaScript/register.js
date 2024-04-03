@@ -1,3 +1,4 @@
+// Firebase Configurations
 const firebaseConfig = {
   apiKey: "AIzaSyChuCsLIaZDj4nfI1jE9Dpbkt2CFZSKR1c",
   authDomain: "craniumcryptics.firebaseapp.com",
@@ -8,8 +9,10 @@ const firebaseConfig = {
   appId: "1:415799673124:web:31e4bf310fda12df4c73b1"
 };
 
+// Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 
+// Get Element By ID
 const getElementVal = (id) => {
   return document.getElementById(id).value;
 };
@@ -18,6 +21,7 @@ var hForm = firebase.database().ref('UserData');
 
 document.getElementById("regForm").addEventListener('submit', submitForm);
 
+// Submit Form Function
 function submitForm(e) {
   e.preventDefault();
 
@@ -27,26 +31,33 @@ function submitForm(e) {
   var confirmPassword = getElementVal('reg_confirm');
 
   // Checking input field validations
+  // If any of the validation fails, the function will return and the form will not be submitted
+
+  // Email Validation
   if (!isValidEmail(email)) {
     displayAlert("Please Enter A Valid Email Address");
     return;
   }
 
+  // Password Validation
   if (!isValidPassword(password)) {
     displayAlert("Password Should Be at least 6 Characters Long With 1 Symbol And 1 Capital Letter.");
     return;
   }
 
+  // Confirm Password Validation
   if (password !== confirmPassword) {
     displayAlert("Password And Confirm Password Do Not Match.");
     return;
   }
 
+  // Username Validation
   if(!isValidUsername(userName)){
     displayAlert("Username Should Be 8 Characters Long");
     return;
   }
 
+  // Checking if the username already exists
   doesUsernameExist(userName)
     .then(usernameExists => {
       if (usernameExists) {
@@ -54,6 +65,7 @@ function submitForm(e) {
         return;
       }
 
+  // If all the validations pass, the data will be stored in the firebase DB
   saveMessages(email, userName, password, confirmPassword);
   displayAlert("Registration Successfull");
   setTimeout(() => {
@@ -117,18 +129,15 @@ function isValidPassword(password) {
         return false;
     }
 
-
     var symbolRegex = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/;
     if (!symbolRegex.test(password)) {
         return false;
     }
 
-
     var capitalLetterRegex = /[A-Z]/;
     if (!capitalLetterRegex.test(password)) {
         return false;
     }
-
     return true;
 }
 
@@ -146,7 +155,5 @@ function displayAlert(message) {
     }
   };
 }
-
-
 
 
