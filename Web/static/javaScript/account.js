@@ -189,12 +189,15 @@ function updateUserDetails(e) {
     if(storageRef !== null){
     storageRef.getDownloadURL().then((url) => {
         const profileImage = document.querySelector('.profile-image');
-        console.log("Hello World !!!");
         profileImage.src = url;
+        setTimeout(() => {
+        location.reload();
+    }, 1250);
     }).catch((error) => {
         alert('Error getting download URL:', error);
     });
   }
+
 }
 
 
