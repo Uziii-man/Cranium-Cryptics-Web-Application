@@ -64,10 +64,6 @@ if(userControl !== null){
 // Function to preview the image in the profile
 const previewImageElement = document.querySelector("#previewImage");
 
-// if (previewImageSrc.includes("/static/images/profile.jpeg")) {
-//     const profileImage = document.querySelector('.profile-image');
-//     profileImage.src = "./static/images/profile.jpeg";
-// } else {
     const firebaseConfig = {
           apiKey: "AIzaSyChuCsLIaZDj4nfI1jE9Dpbkt2CFZSKR1c",
           authDomain: "craniumcryptics.firebaseapp.com",
@@ -152,9 +148,8 @@ function nav_back_highliter() {
     current_button.style.boxShadow = "0 0 15px rgba(100, 100, 100, 0.60)"
 }
 
-// Function to logout the user
+// Function to log out the user
 function logout() {
     localStorage.removeItem('userData');
 }
-
 

@@ -5,14 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e1a00219-e493-472a-a80a-26117a761181" name="Changes" comment="Report generation in HTML">
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Web/static/javaScript/BrainTumorDitector.js" beforeDir="false" afterPath="$PROJECT_DIR$/Web/static/javaScript/BrainTumorDitector.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Web/static/javaScript/MainPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/Web/static/javaScript/MainPage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Web/static/javaScript/account.js" beforeDir="false" afterPath="$PROJECT_DIR$/Web/static/javaScript/account.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Web/static/javaScript/forgotPassword.js" beforeDir="false" afterPath="$PROJECT_DIR$/Web/static/javaScript/forgotPassword.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Web/static/javaScript/login.js" beforeDir="false" afterPath="$PROJECT_DIR$/Web/static/javaScript/login.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Web/static/javaScript/register.js" beforeDir="false" afterPath="$PROJECT_DIR$/Web/static/javaScript/register.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -126,6 +119,7 @@
       <workItem from="1711872605211" duration="1435000" />
       <workItem from="1712119787078" duration="124000" />
       <workItem from="1712119919818" duration="2034000" />
+      <workItem from="1712137188120" duration="166000" />
     </task>
     <task id="LOCAL-00001" summary="report generation continuation">
       <option name="closed" value="true" />
