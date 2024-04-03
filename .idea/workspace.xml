@@ -5,9 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e1a00219-e493-472a-a80a-26117a761181" name="Changes" comment="Report generation in HTML">
-      <change afterPath="$PROJECT_DIR$/Web/templates/forgotPassword.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Web/templates/report.html" beforeDir="false" afterPath="$PROJECT_DIR$/Web/templates/report.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Web/static/javaScript/MainPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/Web/static/javaScript/MainPage.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -60,25 +58,25 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "DefaultHtmlFileTemplate": "HTML File",
-    "Python.ReportGeneratoHTML_to_PDF.executor": "Run",
-    "Python.app.executor": "Run",
-    "Python.reportGenerator.executor": "Run",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "Uzman",
-    "last_opened_file_path": "D:/Cranium-Cryptics-Web-Application/Web/static/reportGenerator",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
+    &quot;Python.ReportGeneratoHTML_to_PDF.executor&quot;: &quot;Run&quot;,
+    &quot;Python.app.executor&quot;: &quot;Run&quot;,
+    &quot;Python.reportGenerator.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;Uzman&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/Cranium-Cryptics-Web-Application/Web/static/reportGenerator&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\Cranium-Cryptics-Web-Application\Web\static\reportGenerator" />
@@ -87,7 +85,7 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-python-sdk-d68999036c7f-b11f5e8da5ad-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-233.14475.56" />
+        <option value="bundled-python-sdk-09665e90c3a7-b11f5e8da5ad-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-233.15026.15" />
       </set>
     </attachedChunks>
   </component>
@@ -114,6 +112,14 @@
       <workItem from="1709632773470" duration="288000" />
       <workItem from="1709885490969" duration="59000" />
       <workItem from="1709988273481" duration="8099000" />
+      <workItem from="1710481914829" duration="73000" />
+      <workItem from="1711056094276" duration="2558000" />
+      <workItem from="1711094960078" duration="517000" />
+      <workItem from="1711523824568" duration="141000" />
+      <workItem from="1711872605211" duration="1435000" />
+      <workItem from="1712119787078" duration="124000" />
+      <workItem from="1712119919818" duration="2034000" />
+      <workItem from="1712137188120" duration="166000" />
     </task>
     <task id="LOCAL-00001" summary="report generation continuation">
       <option name="closed" value="true" />
@@ -169,7 +175,7 @@
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Cranium_Cryptics_Web_Application$reportGenerator.coverage" NAME="reportGenerator Coverage Results" MODIFIED="1708921797261" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Web/static/reportGenerator" />
-    <SUITE FILE_PATH="coverage/Cranium_Cryptics_Web_Application$app.coverage" NAME="app Coverage Results" MODIFIED="1708921805550" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Web" />
     <SUITE FILE_PATH="coverage/Cranium_Cryptics_Web_Application$ReportGeneratoHTML_to_PDF.coverage" NAME="ReportGeneratoHTML_to_PDF Coverage Results" MODIFIED="1709633014728" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Web/static/reportGenerator" />
+    <SUITE FILE_PATH="coverage/Cranium_Cryptics_Web_Application$app.coverage" NAME="app Coverage Results" MODIFIED="1711872820713" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Web" />
   </component>
 </project>

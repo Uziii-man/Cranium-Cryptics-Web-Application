@@ -1,3 +1,4 @@
+// Firebase configuration
 const firebaseConfig = {
     apiKey: "AIzaSyChuCsLIaZDj4nfI1jE9Dpbkt2CFZSKR1c",
     authDomain: "craniumcryptics.firebaseapp.com",
@@ -10,6 +11,7 @@ const firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig);
 
+// Get element value
 const getElementVal = (id) => {
   return document.getElementById(id).value;
 };
@@ -18,6 +20,7 @@ var hForm = firebase.database().ref('UserData')
 
 document.getElementById("loginForm").addEventListener('submit', submitLoginForm);
 
+// Submit login form
 function submitLoginForm(e) {
     e.preventDefault();
 
@@ -28,6 +31,7 @@ function submitLoginForm(e) {
 
 }
 
+// View data from firebase database and display alert messages
 const viewData = (loginUsername, loginPassword) => {
 
 hForm.child(loginUsername).once('value', function(snapshot) {
@@ -51,13 +55,12 @@ hForm.child(loginUsername).once('value', function(snapshot) {
           }
   });
 
-  // Customized alert messages
+// Customized alert messages
 function displayAlert(message) {
   var issue = document.getElementById("customAlert");
   var alertMessage = document.getElementById("alertMessage");
   alertMessage.innerHTML = message;
   issue.style.display = "block";
-
 
   //Closes the alert popup when anywhere in the screen is clicked
   window.onclick = function(event) {
@@ -69,6 +72,7 @@ function displayAlert(message) {
 }
 }
 
+// get data from firebase database
 function getData(userName) {
     const user_ref = firebase.database().ref('UserData/' + userName); // Use the userName parameter
     user_ref.once('value', (snapshot) => {
@@ -87,13 +91,14 @@ function getData(userName) {
             // Store the JSON data in local storage
             localStorage.setItem('userData', jsonData);
 
-
         } else {
             console.error("User data not found");
         }
     });
 }
 
+
+// Sign up form submission and data storage
 function createUserCollection(user){
     firebase.firestore().collection("users").
     doc(user.userName).set({
@@ -103,6 +108,7 @@ function createUserCollection(user){
     })
 }
 
+// Sign up form submission
 async function getUserData(userName){
     const user = await firebase.firestore().collection("users").doc(userName).get();
     return user.data();
