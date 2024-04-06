@@ -830,4 +830,5 @@ def calculate_threshold_probability(probability):
 
 
 if __name__ == '__main__':
+    print("Hello")
     app.run(debug=True, port=5000)
